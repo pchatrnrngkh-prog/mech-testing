@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ทดสอบคุณสมบัติเชิงกลของวัสดุ</title>
+<meta name="description" content="บทเรียนออนไลน์ หน่วยที่ 2 งานทดสอบคุณสมบัติเชิงกลของวัสดุ วิชางานทดลองเครื่องกล (30101-2007) ระดับ ปวส.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e8710a'/><path d='M6 22 Q12 6 18 10 T26 12' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Serif:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== เมนูบน ===== -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-badge">หน่วย 2</span><span class="brand-text">ทดสอบวัสดุ</span></a>
+    <nav class="nav" id="nav">
+      <a href="#basics">ความเค้น-ความเครียด</a>
+      <a href="#curve">กราฟ σ-ε</a>
+      <a href="#tensile">แรงดึง</a>
+      <a href="#compression">แรงอัด</a>
+      <a href="#shear">แรงเฉือน</a>
+      <a href="#hardness">ความแข็ง</a>
+      <a href="#lab">ใบงาน</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#formulas">สรุปสูตร</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="สลับโหมดสว่าง/มืด" aria-label="สลับโหมดสว่าง/มืด">◐</button>
+  </div>
+</header>
+
+<!-- ===== ส่วนหัว ===== -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <span class="kicker">วิชางานทดลองเครื่องกล · รหัสวิชา 30101-2007 · ปวส.</span>
+    <h1>งานทดสอบคุณสมบัติเชิงกลของวัสดุ</h1>
+    <p class="lead">วัสดุแต่ละชนิดรับแรงดึง แรงอัด แรงเฉือน และต้านทานรอยกดได้ไม่เท่ากัน
+      บทเรียนนี้พาไปรู้จักวิธีทดสอบ วิธีอ่านกราฟ และวิธีคำนวณ เพื่อให้เลือกวัสดุได้เหมาะกับงาน</p>
+    <div class="hero-meta">
+      <span>📅 สัปดาห์ที่ 2–5</span>
+      <span>📄 ใบงาน 7 ใบ</span>
+      <span>🧮 เครื่องคิดเลขในตัว</span>
+      <span>✅ แบบทดสอบตรวจคำตอบทันที</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-accent" href="#basics">เริ่มเรียน →</a>
+      <a class="btn btn-ghost" href="#quiz">ไปทำแบบทดสอบ</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== จุดประสงค์ ===== -->
+<section class="block" style="padding-top:40px">
+  <div class="wrap">
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">🎯 เรียนจบแล้วต้องทำได้</h3>
+        <ul class="goal-list">
+          <li><span class="tag tag-k">ความรู้</span><span>อธิบายงานทดสอบการรับแรงดึงได้</span></li>
+          <li><span class="tag tag-k">ความรู้</span><span>บอกงานทดสอบการรับแรงอัดได้</span></li>
+          <li><span class="tag tag-k">ความรู้</span><span>อธิบายหลักการทดสอบโดยการเฉือนได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>ทดสอบวัสดุโดยการเฉือนตรงได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>ทดสอบวัสดุโดยการเฉือนบิดได้</span></li>
+          <li><span class="tag tag-a">เจตคติ</span><span>นำความรู้ไปปรับใช้ในชีวิตประจำวันได้</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">🧭 สาระสำคัญ</h3>
+        <p>การเลือกวัสดุให้เหมาะกับงานวิศวกรรมต้องพิจารณา<b>คุณสมบัติเชิงกล</b>
+          ซึ่งหมายถึงความสามารถของวัสดุในการต้านทานภาระที่มากระทำ เช่น แรงดึง แรงอัด และแรงเฉือน</p>
+        <p class="muted small" style="margin:0">เรื่องที่จะศึกษา: ① การทดสอบแรงดึง ② การทดสอบแรงอัด
+          ③ การทดสอบแรงเฉือน (เฉือนตรง / เฉือนบิด) ④ การทดสอบความแข็ง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.2 ความเค้นและความเครียด ===== -->
+<section class="block" id="basics">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.2</span><h2>ความเค้นและความเครียด</h2></div>
+    <p class="sec-intro">เมื่อมีแรงมากระทำกับวัตถุ ภายในเนื้อวัสดุจะเกิด<b>ความเค้น</b> (แรงต่อพื้นที่)
+      และวัตถุจะเปลี่ยนขนาดหรือรูปร่าง ซึ่งวัดเป็น<b>ความเครียด</b> (ขนาดที่เปลี่ยนไปเทียบกับขนาดเดิม)</p>
+
+    <div class="formula">
+      <span class="eq">σ = <span class="frac"><span>F</span><span>A</span></span></span>
+      <div class="where">
+        <div>σ = ความเค้น (N/m²) · F = แรงที่กระทำ (N) · A = พื้นที่หน้าตัดที่แรงกระทำ (m²)</div>
+      </div>
+    </div>
+    <div class="note note-info"><b>💡 จำง่าย</b>1 MN/m² = 1 MPa = 1 N/mm² ดังนั้นถ้าคิดแรงเป็น N และพื้นที่เป็น mm² จะได้คำตอบเป็น MN/m² ทันที</div>
+
+    <h3>ความเค้น 3 ชนิด (ดูภาพเคลื่อนไหว)</h3>
+    <div class="grid g4">
+      <div class="card force-card">
+        <svg viewBox="0 0 260 140" aria-label="ภาพแรงดึง">
+          <rect class="anim-stretch" x="80" y="50" width="100" height="40" rx="4" fill="var(--brand-soft)" stroke="var(--tension)" stroke-width="2"/>
+          <g stroke="var(--tension)" stroke-width="3" fill="var(--tension)">
+            <line x1="70" y1="70" x2="20" y2="70"/><path d="M20 70 l12 -7 v14z"/>
+            <line x1="190" y1="70" x2="240" y2="70"/><path d="M240 70 l-12 -7 v14z"/>
+          </g>
+          <text x="130" y="122" text-anchor="middle" fill="var(--muted)" font-size="13">ถูกดึง → ยืดออก</text>
+        </svg>
+        <h4>ความเค้นดึง (Tensile)</h4>
+        <div class="formula"><span class="eq">σ<sub>t</sub> = <span class="frac"><span>F</span><span>A</span></span></span></div>
+      </div>
+      <div class="card force-card">
+        <svg viewBox="0 0 260 140" aria-label="ภาพแรงอัด">
+          <rect class="anim-squash" x="80" y="50" width="100" height="40" rx="4" fill="var(--bad-soft)" stroke="var(--compress)" stroke-width="2"/>
+          <g stroke="var(--compress)" stroke-width="3" fill="var(--compress)">
+            <line x1="20" y1="70" x2="66" y2="70"/><path d="M70 70 l-12 -7 v14z"/>
+            <line x1="240" y1="70" x2="194" y2="70"/><path d="M190 70 l12 -7 v14z"/>
+          </g>
+          <text x="130" y="122" text-anchor="middle" fill="var(--muted)" font-size="13">ถูกอัด → หดสั้น</text>
+        </svg>
+        <h4>ความเค้นอัด (Compressive)</h4>
+        <div class="formula"><span class="eq">σ<sub>c</sub> = <span class="frac"><span>F</span><span>A</span></span></span></div>
+      </div>
+      <div class="card force-card">
+        <svg viewBox="0 0 260 140" aria-label="ภาพแรงเฉือนเดี่ยว">
+          <rect x="30" y="44" width="120" height="20" rx="3" fill="var(--surface-2)" stroke="var(--text)" stroke-width="1.5"/>
+          <rect x="110" y="64" width="120" height="20" rx="3" fill="var(--surface-2)" stroke="var(--text)" stroke-width="1.5"/>
+          <rect x="124" y="36" width="12" height="56" rx="3" fill="var(--shear)"/>
+          <g stroke="var(--shear)" stroke-width="3" fill="var(--shear)">
+            <line x1="26" y1="54" x2="4" y2="54"/><path d="M4 54 l10 -6 v12z"/>
+            <line x1="234" y1="74" x2="256" y2="74"/><path d="M256 74 l-10 -6 v12z"/>
+          </g>
+          <line x1="100" y1="64" x2="160" y2="64" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="130" y="122" text-anchor="middle" fill="var(--muted)" font-size="13">หมุดถูกเฉือน 1 หน้าตัด</text>
+        </svg>
+        <h4>เฉือนเดี่ยว (Single Shear)</h4>
+        <div class="formula"><span class="eq">τ = <span class="frac"><span>F</span><span>A</span></span></span></div>
+      </div>
+      <div class="card force-card">
+        <svg viewBox="0 0 260 140" aria-label="ภาพแรงเฉือนคู่">
+          <rect x="20" y="30" width="130" height="18" rx="3" fill="var(--surface-2)" stroke="var(--text)" stroke-width="1.5"/>
+          <rect x="110" y="48" width="130" height="18" rx="3" fill="var(--surface-2)" stroke="var(--text)" stroke-width="1.5"/>
+          <rect x="20" y="66" width="130" height="18" rx="3" fill="var(--surface-2)" stroke="var(--text)" stroke-width="1.5"/>
+          <rect x="124" y="22" width="12" height="70" rx="3" fill="var(--shear)"/>
+          <line x1="100" y1="48" x2="160" y2="48" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>
+          <line x1="100" y1="66" x2="160" y2="66" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>
+          <g stroke="var(--shear)" stroke-width="3" fill="var(--shear)">
+            <line x1="16" y1="57" x2="0" y2="57"/><path d="M0 57 l10 -6 v12z"/>
+            <line x1="244" y1="57" x2="260" y2="57"/><path d="M260 57 l-10 -6 v12z"/>
+          </g>
+          <text x="130" y="122" text-anchor="middle" fill="var(--muted)" font-size="13">หมุดถูกเฉือน 2 หน้าตัด</text>
+        </svg>
+        <h4>เฉือนคู่ (Double Shear)</h4>
+        <div class="formula"><span class="eq">τ = <span class="frac"><span>F</span><span>2A</span></span></span></div>
+      </div>
+    </div>
+
+    <h3>ความเครียด (Strain)</h3>
+    <p>อัตราส่วนระหว่างขนาดที่เปลี่ยนไปกับขนาดเดิม <b>ไม่มีหน่วย</b> มี 3 ชนิดเช่นเดียวกับความเค้น</p>
+    <div class="grid g3">
+      <div class="card">
+        <h4>ความเครียดดึง</h4>
+        <div class="formula"><span class="eq">ε<sub>t</sub> = <span class="frac"><span>δ</span><span>l</span></span></span></div>
+        <p class="small muted" style="margin:0">วัตถุยาวเดิม l ถูกดึงจนยืดออกเป็นระยะ δ</p>
+      </div>
+      <div class="card">
+        <h4>ความเครียดอัด</h4>
+        <div class="formula"><span class="eq">ε<sub>c</sub> = <span class="frac"><span>δ</span><span>l</span></span></span></div>
+        <p class="small muted" style="margin:0">วัตถุยาวเดิม l ถูกอัดจนหดสั้นลงเป็นระยะ δ</p>
+      </div>
+      <div class="card">
+        <h4>ความเครียดเฉือน</h4>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <svg viewBox="0 0 120 90" width="90" aria-label="ภาพความเครียดเฉือน">
+            <rect class="anim-shear" x="25" y="20" width="60" height="60" fill="var(--surface-2)" stroke="var(--shear)" stroke-width="2"/>
+            <line x1="10" y1="80" x2="110" y2="80" stroke="var(--text)" stroke-width="2"/>
+          </svg>
+          <div class="formula" style="flex:1 1 180px"><span class="eq">γ = <span class="frac"><span>δ</span><span>l</span></span> = tan φ ≈ φ</span></div>
+        </div>
+        <p class="small muted" style="margin:0">เมื่อมุม φ เล็กมาก tan φ ≈ φ (เรเดียน)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.3 กราฟ ===== -->
+<section class="block" id="curve">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.3</span><h2>กราฟความเค้น–ความเครียด (เหล็กกล้าละมุน)</h2></div>
+    <p class="sec-intro">ลาก <b>แถบเลื่อน</b> เพื่อเพิ่มแรงดึงทีละน้อย แล้วดูว่าชิ้นทดสอบเปลี่ยนไปอย่างไร
+      หรือแตะที่จุด <b>a–e</b> บนกราฟเพื่ออ่านความหมาย</p>
+    <div class="curve-layout">
+      <div class="card">
+        <svg id="curveSvg" viewBox="0 0 600 380" role="img" aria-label="กราฟความเค้นกับความเครียด">
+          <rect class="zone-elastic" x="60" y="20" width="82" height="320"/>
+          <text class="zone-text" x="66" y="38">ยืดหยุ่น</text>
+          <line class="axis" x1="60" y1="340" x2="580" y2="340"/>
+          <line class="axis" x1="60" y1="340" x2="60" y2="20"/>
+          <text class="axis-label" x="575" y="364" text-anchor="end">ความเครียด ε →</text>
+          <text class="axis-label" x="20" y="180" transform="rotate(-90 20 180)" text-anchor="middle">ความเค้น σ →</text>
+          <text class="axis-label" x="50" y="356">0</text>
+          <path id="curvePath" class="curve" d="M60 340 L130 150 L142 132 Q148 124 152 128 L158 140 Q170 136 200 138 C 260 110 320 70 400 62 C 450 60 490 80 520 112"/>
+          <path id="curveDone" class="curve-done" d=""/>
+          <circle id="curveCursor" class="cursor" r="7" cx="60" cy="340"/>
+          <g id="curvePts"></g>
+        </svg>
+        <div class="slider-row">
+          <span class="small muted">แรงดึง</span>
+          <input type="range" id="curveSlider" min="0" max="1000" value="0" aria-label="เพิ่มแรงดึง">
+          <button class="btn btn-line btn-sm" id="curvePlay">▶ เล่น</button>
+        </div>
+        <svg id="specimenSvg" viewBox="0 0 600 90" aria-label="ภาพชิ้นทดสอบขณะถูกดึง"></svg>
+      </div>
+      <div class="card zone-box">
+        <div class="small muted">ตอนนี้อยู่ที่</div>
+        <div class="zone-name" id="zoneName">เริ่มต้น (ยังไม่มีแรง)</div>
+        <p id="zoneDesc" style="margin-top:6px">ลากแถบเลื่อนด้านซ้ายเพื่อเริ่มดึงชิ้นทดสอบ</p>
+        <div class="pt-legend" id="ptLegend"></div>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:36px"><span class="sec-no">2.4</span><h2>มอดุลัสของความยืดหยุ่น (Young's modulus)</h2></div>
+    <p>คือความสามารถของวัสดุในการต้านทานการเปลี่ยนรูปเมื่อมีแรงกระทำ หาได้จาก<b>ความชันของช่วงเส้นตรง 0–a</b>
+      บนกราฟ ความสัมพันธ์นี้ค้นพบโดยโรเบิร์ต ฮุก จึงเรียกว่า <b>กฎของฮุก (Hooke's law)</b></p>
+    <div class="formula">
+      <span class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span></span>
+      <div class="where"><div>E = มอดุลัสของความยืดหยุ่น (N/m²) · σ = ความเค้น (N/m²) · ε = ความเครียด (ไม่มีหน่วย)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.5 แรงดึง ===== -->
+<section class="block" id="tensile">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.5</span><h2>การทดสอบแรงดึง (Tensile Testing)</h2></div>
+    <p class="sec-intro">ทดสอบความสามารถของวัสดุในการต้านทานแรงดึง โดยดึง<b>ชิ้นทดสอบแรงดึง</b>ในแนวเส้นตรงอย่างต่อเนื่อง
+      จนชิ้นทดสอบขาดออกจากกัน แล้วบันทึกแรงดึงกับระยะยืด</p>
+
+    <h3>เครื่องทดสอบอเนกประสงค์ (Universal Testing Machine)</h3>
+    <p>ใช้ทดสอบได้ทั้ง<b>แรงดึง แรงอัด และแรงเฉือน</b> แบ่งเป็น 2 ประเภทตามวิธีสร้างแรง</p>
+    <div class="grid g3">
+      <figure><div class="img-box"><img src="images/utm-screw.png" alt="เครื่องทดสอบอเนกประสงค์ขับเคลื่อนด้วยสกรู" loading="lazy"></div>
+        <figcaption><b>ขับเคลื่อนด้วยสกรู</b>: มอเตอร์ไฟฟ้าหมุนสกรูเพื่อดึงชิ้นงาน</figcaption></figure>
+      <figure><div class="img-box"><img src="images/utm-hydraulic.png" alt="เครื่องทดสอบอเนกประสงค์ขับเคลื่อนด้วยแรงดันไฮดรอลิกส์" loading="lazy"></div>
+        <figcaption><b>ขับเคลื่อนด้วยไฮดรอลิกส์</b>: ใช้แรงดันน้ำมันสร้างแรงดึง</figcaption></figure>
+      <figure><div class="img-box"><img src="images/utm-wp311-parts.png" alt="ส่วนประกอบเครื่องทดสอบอเนกประสงค์รุ่น WP311" loading="lazy"></div>
+        <figcaption>ส่วนประกอบเครื่องรุ่น WP311 ที่ใช้ในใบงาน</figcaption></figure>
+    </div>
+
+    <h3>ชิ้นทดสอบแรงดึง (Tensile test specimen)</h3>
+    <p>นิยมใช้ 2 แบบ คือ <b>ภาคตัดวงกลม</b> และ <b>ภาคตัดสี่เหลี่ยมมุมฉาก</b></p>
+    <figure style="max-width:520px;margin:0 auto 12px"><div class="img-box"><img src="images/tensile-specimen-drawing.png" alt="แบบชิ้นทดสอบแรงดึงภาคตัดสี่เหลี่ยม" loading="lazy"></div>
+      <figcaption>ตัวอย่างแบบชิ้นทดสอบภาคตัดสี่เหลี่ยม (หน่วย mm)</figcaption></figure>
+    <div class="grid g2">
+      <div class="table-wrap">
+        <table>
+          <caption>ตาราง 2-1 ชิ้นทดสอบภาคตัดวงกลม</caption>
+          <thead><tr><th>S<sub>o</sub> (mm²)</th><th>d (mm)</th><th>L<sub>o</sub> (mm)</th><th>L<sub>c</sub> ต่ำสุด</th><th>r ต่ำสุด</th><th>± d</th></tr></thead>
+          <tbody>
+            <tr><td>12.5</td><td>3.99</td><td>20</td><td>22</td><td>4</td><td>0.02</td></tr>
+            <tr><td>25</td><td>5.64</td><td>28</td><td>31</td><td>5</td><td>0.03</td></tr>
+            <tr><td>50</td><td>7.98</td><td>40</td><td>44</td><td>8</td><td>0.04</td></tr>
+            <tr><td>100</td><td>11.28</td><td>56</td><td>62</td><td>10</td><td>0.06</td></tr>
+            <tr><td>150</td><td>13.82</td><td>69</td><td>76</td><td>13</td><td>0.07</td></tr>
+            <tr><td>200</td><td>15.96</td><td>80</td><td>88</td><td>15</td><td>0.08</td></tr>
+            <tr><td>400</td><td>22.56</td><td>113</td><td>124</td><td>23.5</td><td>0.13</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>ตาราง 2-2 ชิ้นทดสอบภาคตัดสี่เหลี่ยม</caption>
+          <thead><tr><th>b (mm)</th><th>L<sub>o</sub> (mm)</th><th>r ต่ำสุด (mm)</th><th>L<sub>t</sub> ประมาณ (mm)</th></tr></thead>
+          <tbody>
+            <tr><td>3</td><td>12</td><td>6</td><td>50</td></tr>
+            <tr><td>6</td><td>24</td><td>12</td><td>100</td></tr>
+            <tr><td>12.5</td><td>50</td><td>25</td><td>200</td></tr>
+            <tr><td>25</td><td>100</td><td>25</td><td>300</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note note-info"><b>📏 หมายเหตุ</b>ถ้าขนาดชิ้นทดสอบไม่ตรงกับตาราง ให้ใช้ความยาวก่อนดึง L<sub>o</sub> = 5.65√S<sub>o</sub></div>
+
+    <h3>สมการคำนวณผลการทดสอบแรงดึง</h3>
+    <div class="grid g3">
+      <div class="formula"><b class="small">1) ความแข็งแรงดึงสูงสุด</b><br>
+        <span class="eq">σ<sub>u</sub> = <span class="frac"><span>F<sub>u</sub></span><span>S<sub>o</sub></span></span></span>
+        <div class="where"><div>F<sub>u</sub> = แรงดึงสูงสุด (N)</div><div>S<sub>o</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
+      <div class="formula"><b class="small">2) เปอร์เซ็นต์ความยืด</b><br>
+        <span class="eq">δ<sub>t</sub> = <span class="frac"><span>L<sub>u</sub> − L<sub>o</sub></span><span>L<sub>o</sub></span></span> × 100</span>
+        <div class="where"><div>L<sub>u</sub> = ความยาวหลังทดสอบ (mm)</div><div>L<sub>o</sub> = ความยาวเดิม (mm)</div></div></div>
+      <div class="formula"><b class="small">3) มอดุลัสของความยืดหยุ่น</b><br>
+        <span class="eq">E = <span class="frac"><span>σ</span><span>ε</span></span>,&nbsp; σ = <span class="frac"><span>F</span><span>A</span></span>,&nbsp; ε = <span class="frac"><span>δ</span><span>l</span></span></span>
+        <div class="where"><div>ใช้ค่า F และ δ ที่จุดสุดท้ายของช่วงเส้นตรง</div></div></div>
+    </div>
+
+    <div class="example">
+      <h4>📝 ตัวอย่าง 2.1</h4>
+      <p>ทดสอบแรงดึงชิ้นทดสอบเส้นผ่าศูนย์กลาง d = 5.64 mm ความยาวพิกัดเดิม L<sub>o</sub> = 28 mm
+        ได้แรงดึงสูงสุด 14.5 kN และความยาวพิกัดสุดท้าย 30.4 mm
+        จุดสุดท้ายที่กราฟเป็นเส้นตรงมีแรงดึง 11.4 kN และระยะยืด 0.46 mm
+        จงหา (1) σ<sub>u</sub> (2) เปอร์เซ็นต์ความยืด (3) E</p>
+      <details>
+        <summary>ดูวิธีทำ</summary>
+        <div class="steps">
+          <div>พื้นที่ S<sub>o</sub> = π d²/4 = π(5.64)²/4 = 24.98 mm²</div>
+          <div>(1) σ<sub>u</sub> = F<sub>u</sub>/S<sub>o</sub> = 14,500 / 24.98 = <span class="ans">580.4 MN/m²</span></div>
+          <div>(2) δ<sub>t</sub> = (30.4 − 28)/28 × 100 = <span class="ans">8.57 %</span></div>
+          <div>(3) σ = 11,400 / 24.98 = 456.3 MN/m²</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;ε = 0.46 / 28 = 0.01643</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;E = σ/ε = 456.3 / 0.01643 = 27,775 MN/m² ≈ <span class="ans">27.8 GN/m²</span></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="calc" data-calc="tensile">
+      <h4>🧮 เครื่องคิดเลข: ทดสอบแรงดึง</h4>
+      <div class="calc-inputs">
+        <label>เส้นผ่าศูนย์กลาง d (mm)<input type="number" step="any" name="d" value="5.64"></label>
+        <label>แรงดึงสูงสุด F<sub>u</sub> (kN)<input type="number" step="any" name="Fu" value="14.5"></label>
+        <label>ความยาวเดิม L<sub>o</sub> (mm)<input type="number" step="any" name="L0" value="28"></label>
+        <label>ความยาวหลังดึง L<sub>u</sub> (mm)<input type="number" step="any" name="Lu" value="30.4"></label>
+        <label>แรงที่ปลายช่วงเส้นตรง F (kN)<input type="number" step="any" name="Fp" value="11.4" placeholder="ไม่ใส่ก็ได้"></label>
+        <label>ระยะยืดที่จุดนั้น δ (mm)<input type="number" step="any" name="dp" value="0.46" placeholder="ไม่ใส่ก็ได้"></label>
+      </div>
+      <div class="calc-out"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.6 แรงอัด ===== -->
+<section class="block" id="compression">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.6</span><h2>การทดสอบการอัด (Compression Test)</h2></div>
+    <p class="sec-intro">ใช้แรงอัดวัสดุจนวัสดุเปลี่ยนแปลง: <b>วัสดุเปราะ</b> อัดจนแตก ·
+      <b>วัสดุเหนียว</b> อัดจนเปลี่ยนรูปถาวร (ยุบเหลือ ⅓ ของความสูงเดิม)</p>
+
+    <div class="grid g2">
+      <div class="formula"><b class="small">ความเค้นอัด</b><br>
+        <span class="eq">σ<sub>c</sub> = <span class="frac"><span>F<sub>B</sub></span><span>S<sub>o</sub></span></span></span>
+        <div class="where"><div>F<sub>B</sub> = แรงอัดชิ้นทดสอบ (N) · S<sub>o</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
+      <div class="formula"><b class="small">เปอร์เซ็นต์การยุบตัว</b><br>
+        <span class="eq">ε<sub>c</sub> = <span class="frac"><span>h<sub>c</sub></span><span>h<sub>o</sub></span></span> × 100 = <span class="frac"><span>h<sub>o</sub> − h<sub>L</sub></span><span>h<sub>o</sub></span></span> × 100</span>
+        <div class="where"><div>h<sub>o</sub> = ความยาวก่อนทดสอบ · h<sub>L</sub> = ความยาวหลังทดสอบ (mm)</div></div></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:12px">
+      <div class="card">
+        <h4>📈 กราฟการอัดต่างจากกราฟการดึงอย่างไร</h4>
+        <p style="margin:0">กราฟการอัด<b>ไม่โค้งลง</b>เหมือนกราฟการดึง เพราะเมื่อเกินพิกัดความยืดหยุ่น วัสดุจะ
+          <b>ขยายออกด้านข้าง</b> พื้นที่หน้าตัดจึงเพิ่มขึ้นและรับแรงได้มากขึ้น
+          โลหะส่วนมากจึงมีความแข็งแรงอัดสูงสุดมากกว่าความแข็งแรงดึงสูงสุด</p>
+      </div>
+      <div class="card">
+        <h4>⚠️ ข้อจำกัด (ทำให้นิยมน้อยกว่าการทดสอบแรงดึง)</h4>
+        <ol style="margin:0;padding-left:1.2em">
+          <li>ทำให้แรงอัดอยู่ตามแนวแกนจริง ๆ ได้ยาก</li>
+          <li>ชิ้นทดสอบโก่งงอ (buckling) ได้ง่าย</li>
+          <li>ความเสียดทานที่ปลายชิ้นงานทำให้ความเค้นซับซ้อน คำนวณยาก</li>
+          <li>สัดส่วนความสูงต่อพื้นที่หน้าตัดต้องได้มาตรฐาน</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption>ตาราง 2-3 ขนาดชิ้นทดสอบการอัดตามมาตรฐาน ASTM</caption>
+        <thead><tr><th class="left">ชนิด</th><th>สัดส่วน h กับ d</th><th>d (mm)</th><th>h (mm)</th><th class="left">เหมาะกับ</th></tr></thead>
+        <tbody>
+          <tr><td class="left">ขนาดสั้น (Short)</td><td>h = 0.9d</td><td>30</td><td>27</td><td class="left">ทดสอบโลหะแบริ่ง</td></tr>
+          <tr><td class="left">ขนาดกลาง (Medium)</td><td>h = 3d</td><td>13–30</td><td>39–90</td><td class="left">ทดสอบทั่วไป</td></tr>
+          <tr><td class="left">ขนาดยาว (Long)</td><td>h = 8d ถึง 10d</td><td>20–32</td><td>160–320</td><td class="left">หาค่ามอดุลัสความยืดหยุ่น</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note note-info"><b>👷 ในทางปฏิบัติ</b>นิยมใช้ชิ้นทดสอบที่สูงเป็น 2 เท่าของเส้นผ่าศูนย์กลาง (h = 2d)</div>
+
+    <div class="example">
+      <h4>📝 ตัวอย่าง 2.2</h4>
+      <p>ทดสอบการอัดชิ้นทดสอบเส้นผ่าศูนย์กลาง 15 mm ความยาวเดิม 30 mm ความยาวสุดท้าย 23 mm
+        แรงอัดสูงสุดก่อนแตก 35 kN จงหา (1) ความแข็งแรงอัดสูงสุด (2) เปอร์เซ็นต์การยุบตัว</p>
+      <details>
+        <summary>ดูวิธีทำ</summary>
+        <div class="steps">
+          <div>S<sub>o</sub> = π(15)²/4 = 176.71 mm²</div>
+          <div>(1) σ<sub>c</sub> = 35,000 / 176.71 = <span class="ans">198.06 MN/m²</span></div>
+          <div>(2) ε<sub>c</sub> = (30 − 23)/30 × 100 = <span class="ans">23.33 %</span></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="calc" data-calc="compression">
+      <h4>🧮 เครื่องคิดเลข: ทดสอบการอัด</h4>
+      <div class="calc-inputs">
+        <label>เส้นผ่าศูนย์กลาง d (mm)<input type="number" step="any" name="d" value="15"></label>
+        <label>แรงอัดสูงสุด F<sub>B</sub> (kN)<input type="number" step="any" name="F" value="35"></label>
+        <label>ความยาวก่อนทดสอบ h<sub>o</sub> (mm)<input type="number" step="any" name="h0" value="30"></label>
+        <label>ความยาวหลังทดสอบ h<sub>L</sub> (mm)<input type="number" step="any" name="hL" value="23"></label>
+      </div>
+      <div class="calc-out"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.7 แรงเฉือน ===== -->
+<section class="block" id="shear">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.7</span><h2>การทดสอบโดยการเฉือน (Shear Test)</h2></div>
+    <p class="sec-intro">ให้แรงเฉือนแก่ชิ้นทดสอบจน<b>ชิ้นทดสอบขาด</b> แบ่งเป็น 2 ลักษณะ คือ การเฉือนตรง และ การเฉือนบิด</p>
+
+    <div class="tabs" data-tabs="shear">
+      <button class="on" data-tab="direct">2.7.1 เฉือนตรง (Direct Shear)</button>
+      <button data-tab="torsion">2.7.2 เฉือนบิด (Torsion)</button>
+    </div>
+
+    <div class="tab-panel" data-panel="direct">
+      <p>แรงเฉือนตรงคือแรงที่<b>ขนานกันและมีทิศตรงข้าม</b> กระทำผ่านเซนทรอยด์ของพื้นที่ แบ่งเป็นเฉือนเดี่ยวและเฉือนคู่</p>
+      <div class="grid g2">
+        <div>
+          <div class="formula"><b class="small">เฉือนเดี่ยว (Single Shear)</b><br><span class="eq">τ = <span class="frac"><span>F</span><span>A</span></span></span></div>
+          <div class="formula"><b class="small">เฉือนคู่ (Double Shear)</b><br><span class="eq">τ = <span class="frac"><span>F</span><span>2A</span></span></span></div>
+          <ul>
+            <li>อุปกรณ์แบบ <b>Johnson</b>: ใช้กับชิ้นทดสอบภาคตัดสี่เหลี่ยมหรือวงกลม ทดสอบได้<b>ทั้งเฉือนเดี่ยวและเฉือนคู่</b></li>
+            <li>อุปกรณ์ที่ใช้กับ<b>เครื่องทดสอบอเนกประสงค์</b>: เป็นการทดสอบ<b>เฉือนคู่</b> มีรูทะลุสำหรับสอดชิ้นทดสอบภาคตัดกลม</li>
+          </ul>
+        </div>
+        <figure><div class="img-box"><img src="images/direct-shear-jig.png" alt="อุปกรณ์ทดสอบเฉือนตรงที่ใช้กับเครื่องทดสอบอเนกประสงค์" loading="lazy"></div>
+          <figcaption>อุปกรณ์ทดสอบเฉือนตรงที่ใช้กับเครื่องทดสอบอเนกประสงค์ (เฉือนคู่)</figcaption></figure>
+      </div>
+
+      <div class="example">
+        <h4>📝 ตัวอย่าง 2.3</h4>
+        <p>ทดสอบเฉือนตรงแบบเฉือนคู่ ชิ้นทดสอบเส้นผ่าศูนย์กลาง 5.5 mm แรงเฉือนสูงสุด 18 kN จงหาความแข็งแรงเฉือนสูงสุด</p>
+        <details>
+          <summary>ดูวิธีทำ</summary>
+          <div class="steps">
+            <div>A = π(5.5)²/4 = 23.76 mm²</div>
+            <div>τ = F / 2A = 18,000 / (2 × 23.76) = <span class="ans">378.82 MN/m²</span></div>
+          </div>
+        </details>
+      </div>
+
+      <div class="calc" data-calc="shear">
+        <h4>🧮 เครื่องคิดเลข: เฉือนตรง</h4>
+        <div class="calc-inputs">
+          <label>ลักษณะการเฉือน<select name="mode"><option value="2">เฉือนคู่ (Double)</option><option value="1">เฉือนเดี่ยว (Single)</option></select></label>
+          <label>รูปหน้าตัด<select name="shape"><option value="round">วงกลม</option><option value="rect">สี่เหลี่ยม</option></select></label>
+          <label>d หรือ ความกว้าง (mm)<input type="number" step="any" name="a" value="5.5"></label>
+          <label>ความยาว (mm, เฉพาะสี่เหลี่ยม)<input type="number" step="any" name="b" value="50"></label>
+          <label>แรงเฉือนสูงสุด F (kN)<input type="number" step="any" name="F" value="18"></label>
+        </div>
+        <div class="calc-out"></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="torsion" hidden>
+      <p>นิยมใช้หาความต้านทานการเฉือนบิดของ<b>เพลา</b> (ซึ่งมักเป็นโลหะเหนียวที่ผ่านการอบชุบ)
+        <b>ไม่นิยม</b>ใช้กับวัสดุเปราะ เช่น เหล็กหล่อ คอนกรีต เพราะจะแตกก่อนถึงความต้านทานเฉือนสูงสุด
+        แรงเฉือนบิดเกิดจาก<b>โมเมนต์บิด (torque)</b> ที่พยายามบิดวัสดุให้ขาด</p>
+      <div class="grid g2">
+        <div>
+          <div class="formula"><b class="small">โมเมนต์บิดจากชุดทดลอง</b><br><span class="eq">T = F · R</span>
+            <div class="where"><div>F = แรงจากเครื่องชั่งสปริง (N) = kg × 9.81</div><div>R = รัศมีคานโมเมนต์ (ชุดทดลองนี้ 0.15 m)</div></div></div>
+          <div class="formula"><b class="small">ความเค้นเฉือนบิด</b><br><span class="eq">τ = <span class="frac"><span>T · r</span><span>J</span></span></span>
+            <div class="where"><div>r = รัศมีของชิ้นทดสอบ (m) — <b>ไม่ใช่</b>รัศมีคานโมเมนต์</div></div></div>
+          <div class="formula"><b class="small">โมเมนต์เฉื่อยเชิงขั้ว J</b><br>
+            <span class="eq">เพลาตัน: J = <span class="frac"><span>π d⁴</span><span>32</span></span></span><br>
+            <span class="eq">เพลากลวง: J = <span class="frac"><span>π (D⁴ − d⁴)</span><span>32</span></span></span></div>
+          <div class="formula accent"><span class="eq"><span class="frac"><span>τ</span><span>r</span></span> = <span class="frac"><span>T</span><span>J</span></span> = <span class="frac"><span>G θ</span><span>L</span></span></span>
+            <div class="where"><div>G = มอดุลัสความแกร่ง (modulus of rigidity) · θ = มุมบิด (rad) · L = ความยาวเพลา (m)</div></div></div>
+        </div>
+        <div class="grid" style="gap:12px">
+          <figure><div class="img-box"><img src="images/torsion-apparatus.png" alt="ชุดทดลองการเฉือนบิด" loading="lazy"></div>
+            <figcaption>ชุดทดลองการเฉือนบิด (ใช้ในใบงาน 2.4)</figcaption></figure>
+          <figure><div class="img-box"><img src="images/torsion-machine.png" alt="เครื่องทดสอบโดยการเฉือนบิด" loading="lazy"></div>
+            <figcaption>เครื่องทดสอบการเฉือนบิด (Torsion testing machine)</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="example">
+        <h4>📝 ตัวอย่าง 2.4</h4>
+        <p>ชุดทดลองเฉือนบิดมีรัศมีคานโมเมนต์ 0.15 m ชิ้นทดสอบ d = 6 mm ยาว 30 mm
+          แรงสูงสุดจากเครื่องชั่งสปริงก่อนขาด 5.3 kg จงหา (1) โมเมนต์บิดสูงสุด (2) ความเค้นเฉือนบิดสูงสุด</p>
+        <details>
+          <summary>ดูวิธีทำ</summary>
+          <div class="steps">
+            <div>(1) T = F·R = (5.3 × 9.81)(0.15) = <span class="ans">7.80 N·m</span></div>
+            <div>(2) J = π(0.006)⁴/32 = 1.27 × 10⁻¹⁰ m⁴</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;τ = T·r/J = (7.80 × 0.003) / 1.27×10⁻¹⁰ = <span class="ans">184.25 MN/m²</span></div>
+            <div class="muted">(ถ้าไม่ปัดเศษระหว่างทาง จะได้ ≈ 183.9 MN/m² ตามเครื่องคิดเลขด้านล่าง)</div>
+          </div>
+        </details>
+      </div>
+
+      <div class="calc" data-calc="torsion">
+        <h4>🧮 เครื่องคิดเลข: เฉือนบิด</h4>
+        <div class="calc-inputs">
+          <label>แรงจากเครื่องชั่งสปริง (kg)<input type="number" step="any" name="kg" value="5.3"></label>
+          <label>รัศมีคานโมเมนต์ R (m)<input type="number" step="any" name="R" value="0.15"></label>
+          <label>เส้นผ่าศูนย์กลางชิ้นทดสอบ d (mm)<input type="number" step="any" name="d" value="6"></label>
+        </div>
+        <div class="calc-out"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2.8 ความแข็ง ===== -->
+<section class="block" id="hardness">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">2.8</span><h2>การทดสอบความแข็ง (Hardness)</h2></div>
+    <p class="sec-intro">ความแข็ง คือความต้านทานของวัสดุต่อแรงทางกลที่ทำให้<b>เปลี่ยนรูปทรงหรือขนาดอย่างถาวร</b>
+      วิธีที่นิยมในงานโลหะวิทยาคือ<b>ใช้หัวกด</b>กดลงบนผิวแล้ววัดรอยกด มี 3 แบบ</p>
+
+    <div class="grid g3">
+      <div class="card indenter">
+        <svg viewBox="0 0 280 170" aria-label="หัวกดบริเนลล์">
+          <rect x="20" y="110" width="240" height="50" fill="var(--surface-2)" stroke="var(--text)"/>
+          <path d="M108 110 A32 32 0 0 0 172 110" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="118" y="10" width="44" height="50" fill="var(--brand-soft)" stroke="var(--brand)"/>
+          <circle cx="140" cy="88" r="30" fill="var(--brand)" opacity=".85"/>
+          <line x1="108" y1="140" x2="172" y2="140" stroke="var(--accent)" stroke-width="2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <text x="140" y="156" text-anchor="middle" fill="var(--accent)" font-size="13" font-weight="700">วัด ⌀ รอยกด</text>
+          <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="var(--accent)"/></marker></defs>
+        </svg>
+        <h4>บริเนลล์ (Brinell) · <span class="mono">HB</span></h4>
+        <ul class="small" style="padding-left:1.1em;margin:0">
+          <li>หัวกด<b>ลูกบอลทรงกลม</b></li>
+          <li>วัด<b>เส้นผ่าศูนย์กลางรอยบุ๋ม</b>ด้วยกล้องไมโครสโคปสเกล</li>
+          <li>มาตรฐาน: ลูกบอล 10 mm แรงกด 29,420 N กดแช่ 10–15 s</li>
+        </ul>
+      </div>
+      <div class="card indenter">
+        <svg viewBox="0 0 280 170" aria-label="หัวกดรอคเวลล์">
+          <rect x="20" y="110" width="240" height="50" fill="var(--surface-2)" stroke="var(--text)"/>
+          <path d="M115 110 L140 138 L165 110" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="118" y="10" width="44" height="50" fill="var(--brand-soft)" stroke="var(--brand)"/>
+          <path d="M118 60 L162 60 L140 104 Z" fill="var(--brand)" opacity=".85"/>
+          <line x1="200" y1="110" x2="200" y2="138" stroke="var(--accent)" stroke-width="2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <line x1="140" y1="138" x2="205" y2="138" stroke="var(--accent)" stroke-dasharray="3 3"/>
+          <text x="140" y="156" text-anchor="middle" fill="var(--accent)" font-size="13" font-weight="700">วัดความลึก</text>
+        </svg>
+        <h4>รอคเวลล์ (Rockwell) · <span class="mono">HR</span></h4>
+        <ul class="small" style="padding-left:1.1em;margin:0">
+          <li>วัด<b>ความลึก</b>ที่หัวกดจมลงไปในเนื้อชิ้นงาน</li>
+          <li>มีหลาย<b>สเกล</b> เช่น HRA, HRB, HRC</li>
+          <li>HRB: ลูกบอล 1/16 นิ้ว · HRC: เพชรรูปกรวย 120°</li>
+        </ul>
+      </div>
+      <div class="card indenter">
+        <svg viewBox="0 0 280 170" aria-label="หัวกดวิคเกอร์ส">
+          <rect x="70" y="40" width="140" height="120" fill="var(--surface-2)" stroke="var(--text)"/>
+          <path d="M140 60 L200 100 L140 140 L80 100 Z" fill="var(--bg)" stroke="var(--accent)" stroke-width="2"/>
+          <line x1="80" y1="100" x2="200" y2="100" stroke="var(--brand)" stroke-width="2"/>
+          <line x1="140" y1="60" x2="140" y2="140" stroke="var(--brand)" stroke-width="2"/>
+          <text x="205" y="96" fill="var(--brand)" font-size="14" font-weight="700">d₁</text>
+          <text x="146" y="56" fill="var(--brand)" font-size="14" font-weight="700">d₂</text>
+          <text x="140" y="28" text-anchor="middle" fill="var(--accent)" font-size="13" font-weight="700">d = (d₁ + d₂) / 2</text>
+        </svg>
+        <h4>วิคเกอร์ส (Vickers) · <span class="mono">HV</span></h4>
+        <ul class="small" style="padding-left:1.1em;margin:0">
+          <li>หัวกด<b>เพชรทรงพีระมิดฐานจัตุรัส</b> มุม 136°</li>
+          <li>วัด<b>เส้นทแยงมุม</b>รอยกด 2 เส้นแล้วหาค่าเฉลี่ย</li>
+          <li>หลักการคล้ายบริเนลล์ ต่างกันที่รูปทรงหัวกด</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="calc decoder" id="decoder">
+        <h4>🔍 ถอดรหัสสัญลักษณ์ความแข็ง</h4>
+        <p class="small muted" style="margin:0 0 8px">พิมพ์ค่าความแข็ง เช่น <code>170 HB 5/250/30</code>, <code>610 HV 294.2/20</code>, <code>21 HRC</code></p>
+        <input type="text" id="decInput" value="170 HB 5/250/30" aria-label="สัญลักษณ์ความแข็ง">
+        <div class="tabs" style="margin:10px 0 0">
+          <button class="btn-sm" data-ex="170 HB 5/250/30">170 HB 5/250/30</button>
+          <button class="btn-sm" data-ex="350 HB">350 HB</button>
+          <button class="btn-sm" data-ex="610 HV 294.2/20">610 HV 294.2/20</button>
+          <button class="btn-sm" data-ex="98.5 HRB">98.5 HRB</button>
+        </div>
+        <div class="parts" id="decOut"></div>
+      </div>
+      <figure><div class="img-box"><img src="images/hardness-tester-parts.png" alt="ส่วนประกอบเครื่องทดสอบความแข็งยูนิเวอร์แซล" loading="lazy"></div>
+        <figcaption>เครื่องทดสอบความแข็งยูนิเวอร์แซล (Universal Hardness Tester) แสดงค่าความแข็งได้ทันที</figcaption></figure>
+    </div>
+
+    <div class="calc" data-calc="hardness">
+      <h4>🧮 คำนวณความแข็งจากขนาดรอยกด (เสริม)</h4>
+      <p class="small muted" style="margin:0 0 8px">ใช้เมื่อวัดรอยกดด้วยกล้องไมโครสโคปสเกล แทนการเปิดตาราง</p>
+      <div class="calc-inputs">
+        <label>วิธี<select name="type"><option value="HB">บริเนลล์ (HB)</option><option value="HV">วิคเกอร์ส (HV)</option></select></label>
+        <label>แรงกด (kgf)<input type="number" step="any" name="kgf" value="187.5"></label>
+        <label>⌀ ลูกบอล D (mm, เฉพาะ HB)<input type="number" step="any" name="D" value="2.5"></label>
+        <label>ขนาดรอยกด d (mm)<input type="number" step="any" name="d" value="0.9"></label>
+      </div>
+      <div class="calc-out"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ใบงาน ===== -->
+<section class="block" id="lab">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">LAB</span><h2>ใบงานการทดลอง</h2></div>
+    <p class="sec-intro">อ่านขั้นตอนล่วงหน้าก่อนเข้าห้องปฏิบัติการ แตะที่ชื่อใบงานเพื่อเปิดดูรายละเอียด</p>
+    <div id="sheets"></div>
+    <div class="note note-warn"><b>🦺 ความปลอดภัย</b>ตรวจสอบความเรียบร้อยของเครื่องก่อนใช้ทุกครั้ง
+      รู้ตำแหน่ง<b>สวิตช์ฉุกเฉิน</b> และอยู่ห่างจากชิ้นทดสอบขณะใกล้ขาดหรือแตก</div>
+  </div>
+</section>
+
+<!-- ===== แบบทดสอบ ===== -->
+<section class="block" id="quiz">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">QUIZ</span><h2>แบบทดสอบตรวจคำตอบทันที</h2></div>
+    <p class="sec-intro">เลือกชุดแบบทดสอบ แล้วกดตอบ ระบบจะบอกทันทีว่าถูกหรือผิด พร้อมเหตุผล ทำซ้ำได้ไม่จำกัด</p>
+    <div class="tabs" id="quizTabs"></div>
+    <div class="quiz-head">
+      <h3 id="quizTitle" style="margin:0"></h3>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="score" id="quizScore">0 / 0</span>
+        <button class="btn btn-line btn-sm" id="quizReset">↺ เริ่มใหม่</button>
+      </div>
+    </div>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ===== สรุปสูตร ===== -->
+<section class="block" id="formulas">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">Σ</span><h2>สรุปสูตรทั้งหมด</h2></div>
+    <p class="sec-intro">กด <b>Ctrl + P</b> เพื่อพิมพ์หน้านี้ไว้ทบทวน</p>
+    <div class="sheet-grid">
+      <div class="card"><h4>ความเค้น / ความเครียด</h4>
+        <div class="formula"><span class="eq">σ = F / A</span></div>
+        <div class="formula"><span class="eq">ε = δ / l</span></div>
+        <div class="formula"><span class="eq">E = σ / ε</span></div></div>
+      <div class="card"><h4>ทดสอบแรงดึง</h4>
+        <div class="formula"><span class="eq">σ<sub>u</sub> = F<sub>u</sub> / S<sub>o</sub></span></div>
+        <div class="formula"><span class="eq">δ<sub>t</sub> = (L<sub>u</sub> − L<sub>o</sub>) / L<sub>o</sub> × 100</span></div>
+        <div class="formula"><span class="eq">L<sub>o</sub> = 5.65 √S<sub>o</sub></span></div></div>
+      <div class="card"><h4>ทดสอบการอัด</h4>
+        <div class="formula"><span class="eq">σ<sub>c</sub> = F<sub>B</sub> / S<sub>o</sub></span></div>
+        <div class="formula"><span class="eq">ε<sub>c</sub> = (h<sub>o</sub> − h<sub>L</sub>) / h<sub>o</sub> × 100</span></div></div>
+      <div class="card"><h4>เฉือนตรง</h4>
+        <div class="formula"><span class="eq">เดี่ยว: τ = F / A</span></div>
+        <div class="formula"><span class="eq">คู่: τ = F / 2A</span></div>
+        <div class="formula"><span class="eq">γ = δ / l = tan φ ≈ φ</span></div></div>
+      <div class="card"><h4>เฉือนบิด</h4>
+        <div class="formula"><span class="eq">T = F · R</span></div>
+        <div class="formula"><span class="eq">τ = T r / J</span></div>
+        <div class="formula"><span class="eq">J<sub>ตัน</sub> = π d⁴ / 32</span></div>
+        <div class="formula"><span class="eq">τ/r = T/J = Gθ/L</span></div></div>
+      <div class="card"><h4>หน่วยที่ควรจำ</h4>
+        <div class="formula"><span class="eq">1 MN/m² = 1 MPa = 1 N/mm²</span></div>
+        <div class="formula"><span class="eq">1 kN = 1,000 N</span></div>
+        <div class="formula"><span class="eq">1 kgf = 9.81 N</span></div>
+        <div class="formula"><span class="eq">A<sub>วงกลม</sub> = π d² / 4</span></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b>หน่วยที่ 2 งานทดสอบคุณสมบัติเชิงกลของวัสดุ</b> · วิชางานทดลองเครื่องกล (30101-2007) · ปวส. หลักสูตร พ.ศ. 2567</p>
+    <p style="margin:0">เรียบเรียงจากแผนการจัดการเรียนรู้ วิชางานทดลองเครื่องกล โดย สมนึก มังกะระ</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+<script src="js/main.js"></script>
+</body>
+</html>
