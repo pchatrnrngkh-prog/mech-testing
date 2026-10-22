@@ -30,12 +30,20 @@ const store = {
   const links = $$('#nav a');
   const secs = links.map(a => $(a.getAttribute('href')));
   const toTop = $('#toTop');
+  let last = null;
   const onScroll = () => {
     const y = scrollY + 120;
     let cur = -1;
     secs.forEach((s, i) => { if (s && s.offsetTop <= y) cur = i; });
-    links.forEach((a, i) => a.classList.toggle('active', i === cur));
-    if (cur >= 0) links[cur].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    if (cur !== last) {
+      last = cur;
+      links.forEach((a, i) => a.classList.toggle('active', i === cur));
+      // เลื่อนเฉพาะแถบเมนูในแนวนอน (ห้ามใช้ scrollIntoView เพราะจะดึงทั้งหน้ากลับ)
+      if (cur >= 0) {
+        const nav = $('#nav'), a = links[cur];
+        nav.scrollTo({ left: a.offsetLeft - nav.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+      }
+    }
     toTop.classList.toggle('show', scrollY > 600);
   };
   addEventListener('scroll', onScroll, { passive: true });
