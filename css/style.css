@@ -316,3 +316,36 @@ footer { margin-top: 60px; padding: 30px 0 40px; border-top: 1px solid var(--lin
   details.sheet:not([open]) > .sheet-body { display: block; }
   body { background: #fff; }
 }
+
+/* ===== วิดีโอและรูปถ่ายจริง ===== */
+.media-block { margin: 28px 0 8px; }
+.media-block > h3 { display: flex; align-items: center; gap: 8px; }
+.video-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.video-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.yt, .yt-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.yt { border: 0; padding: 0; cursor: pointer; }
+.yt img { width: 100%; height: 100%; object-fit: cover; max-height: none; opacity: .92; transition: opacity .2s, transform .3s; }
+.yt:hover img, .yt:focus-visible img { opacity: 1; transform: scale(1.03); }
+.yt-play {
+  position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+  background: var(--accent); color: #fff; font-size: 1.6rem; display: grid; place-items: center; padding-left: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: transform .2s;
+}
+.yt:hover .yt-play { transform: scale(1.1); }
+.yt-len { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.75); color: #fff; font-size: .8rem; padding: 1px 7px; border-radius: 6px; font-family: "IBM Plex Mono", monospace; }
+.yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-meta { padding: 10px 14px 12px; font-size: .93rem; line-height: 1.5; }
+.video-meta b { display: block; }
+.lang { display: inline-block; font-size: .72rem; font-weight: 700; border-radius: 6px; padding: 0 7px; margin-bottom: 4px; }
+.lang-th { background: var(--ok-soft); color: var(--ok); }
+.lang-en { background: var(--brand-soft); color: var(--brand); }
+.photo-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.photo .img-box { padding: 0; overflow: hidden; background: #111; aspect-ratio: 4 / 3; }
+.photo img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+.video-grid:has(> :only-child) { max-width: 520px; }
+.video-grid.v4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.photo.fit img { object-fit: contain; }
+.photo.contain .img-box { background: #fff; }
+.photo.contain img { object-fit: contain; }
+.credit { display: block; font-size: .75rem; opacity: .8; margin-top: 2px; }
+.credit a { color: inherit; }

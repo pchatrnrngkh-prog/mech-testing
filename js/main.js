@@ -547,3 +547,13 @@ const QUIZ = [
 
   load(0);
 })();
+
+/* ===== วิดีโอ YouTube (โหลดเมื่อกดเล่น เพื่อให้หน้าเว็บเปิดเร็ว) ===== */
+(function videos() {
+  $$('.yt').forEach(btn => btn.addEventListener('click', () => {
+    const box = document.createElement('div');
+    box.className = 'yt-frame';
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${btn.dataset.yt}?autoplay=1&rel=0" title="${btn.getAttribute('aria-label')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    btn.replaceWith(box);
+  }));
+})();
