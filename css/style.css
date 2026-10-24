@@ -227,7 +227,7 @@ caption { caption-side: top; text-align: left; padding: 8px 12px; font-weight: 6
 }
 .calc input:focus, .calc select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .calc-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.calc-out { margin-top: 14px; display: grid; gap: 8px; }
+.calc-out { margin-top: 14px; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); } /* minmax(0) กันบรรทัดวิธีทำยาว ๆ ดันหน้าเว็บให้กว้างเกินจอมือถือ */
 .calc-out .res { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
 .calc-out .res .k { font-size: .88rem; color: var(--muted); }
 .calc-out .res .v { font-family: "IBM Plex Mono", monospace; font-size: 1.15rem; font-weight: 700; color: var(--ok); }
@@ -251,21 +251,6 @@ caption { caption-side: top; text-align: left; padding: 8px 12px; font-weight: 6
 .decoder .part .pv { font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 1.1rem; }
 .decoder .part .pk { font-size: .85rem; color: var(--muted); }
 
-/* ===== ใบงาน ===== */
-details.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); margin: 10px 0; box-shadow: var(--shadow); }
-details.sheet > summary {
-  cursor: pointer; padding: 14px 18px; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 12px;
-}
-details.sheet > summary::-webkit-details-marker { display: none; }
-details.sheet > summary::after { content: "＋"; margin-left: auto; color: var(--accent); font-weight: 700; }
-details.sheet[open] > summary::after { content: "－"; }
-details.sheet .sheet-no { background: var(--brand); color: var(--surface); border-radius: 8px; padding: 2px 10px; font-family: "IBM Plex Mono", monospace; font-size: .9rem; }
-details.sheet .sheet-body { padding: 0 18px 18px; }
-details.sheet ol { padding-left: 1.4em; }
-details.sheet ol li { margin: 3px 0; }
-.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
-.chip { background: var(--surface-2); border-radius: 999px; padding: 2px 12px; font-size: .88rem; }
-
 /* ===== แบบทดสอบ ===== */
 .quiz-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .score { font-family: "IBM Plex Mono", monospace; font-weight: 700; background: var(--surface-2); padding: 6px 14px; border-radius: 999px; }
@@ -288,9 +273,34 @@ details.sheet ol li { margin: 3px 0; }
 .result-box .big { font-size: 2rem; font-weight: 700; font-family: "IBM Plex Mono", monospace; color: var(--brand); }
 
 /* ===== สรุปสูตร ===== */
-.sheet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-.sheet-grid .card h4 { color: var(--brand); margin-bottom: 4px; }
-.sheet-grid .formula { font-size: 1rem; padding: 10px 14px; margin: 8px 0; }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.jump a { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; text-decoration: none; font-size: .92rem; }
+.jump a:hover { border-color: var(--brand); }
+h3.fx-group { margin-top: 2em; padding-bottom: 6px; border-bottom: 2px solid var(--line); }
+.fx { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; margin: 16px 0; break-inside: avoid; }
+.fx-head { display: flex; align-items: center; gap: 10px; }
+.fx-head h4 { margin: 0; color: var(--brand); font-size: 1.1rem; }
+.fx-no { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: .9rem; }
+.fx .formula { font-size: 1.3rem; }
+.fx .eq-alt { display: block; font-family: "IBM Plex Serif", Georgia, serif; font-style: italic; font-size: .85em; color: var(--muted); margin-top: 6px; }
+.fx .origin { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; margin: 10px 0; font-size: .95rem; }
+.fx .table-wrap { margin: 10px 0 0; }
+table.vars td:first-child { font-family: "IBM Plex Serif", Georgia, serif; font-style: italic; font-weight: 600; color: var(--brand); }
+.fx-ex { margin: 10px 0 0; font-size: .93rem; color: var(--muted); }
+.fx-ex b { color: var(--ok); }
+table.units td { white-space: normal; }
+/* จอมือถือ: เปลี่ยนตารางตัวแปรเป็นแบบเรียงลงมา จะได้ไม่ต้องเลื่อนตารางซ้ายขวา */
+@media (max-width: 600px) {
+  table.vars:not(.units) thead { display: none; }
+  table.vars:not(.units), table.vars:not(.units) tbody { display: block; }
+  table.vars:not(.units) tr { display: grid; grid-template-columns: 52px 1fr; column-gap: 10px; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  table.vars:not(.units) tr:last-child { border-bottom: 0; }
+  table.vars:not(.units) td { border: 0; padding: 1px 0; white-space: normal; text-align: left; }
+  table.vars:not(.units) td:first-child { grid-row: span 3; }
+  table.vars:not(.units) td:nth-child(n+3) { font-size: .88rem; }
+  table.vars:not(.units) td:nth-child(3)::before { content: "หน่วย: "; color: var(--muted); }
+  table.vars:not(.units) td:nth-child(4)::before { content: "ได้ค่าจาก: "; color: var(--muted); }
+}
 
 /* ===== ท้ายเว็บ ===== */
 footer { margin-top: 60px; padding: 30px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
@@ -310,10 +320,8 @@ footer { margin-top: 60px; padding: 30px 0 40px; border-top: 1px solid var(--lin
 }
 
 @media print {
-  .topbar, .hero-cta, .calc, .to-top, .tabs, #quiz, .slider-row { display: none !important; }
+  .topbar, .hero-cta, .calc, .to-top, .tabs, #quiz, .slider-row, .media-block, .jump { display: none !important; }
   .tab-panel[hidden] { display: block !important; }
-  details.sheet { break-inside: avoid; }
-  details.sheet:not([open]) > .sheet-body { display: block; }
   body { background: #fff; }
 }
 

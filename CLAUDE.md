@@ -4,9 +4,9 @@
 สื่อสารกับผู้ดูแลเว็บเป็นภาษาไทยแบบเข้าใจง่าย
 
 ## โครงสร้าง
-- `index.html` — เนื้อหาทั้งหมดอยู่ในหน้าเดียว แบ่งเป็นส่วน `#basics #curve #tensile #compression #shear #hardness #lab #quiz #formulas`
+- `index.html` — เนื้อหาทั้งหมดอยู่ในหน้าเดียว แบ่งเป็นส่วน `#basics #curve #tensile #compression #shear #hardness #quiz #formulas`
 - `css/style.css` — ธีมสีอยู่ที่ `:root` (มีโหมดมืด) สีหลักคือน้ำเงินเหล็ก `--brand` และส้มเซฟตี้ `--accent`
-- `js/main.js` — กราฟ σ-ε แบบเลื่อนดูได้ เครื่องคิดเลข (`CALCS`) ตัวถอดรหัสค่าความแข็ง ข้อมูลใบงาน (`SHEETS`) และแบบทดสอบ (`QUIZ`)
+- `js/main.js` — กราฟ σ-ε แบบเลื่อนดูได้ เครื่องคิดเลข (`CALCS`) ตัวถอดรหัสค่าความแข็ง และแบบทดสอบ (`QUIZ`)
 - `images/` — รูปที่ตัดมาจากเอกสารต้นฉบับ และรูปถ่าย `photo-*.jpg` จาก Wikimedia Commons (ต้องใส่เครดิตผู้ถ่าย/สัญญาอนุญาตใต้รูปเสมอ)
 - วิดีโอ YouTube ใช้ปุ่ม `.yt[data-yt=ID]` แสดงภาพตัวอย่างก่อน แล้วโหลด iframe (youtube-nocookie) เมื่อกดเล่น โค้ดอยู่ท้าย `js/main.js` ก่อนเพิ่มวิดีโอใหม่ให้ตรวจว่าฝังได้ด้วย `https://www.youtube.com/oembed?url=...`
 - เป็นเว็บแบบ static ไม่มีขั้นตอน build เปิด `index.html` ในเบราว์เซอร์ได้ทันที
@@ -27,3 +27,7 @@
 GitHub Pages: repo `pchatrnrngkh-prog/mech-testing` (public) branch `main` โฟลเดอร์ root
 แก้เสร็จแล้วให้ `git commit` และ `git push` เว็บจะอัปเดตเองใน 1–2 นาที
 ลิงก์: https://pchatrnrngkh-prog.github.io/mech-testing/
+
+## สิ่งที่ผู้ใช้ขอไว้
+- ไม่ต้องมีหมวดใบงานในเว็บ (เอาออกแล้วเมื่อ 2026-10-24)
+- หมวดสรุปสูตร (`#formulas`) ต้องละเอียด: ทุกสูตรมีที่มา ตารางตัวแปร (คืออะไร / หน่วย / ได้ค่ามาจากไหน) และตัวอย่าง
