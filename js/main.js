@@ -162,7 +162,8 @@ $$('[data-tabs]').forEach(group => {
       $('#zoneName').textContent = z.name;
       $('#zoneDesc').innerHTML = z.desc;
     }
-    $$('#curvePts .pt, #ptLegend button').forEach(el => el.classList.toggle('on', focusPt && el.dataset.id === focusPt.id));
+    // ต้องส่งค่า true/false จริง ๆ ถ้าส่ง undefined คำสั่ง toggle จะสลับเปิด/ปิดทุกครั้งที่ลาก ทำให้จุดกระพริบ
+    $$('#curvePts .pt, #ptLegend button').forEach(el => el.classList.toggle('on', !!focusPt && el.dataset.id === focusPt.id));
   }
 
   slider.addEventListener('input', () => setLen(slider.value / 1000 * total));
