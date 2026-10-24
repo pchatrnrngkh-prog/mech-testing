@@ -29,5 +29,6 @@ GitHub Pages: repo `pchatrnrngkh-prog/mech-testing` (public) branch `main` โ�
 ลิงก์: https://pchatrnrngkh-prog.github.io/mech-testing/
 
 ## สิ่งที่ผู้ใช้ขอไว้
+- ฟอนต์ทั้งเว็บใช้ Sarabun (TH Sarabun ฉบับเว็บฟอนต์จาก Google Fonts) ผ่านตัวแปร `--font` ใน `:root` ห้ามใส่ฟอนต์อื่น
 - ไม่ต้องมีหมวดใบงานในเว็บ (เอาออกแล้วเมื่อ 2026-10-24)
 - หมวดสรุปสูตร (`#formulas`) ต้องละเอียด: ทุกสูตรมีที่มา ตารางตัวแปร (คืออะไร / หน่วย / ได้ค่ามาจากไหน) และตัวอย่าง
