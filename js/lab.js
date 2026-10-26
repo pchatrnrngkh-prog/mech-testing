@@ -1822,7 +1822,7 @@
       <div class="svg-fig"><svg viewBox="0 0 360 230" class="sp-svg" role="img" aria-label="ความเค้นบนหน้าตัด"></svg></div>
       <div>
         <label class="small muted">แรงดึง F = <b class="sp-fv"></b> kN<input type="range" class="sp-f" min="1" max="200" step="1" value="10"></label>
-        <label class="small muted">เส้นผ่าศูนย์กลาง d = <b class="sp-dv"></b> mm<input type="range" class="sp-d" min="4" max="20" step="0.5" value="10"></label>
+        <label class="small muted">เส้นผ่าศูนย์กลาง d = <b class="sp-dv"></b> mm<input type="range" class="sp-d" min="4" max="50" step="0.5" value="10"></label>
         <div class="lf-list sp-lf"></div>
         <p class="small muted" style="margin:6px 0 0">ลองดู: แรงเท่าเดิม แต่ชิ้นงานใหญ่ขึ้น ลูกศรแต่ละอันจะสั้นลง (ความเค้นลดลง)</p>
         <div class="note note-info sp-unit" style="margin-top:10px"><b>📏 แปลงหน่วย mm → m ทำยังไง?</b>
@@ -1838,7 +1838,7 @@
       const A = Math.PI * d * d / 4, s = F * 1000 / A;
       root.querySelector('.sp-fv').textContent = N(F, 1);
       root.querySelector('.sp-dv').textContent = N(d, 1);
-      const w = 30 + d * 6, cx = 70;
+      const w = 30 + d * 2.4, cx = 70;
       const len = Math.min(40, 6 + s / 12);
       let g = `<rect x="${cx - w / 4}" y="10" width="${w / 2}" height="16" fill="#8a95a3"/><path d="M${cx - w / 4 - 10} 10 h${w / 2 + 20}" stroke="#555" stroke-width="3"/>
         <rect x="${cx - 9}" y="26" width="18" height="150" fill="url(#gm-steel-h)" stroke="#5d6876"/>
@@ -1848,7 +1848,8 @@
         <text x="${cx - 26}" y="104" text-anchor="end" font-size="12" fill="var(--accent)">ภาคตัด</text>
         <line x1="${cx + 24}" y1="100" x2="180" y2="${120}" stroke="var(--muted)"/>`;
       // ภาคตัดแบบสามมิติ และลูกศรแรงเล็ก ๆ จำนวนมาก
-      const ox = 270, oy = 150, rx = w * 0.9, ry = w * 0.32;
+      // ขนาดภาพหน้าตัดโตตาม d แต่ไม่ล้นกรอบ (d สูงสุด 50 mm)
+      const ox = 255, oy = 150, rx = 25 + d * 1.5, ry = rx * 0.36;
       g += `<ellipse cx="${ox}" cy="${oy}" rx="${rx}" ry="${ry}" fill="url(#gm-steel-v)" stroke="#5d6876" stroke-width="1.5"/>
         <path d="M${ox - rx} ${oy} v24 A${rx} ${ry} 0 0 0 ${ox + rx} ${oy + 24} v-24" fill="#8f99a6" stroke="#5d6876"/>`;
       for (let j = -1; j <= 1; j++) for (let i = -3; i <= 3; i++) {
