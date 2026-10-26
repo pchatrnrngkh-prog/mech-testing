@@ -435,9 +435,29 @@ const QUIZ = [
 /* ===== วิดีโอ YouTube (โหลดเมื่อกดเล่น เพื่อให้หน้าเว็บเปิดเร็ว) ===== */
 (function videos() {
   $$('.yt').forEach(btn => btn.addEventListener('click', () => {
+    const id = btn.dataset.yt, card = btn.closest('.video-card');
     const box = document.createElement('div');
     box.className = 'yt-frame';
-    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${btn.dataset.yt}?autoplay=1&rel=0" title="${btn.getAttribute('aria-label')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=0&fs=1" title="${btn.getAttribute('aria-label')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <button class="yt-close" aria-label="ออกจากโหมดเต็มจอ">✕ ปิดเต็มจอ</button>`;
     btn.replaceWith(box);
+    // คลิปที่กำลังเล่นขยายเต็มแถว จะได้ไม่เล็กเกินไป (ปุ่มเต็มจอของ YouTube ซ่อนเมื่อจอเล็ก)
+    card.classList.add('playing');
+    const bar = document.createElement('div');
+    bar.className = 'yt-bar';
+    bar.innerHTML = `<button class="btn btn-accent btn-sm yt-full">⛶ ดูเต็มจอ</button><a class="btn btn-line btn-sm" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">▶ เปิดใน YouTube</a>`;
+    box.after(bar);
+    const exit = () => { box.classList.remove('yt-max'); document.body.classList.remove('yt-lock'); };
+    bar.querySelector('.yt-full').addEventListener('click', () => {
+      const req = box.requestFullscreen || box.webkitRequestFullscreen;
+      if (req) {
+        Promise.resolve(req.call(box)).catch(() => { box.classList.add('yt-max'); document.body.classList.add('yt-lock'); });
+      } else {
+        // iPhone ไม่รองรับการขยายเต็มจอแบบนี้ จึงขยายกรอบวิดีโอให้เต็มหน้าจอแทน
+        box.classList.add('yt-max'); document.body.classList.add('yt-lock');
+      }
+    });
+    box.querySelector('.yt-close').addEventListener('click', exit);
+    card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }));
 })();
