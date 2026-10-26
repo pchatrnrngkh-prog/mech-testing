@@ -1821,10 +1821,16 @@
     root.innerHTML = `<div class="stress-play">
       <div class="svg-fig"><svg viewBox="0 0 360 230" class="sp-svg" role="img" aria-label="ความเค้นบนหน้าตัด"></svg></div>
       <div>
-        <label class="small muted">แรงดึง F = <b class="sp-fv"></b> kN<input type="range" class="sp-f" min="1" max="40" step="0.5" value="10"></label>
+        <label class="small muted">แรงดึง F = <b class="sp-fv"></b> kN<input type="range" class="sp-f" min="1" max="200" step="1" value="10"></label>
         <label class="small muted">เส้นผ่าศูนย์กลาง d = <b class="sp-dv"></b> mm<input type="range" class="sp-d" min="4" max="20" step="0.5" value="10"></label>
         <div class="lf-list sp-lf"></div>
         <p class="small muted" style="margin:6px 0 0">ลองดู: แรงเท่าเดิม แต่ชิ้นงานใหญ่ขึ้น ลูกศรแต่ละอันจะสั้นลง (ความเค้นลดลง)</p>
+        <div class="note note-info sp-unit" style="margin-top:10px"><b>📏 แปลงหน่วย mm → m ทำยังไง?</b>
+          <div>1 m = 1,000 mm → ความยาว: เอา mm <b>÷ 1,000</b> ได้ m</div>
+          <div>พื้นที่เป็น "ยาว × กว้าง" จึงต้องหาร 1,000 <b>สองครั้ง</b>: 1 m² = 1,000 × 1,000 = 1,000,000 mm² → เอา mm² <b>÷ 1,000,000</b> (หรือ × 10⁻⁶) ได้ m²</div>
+          <div>แรง: 1 kN = 1,000 N → เอา kN <b>× 1,000</b> ได้ N</div>
+          <div>ผลหาร N/m² ได้ตัวเลขยาวมาก จึงหารด้วย 1,000,000 (= 10⁶) ให้เป็น MN/m² · ทางลัด: <b>N ÷ mm² ได้ MN/m² ทันที</b></div>
+        </div>
       </div></div>`;
     const svg = root.querySelector('.sp-svg');
     const draw = () => {
@@ -1833,7 +1839,7 @@
       root.querySelector('.sp-fv').textContent = N(F, 1);
       root.querySelector('.sp-dv').textContent = N(d, 1);
       const w = 30 + d * 6, cx = 70;
-      const len = Math.min(30, 6 + s / 10);
+      const len = Math.min(40, 6 + s / 12);
       let g = `<rect x="${cx - w / 4}" y="10" width="${w / 2}" height="16" fill="#8a95a3"/><path d="M${cx - w / 4 - 10} 10 h${w / 2 + 20}" stroke="#555" stroke-width="3"/>
         <rect x="${cx - 9}" y="26" width="18" height="150" fill="url(#gm-steel-h)" stroke="#5d6876"/>
         <line x1="${cx}" y1="176" x2="${cx}" y2="210" stroke="var(--tension)" stroke-width="4" marker-end="url(#mArrT)"/>
@@ -1852,8 +1858,13 @@
       }
       g += `<text x="262" y="${oy + ry + 44}" text-anchor="middle" font-size="11" fill="var(--muted)">แรงเล็ก ๆ ต่อหนึ่งหน่วยพื้นที่ = ความเค้น</text>`;
       svg.innerHTML = g;
-      root.querySelector('.sp-lf').innerHTML = LF('พื้นที่หน้าตัด', `A = ${FR('π d²', '4')}`, `= ${FR(`π × ${N(d, 1)}²`, '4')}`, `= ${N(A)} mm²`)
-        + LF('ความเค้น', `σ = ${FR('F', 'A')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${N(A)} mm²`)}`, `= ${N(s, 1)} MN/m²`, 'hl');
+      const Am = A / 1e6, sPa = F * 1000 / Am;
+      root.querySelector('.sp-lf').innerHTML = LF('① แปลงแรง kN → N (× 1,000)', `F = ${N(F, 1)} kN`, `= ${N(F, 1)} × 1,000`, `= ${N(F * 1000, 0)} N`)
+        + LF('② พื้นที่หน้าตัด (คิดเป็น mm² ก่อน)', `A = ${FR('π d²', '4')}`, `= ${FR(`π × ${N(d, 1)}²`, '4')}`, `= ${N(A)} mm²`)
+        + LF('③ แปลงพื้นที่ mm² → m² (÷ 1,000,000)', `A = ${N(A)} mm²`, `= ${FR(N(A), '1,000,000')}`, `= ${SCI(Am)} m²`)
+        + LF('④ ความเค้น (หน่วย SI: N/m²)', `σ = ${FR('F', 'A')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${SCI(Am)} m²`)}`, `= ${N(sPa, 0)} N/m²`)
+        + LF('⑤ ทำให้ตัวเลขสั้นลง: N/m² → MN/m² (÷ 1,000,000)', `σ = ${FR(N(sPa, 0), '1,000,000')}`, '', `= ${N(s, 1)} MN/m²`, 'hl')
+        + LF('✔ ทางลัด: ใช้ N กับ mm² ได้ MN/m² ทันที', `σ = ${FR(`${N(F * 1000, 0)} N`, `${N(A)} mm²`)}`, '', `= ${N(s, 1)} N/mm² = ${N(s, 1)} MN/m²`);
     };
     root.addEventListener('input', draw);
     draw();
