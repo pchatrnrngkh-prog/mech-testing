@@ -752,9 +752,9 @@
         const So = round ? Math.PI * v.d ** 2 / 4 : v.b * v.t;
         const Lr = 5.65 * Math.sqrt(So);
         let html = round
-          ? LF('พื้นที่หน้าตัดก่อนทดสอบ', `S<sub>o</sub> = ${FR('π d²', '4')}`, `= ${FR(`π × ${v.d}²`, '4')}`, `= ${N(So)} mm²`, 'hl')
-          : LF('พื้นที่หน้าตัดก่อนทดสอบ', 'S<sub>o</sub> = b × t', `= ${v.b} × ${v.t}`, `= ${N(So)} mm²`, 'hl');
-        html += LF('ความยาวพิกัดตามมาตรฐาน (ใช้เมื่อขนาดไม่ตรงตาราง)', 'L<sub>o</sub> = 5.65 √S<sub>o</sub>', `= 5.65 × √${N(So)}`, `= ${N(Lr)} mm`);
+          ? LF('พื้นที่หน้าตัดก่อนทดสอบ', `S<sub>O</sub> = ${FR('π d²', '4')}`, `= ${FR(`π × ${v.d}²`, '4')}`, `= ${N(So)} mm²`, 'hl')
+          : LF('พื้นที่หน้าตัดก่อนทดสอบ', 'S<sub>O</sub> = b × t', `= ${v.b} × ${v.t}`, `= ${N(So)} mm²`, 'hl');
+        html += LF('ความยาวพิกัดตามมาตรฐาน (ใช้เมื่อขนาดไม่ตรงตาราง)', 'L<sub>o</sub> = 5.65 √S<sub>O</sub>', `= 5.65 × √${N(So)}`, `= ${N(Lr)} mm`);
         html += `<p class="small muted" style="margin:4px 0 0">ใบงานข้อ 2: ทำเครื่องหมาย 2 จุด ห่างจากกึ่งกลางชิ้นงานข้างละ ${N(v.Lo / 2, 1)} mm → ความยาวพิกัด L<sub>o</sub> = ${N(v.Lo, 1)} mm</p>`;
         return { ok: true, html, dims: { So, Lo: v.Lo, round, d: v.d, b: v.b, t: v.t } };
       },
@@ -779,7 +779,7 @@
       live(st, F, x) {
         const D = st.dims; if (!D) return '';
         const s = F * 1000 / D.So, e = x / D.Lo;
-        return LF('ความเค้นขณะนี้', `σ = ${FR('F', 'S<sub>o</sub>')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(s, 1)} MN/m²`)
+        return LF('ความเค้นขณะนี้', `σ = ${FR('F', 'S<sub>O</sub>')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(s, 1)} MN/m²`)
           + LF('ความเครียดขณะนี้', `ε = ${FR('δ', 'L<sub>o</sub>')}`, `= ${FR(`${N(x, 3)} mm`, `${N(D.Lo, 2)} mm`)}`, `= ${N(e, 5)} (${N(e * 100, 2)} %)`);
       },
       phaseText: p => PH[p] || '',
@@ -810,7 +810,7 @@
         const Fu = st.peak, su = Fu * 1000 / D.So;
         const done = st.c.stop !== 'limit';
         let h = '<div class="result-grid"><div>';
-        h += LF('1) ความแข็งแรงดึงสูงสุด', `σ<sub>u</sub> = ${FR('F<sub>u</sub>', 'S<sub>o</sub>')}`, `= ${FR(`${N(Fu * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(su, 1)} MN/m²`, 'hl');
+        h += LF('1) ความแข็งแรงดึงสูงสุด', `σ<sub>u</sub> = ${FR('F<sub>u</sub>', 'S<sub>O</sub>')}`, `= ${FR(`${N(Fu * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(su, 1)} MN/m²`, 'hl');
         h += `<p class="small muted" style="margin:4px 2px 10px">= ${N(su * 1e6, 0)} N/m² · F<sub>u</sub> คือแรงดึงสูงสุด (แถวสีส้มในตาราง)${done ? '' : ' — ชิ้นงานยังไม่ขาด ค่านี้จึงยังไม่ใช่ความแข็งแรงสูงสุดจริง'}</p>`;
         if (done) {
           const Lu = D.Lo * (1 + M.ef - (M.brittle ? M.su : M.sf) / M.E);
@@ -827,7 +827,7 @@
         if (r) {
           const s = r.y * 1000 / D.So, e = r.x / D.Lo, E = s / e;
           h += `<p class="small" style="margin:0 0 6px"><b>3) มอดุลัสของความยืดหยุ่น</b> ใช้แถวที่ ${st.pick + 1} ในตาราง (กรอบสีเขียว) <span class="muted">— แตะแถวอื่นที่ยังอยู่ช่วงเส้นตรงเพื่อเปลี่ยนได้</span></p>`;
-          h += LF('ความเค้น ณ จุดนั้น', `σ = ${FR('F', 'S<sub>o</sub>')}`, `= ${FR(`${N(r.y * 1000, 0)}`, N(D.So))}`, `= ${N(s, 1)} MN/m²`);
+          h += LF('ความเค้น ณ จุดนั้น', `σ = ${FR('F', 'S<sub>O</sub>')}`, `= ${FR(`${N(r.y * 1000, 0)}`, N(D.So))}`, `= ${N(s, 1)} MN/m²`);
           h += LF('ความเครียด ณ จุดนั้น', `ε = ${FR('δ', 'L<sub>o</sub>')}`, `= ${FR(N(r.x, 3), N(D.Lo, 2))}`, `= ${N(e, 5)}`);
           h += LF('มอดุลัสของความยืดหยุ่น', `E = ${FR('σ', 'ε')}`, `= ${FR(N(s, 1), N(e, 5))}`, `= ${N(E / 1000, 1)} GN/m²`, 'hl');
           const inLin = s <= (M.brittle ? 0.4 * M.su : 0.86 * M.sy);
@@ -866,7 +866,7 @@
       inputs: `
         <label>ขนาดชิ้นทดสอบสำเร็จรูป<select name="pre"><option value="20,40" selected>⌀20 × 40 mm (ตามใบงาน)</option><option value="10,20">⌀10 × 20 mm (h = 2d)</option><option value="30,27">⌀30 × 27 mm (ASTM ขนาดสั้น)</option><option value="13,39">⌀13 × 39 mm (ASTM ขนาดกลาง)</option><option value="c">กำหนดเอง</option></select></label>
         <label>เส้นผ่าศูนย์กลาง d (mm)<input type="number" name="d" step="0.1" min="3" max="40" value="20"></label>
-        <label>ความยาวก่อนทดสอบ h<sub>o</sub> (mm)<input type="number" name="h0" step="0.1" min="3" max="120" value="40"></label>`,
+        <label>ความยาวก่อนทดสอบ h<sub>O</sub> (mm)<input type="number" name="h0" step="0.1" min="3" max="120" value="40"></label>`,
       onInput(e, root) {
         const f = n => root.querySelector(`[name=${n}]`);
         if (e.target.name === 'pre' && f('pre').value !== 'c') { const [d, h] = f('pre').value.split(','); f('d').value = d; f('h0').value = h; }
@@ -876,17 +876,17 @@
         if (!(v.d > 0 && v.h0 > 0)) return { ok: false, html: '<div class="calc-err">⚠️ กรอกขนาดชิ้นทดสอบให้ครบ และต้องมากกว่า 0</div>' };
         const So = Math.PI * v.d ** 2 / 4, ratio = v.h0 / v.d;
         const kind = ratio < 1.5 ? 'ขนาดสั้น (เหมาะกับโลหะแบริ่ง)' : ratio <= 4 ? 'ขนาดกลาง (ใช้ทั่วไป)' : 'ขนาดยาว (ใช้หามอดุลัส แต่ระวังโก่งงอ)';
-        let html = LF('พื้นที่หน้าตัดก่อนทดสอบ', `S<sub>o</sub> = ${FR('π d²', '4')}`, `= ${FR(`π × ${v.d}²`, '4')}`, `= ${N(So)} mm²`, 'hl');
-        html += LF('สัดส่วนความสูงต่อเส้นผ่าศูนย์กลาง (ตาราง 2-3)', `${FR('h<sub>o</sub>', 'd')}`, `= ${FR(v.h0, v.d)}`, `= ${N(ratio, 2)} → ${kind}`);
+        let html = LF('พื้นที่หน้าตัดก่อนทดสอบ', `S<sub>O</sub> = ${FR('π d²', '4')}`, `= ${FR(`π × ${v.d}²`, '4')}`, `= ${N(So)} mm²`, 'hl');
+        html += LF('สัดส่วนความสูงต่อเส้นผ่าศูนย์กลาง (ตาราง 2-3)', `${FR('h<sub>O</sub>', 'd')}`, `= ${FR(v.h0, v.d)}`, `= ${N(ratio, 2)} → ${kind}`);
         const fmax = v.fmax;
         let fh = '';
         if (m.brittle) {
           const Fb = m.suc * So / 1000;
-          fh = LF('แรงอัดที่คาดว่าจะทำให้ชิ้นงานแตก', `F ≈ σ<sub>c</sub> × S<sub>o</sub>`, `≈ ${m.suc} × ${N(So)}`, `≈ ${N(Fb, 1)} kN`);
+          fh = LF('แรงอัดที่คาดว่าจะทำให้ชิ้นงานแตก', `F ≈ σ<sub>c</sub> × S<sub>O</sub>`, `≈ ${m.suc} × ${N(So)}`, `≈ ${N(Fb, 1)} kN`);
           fh += `<p class="small ${Fb > fmax ? '' : 'muted'}" style="margin:4px 2px 0">${Fb > fmax ? `⚠️ มากกว่าแรงสูงสุดที่ตั้งไว้ ${fmax} kN เครื่องจะหยุดก่อนชิ้นงานแตก` : '✅ เครื่องมีแรงพอที่จะอัดจนชิ้นงานแตก'}</p>`;
         } else {
           const Fy = m.csy * So / 1000;
-          fh = LF('แรงอัดที่ทำให้ชิ้นงานเริ่มยุบตัวถาวร', `F<sub>y</sub> ≈ σ<sub>y</sub> × S<sub>o</sub>`, `≈ ${m.csy} × ${N(So)}`, `≈ ${N(Fy, 1)} kN`);
+          fh = LF('แรงอัดที่ทำให้ชิ้นงานเริ่มยุบตัวถาวร', `F<sub>y</sub> ≈ σ<sub>y</sub> × S<sub>O</sub>`, `≈ ${m.csy} × ${N(So)}`, `≈ ${N(Fy, 1)} kN`);
           fh += `<p class="small" style="margin:4px 2px 0">${Fy > fmax ? `⚠️ มากกว่าแรงสูงสุดที่ตั้งไว้ ${fmax} kN → ชิ้นงานจะ<b>ไม่ยุบตัวถาวร</b> ลองเลือกชิ้นงานที่เล็กลง วัสดุที่นิ่มกว่า หรือเครื่องที่ใหญ่ขึ้น` : `เครื่องตั้งไว้ ${fmax} kN มากกว่าแรงนี้ ชิ้นงานจะยุบตัวได้ (อัดจนสูงเหลือ ⅓ หรือจนถึงแรงที่ตั้งไว้)`}</p>`;
         }
         return { ok: true, html, fmaxHtml: fh, dims: { So, h0: v.h0, d: v.d } };
@@ -918,8 +918,8 @@
       },
       live(st, F, x) {
         const D = st.dims; if (!D) return '';
-        return LF('ความเค้นอัดขณะนี้', `σ<sub>c</sub> = ${FR('F', 'S<sub>o</sub>')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(F * 1000 / D.So, 1)} MN/m²`)
-          + LF('ความสูงขณะนี้ และเปอร์เซ็นต์ที่ยุบ (ขณะมีแรงกด)', `h = h<sub>o</sub> − ระยะยุบ`, `= ${N(D.h0, 2)} − ${N(x, 3)} = ${N(D.h0 - x, 2)} mm`, `→ ${N(x / D.h0 * 100, 2)} %`);
+        return LF('ความเค้นอัดขณะนี้', `σ<sub>c</sub> = ${FR('F', 'S<sub>O</sub>')}`, `= ${FR(`${N(F * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(F * 1000 / D.So, 1)} MN/m²`)
+          + LF('ความสูงขณะนี้ และเปอร์เซ็นต์ที่ยุบ (ขณะมีแรงกด)', `h = h<sub>O</sub> − ระยะยุบ`, `= ${N(D.h0, 2)} − ${N(x, 3)} = ${N(D.h0 - x, 2)} mm`, `→ ${N(x / D.h0 * 100, 2)} %`);
       },
       phaseText: p => PH[p] || '',
       endText: (stop, st) => stop === 'limit' ? `⚠️ ถึงแรงสูงสุดที่ตั้งไว้ (${st.c.fmaxSet} kN) เครื่องหยุดเพื่อความปลอดภัย`
@@ -943,15 +943,15 @@
         const Aend = D.So / (1 - eEnd), rec = (c.y[c.y.length - 1] * 1000 / Aend) / c.meta.E * hEnd;
         const hL = m.brittle ? D.h0 * (1 - eEnd) + rec : Math.min(D.h0, hEnd + rec);
         let h = '<div class="result-grid"><div>';
-        h += LF('1) ความเค้นแรงอัดสูงสุด', `σ<sub>c</sub> = ${FR('F<sub>B</sub>', 'S<sub>o</sub>')}`, `= ${FR(`${N(FB * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(sc, 1)} MN/m²`, 'hl');
+        h += LF('1) ความเค้นแรงอัดสูงสุด', `σ<sub>c</sub> = ${FR('F<sub>B</sub>', 'S<sub>O</sub>')}`, `= ${FR(`${N(FB * 1000, 0)} N`, `${N(D.So)} mm²`)}`, `= ${N(sc, 1)} MN/m²`, 'hl');
         h += `<p class="small muted" style="margin:4px 2px 10px">= ${N(sc * 1e6, 0)} N/m² · F<sub>B</sub> = ${c.stop === 'crack' ? 'แรงอัดสูงสุดก่อนแตก' : c.stop === 'third' ? 'แรงอัดเมื่อชิ้นงานสูงเหลือ ⅓' : `แรงที่เครื่องหยุด (${c.fmaxSet} kN) — ยังไม่ใช่ค่าสูงสุดจริงของวัสดุ`}</p>`;
         h += '</div><div>';
         if (!st.measured) {
-          h += `<div class="lf wait"><div class="lf-k">2) เปอร์เซ็นต์การยุบตัว (ใบงานข้อ 17)</div><div class="lf-row"><span class="lf-eq">ε<sub>c</sub> = ${FR('h<sub>o</sub> − h<sub>L</sub>', 'h<sub>o</sub>')} × 100</span>
+          h += `<div class="lf wait"><div class="lf-k">2) เปอร์เซ็นต์การยุบตัว (ใบงานข้อ 17)</div><div class="lf-row"><span class="lf-eq">ε<sub>c</sub> = ${FR('h<sub>O</sub> − h<sub>L</sub>', 'h<sub>O</sub>')} × 100</span>
             <button type="button" class="btn btn-accent btn-sm" data-act="measured">📏 ถอดชิ้นงานออกมาวัดความยาว h<sub>L</sub></button></div></div>`;
         } else {
           h += LF('ความยาวชิ้นงานหลังทดสอบ (วัดหลังปล่อยแรงแล้ว)', 'h<sub>L</sub>', '', `= ${N(hL, 2)} mm`);
-          h += LF('2) เปอร์เซ็นต์การยุบตัว', `ε<sub>c</sub> = ${FR('h<sub>o</sub> − h<sub>L</sub>', 'h<sub>o</sub>')} × 100`, `= ${FR(`${N(D.h0, 2)} − ${N(hL, 2)}`, N(D.h0, 2))} × 100`, `= ${N((D.h0 - hL) / D.h0 * 100, 2)} %`, 'hl');
+          h += LF('2) เปอร์เซ็นต์การยุบตัว', `ε<sub>c</sub> = ${FR('h<sub>O</sub> − h<sub>L</sub>', 'h<sub>O</sub>')} × 100`, `= ${FR(`${N(D.h0, 2)} − ${N(hL, 2)}`, N(D.h0, 2))} × 100`, `= ${N((D.h0 - hL) / D.h0 * 100, 2)} %`, 'hl');
           if (hL > hEnd + 0.005) h += `<p class="small muted" style="margin:4px 2px 0">ระหว่างกดชิ้นงานสูง ${N(hEnd, 2)} mm แต่หลังปล่อยแรงคืนตัวขึ้นมา ${N(hL - hEnd, 3)} mm (ส่วนที่ยืดหยุ่น)</p>`;
         }
         h += '</div></div>';

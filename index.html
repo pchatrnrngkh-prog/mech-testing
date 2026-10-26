@@ -350,7 +350,7 @@
       <div class="table-wrap">
         <table>
           <caption>ตาราง 2-1 ชิ้นทดสอบภาคตัดวงกลม</caption>
-          <thead><tr><th>S<sub>o</sub> (mm²)</th><th>d (mm)</th><th>L<sub>o</sub> (mm)</th><th>L<sub>c</sub> ต่ำสุด</th><th>r ต่ำสุด</th><th>± d</th></tr></thead>
+          <thead><tr><th>S<sub>O</sub> (mm²)</th><th>d (mm)</th><th>L<sub>o</sub> (mm)</th><th>L<sub>c</sub> ต่ำสุด</th><th>r ต่ำสุด</th><th>± d</th></tr></thead>
           <tbody>
             <tr><td>12.5</td><td>3.99</td><td>20</td><td>22</td><td>4</td><td>0.02</td></tr>
             <tr><td>25</td><td>5.64</td><td>28</td><td>31</td><td>5</td><td>0.03</td></tr>
@@ -375,7 +375,7 @@
         </table>
       </div>
     </div>
-    <div class="note note-info"><b>📏 หมายเหตุ</b>ถ้าขนาดชิ้นทดสอบไม่ตรงกับตาราง ให้ใช้ความยาวก่อนดึง L<sub>o</sub> = 5.65√S<sub>o</sub></div>
+    <div class="note note-info"><b>📏 หมายเหตุ</b>ถ้าขนาดชิ้นทดสอบไม่ตรงกับตาราง ให้ใช้ความยาวก่อนดึง L<sub>o</sub> = 5.65√S<sub>O</sub></div>
 
     <div class="media-block">
       <h3>📷 ลักษณะรอยขาดของชิ้นทดสอบ: วัสดุเหนียว กับ วัสดุเปราะ</h3>
@@ -404,8 +404,8 @@
     <h3>สมการคำนวณผลการทดสอบแรงดึง</h3>
     <div class="grid g3">
       <div class="formula"><b class="small">1) ความแข็งแรงดึงสูงสุด</b><br>
-        <span class="eq">σ<sub>u</sub> = <span class="frac"><span>F<sub>u</sub></span><span>S<sub>o</sub></span></span></span>
-        <div class="where"><div>F<sub>u</sub> = แรงดึงสูงสุด (N)</div><div>S<sub>o</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
+        <span class="eq">σ<sub>u</sub> = <span class="frac"><span>F<sub>u</sub></span><span>S<sub>O</sub></span></span></span>
+        <div class="where"><div>F<sub>u</sub> = แรงดึงสูงสุด (N)</div><div>S<sub>O</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
       <div class="formula"><b class="small">2) เปอร์เซ็นต์ความยืด</b><br>
         <span class="eq">ε<sub>t</sub> = <span class="frac"><span>L<sub>u</sub> − L<sub>o</sub></span><span>L<sub>o</sub></span></span> × 100</span>
         <div class="where"><div>L<sub>u</sub> = ความยาวหลังทดสอบ (mm)</div><div>L<sub>o</sub> = ความยาวเดิม (mm)</div></div></div>
@@ -423,8 +423,8 @@
       <details>
         <summary>ดูวิธีทำ</summary>
         <div class="steps">
-          <div>พื้นที่ S<sub>o</sub> = π d²/4 = π(5.64)²/4 = 24.98 mm²</div>
-          <div>(1) σ<sub>u</sub> = F<sub>u</sub>/S<sub>o</sub> = 14,500 / 24.98 = <span class="ans">580.4 MN/m²</span></div>
+          <div>พื้นที่ S<sub>O</sub> = π d²/4 = π(5.64)²/4 = 24.98 mm²</div>
+          <div>(1) σ<sub>u</sub> = F<sub>u</sub>/S<sub>O</sub> = 14,500 / 24.98 = <span class="ans">580.4 MN/m²</span></div>
           <div>(2) ε<sub>t</sub> = (30.4 − 28)/28 × 100 = <span class="ans">8.57 %</span></div>
           <div>(3) σ = 11,400 / 24.98 = 456.3 MN/m²</div>
           <div>&nbsp;&nbsp;&nbsp;&nbsp;ε = 0.46 / 28 = 0.01643</div>
@@ -459,11 +459,11 @@
 
     <div class="grid g2">
       <div class="formula"><b class="small">ความเค้นอัด</b><br>
-        <span class="eq">σ<sub>c</sub> = <span class="frac"><span>F<sub>B</sub></span><span>S<sub>o</sub></span></span></span>
-        <div class="where"><div>F<sub>B</sub> = แรงอัดชิ้นทดสอบ (N) · S<sub>o</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
+        <span class="eq">σ<sub>c</sub> = <span class="frac"><span>F<sub>B</sub></span><span>S<sub>O</sub></span></span></span>
+        <div class="where"><div>F<sub>B</sub> = แรงอัดชิ้นทดสอบ (N) · S<sub>O</sub> = พื้นที่หน้าตัดก่อนทดสอบ (m²)</div></div></div>
       <div class="formula"><b class="small">เปอร์เซ็นต์การยุบตัว</b><br>
-        <span class="eq">ε<sub>c</sub> = <span class="frac"><span>h<sub>c</sub></span><span>h<sub>o</sub></span></span> × 100 = <span class="frac"><span>h<sub>o</sub> − h<sub>L</sub></span><span>h<sub>o</sub></span></span> × 100</span>
-        <div class="where"><div>h<sub>o</sub> = ความยาวก่อนทดสอบ · h<sub>L</sub> = ความยาวหลังทดสอบ (mm)</div></div></div>
+        <span class="eq">ε<sub>c</sub> = <span class="frac"><span>Δh<sub>c</sub></span><span>h<sub>O</sub></span></span> × 100 = <span class="frac"><span>h<sub>O</sub> − h<sub>L</sub></span><span>h<sub>O</sub></span></span> × 100</span>
+        <div class="where"><div>ε<sub>c</sub> = เปอร์เซ็นต์การยุบตัว · Δh<sub>c</sub> = ระยะยุบตัวของชิ้นทดสอบ (mm)</div><div>h<sub>O</sub> = ความยาวชิ้นทดสอบก่อนทดสอบ (mm) · h<sub>L</sub> = ความยาวชิ้นทดสอบหลังทดสอบ (mm)</div></div></div>
     </div>
 
     <div class="grid g2" style="margin-top:12px">
@@ -534,7 +534,7 @@
       <details>
         <summary>ดูวิธีทำ</summary>
         <div class="steps">
-          <div>S<sub>o</sub> = π(15)²/4 = 176.71 mm²</div>
+          <div>S<sub>O</sub> = π(15)²/4 = 176.71 mm²</div>
           <div>(1) σ<sub>c</sub> = 35,000 / 176.71 = <span class="ans">198.06 MN/m²</span></div>
           <div>(2) ε<sub>c</sub> = (30 − 23)/30 × 100 = <span class="ans">23.33 %</span></div>
         </div>
@@ -546,7 +546,7 @@
       <div class="calc-inputs">
         <label>เส้นผ่าศูนย์กลาง d (mm)<input type="number" step="any" name="d" value="15"></label>
         <label>แรงอัดสูงสุด F<sub>B</sub> (kN)<input type="number" step="any" name="F" value="35"></label>
-        <label>ความยาวก่อนทดสอบ h<sub>o</sub> (mm)<input type="number" step="any" name="h0" value="30"></label>
+        <label>ความยาวก่อนทดสอบ h<sub>O</sub> (mm)<input type="number" step="any" name="h0" value="30"></label>
         <label>ความยาวหลังทดสอบ h<sub>L</sub> (mm)<input type="number" step="any" name="hL" value="23"></label>
       </div>
       <div class="calc-out"></div>
@@ -991,18 +991,18 @@
 
     <article class="fx">
       <div class="fx-head"><span class="fx-no">6</span><h4>ความแข็งแรงดึงสูงสุด (Ultimate tensile strength)</h4></div>
-      <div class="formula"><span class="eq">σ<sub>u</sub> = <span class="frac"><span>F<sub>u</sub></span><span>S<sub>o</sub></span></span></span></div>
+      <div class="formula"><span class="eq">σ<sub>u</sub> = <span class="frac"><span>F<sub>u</sub></span><span>S<sub>O</sub></span></span></span></div>
       <div class="origin"><b>ที่มา:</b> คือสูตรความเค้น σ = F/A (สูตรที่ 1) ที่ใช้<b>แรงดึงสูงสุด</b> (จุด d บนกราฟ)
-        ใช้พื้นที่หน้าตัด<b>ก่อนทดสอบ</b> S<sub>o</sub> ไม่ใช่พื้นที่ตรงคอคอด เพราะวัดง่าย ใช้เทียบกันได้ทุกห้องแล็บ
+        ใช้พื้นที่หน้าตัด<b>ก่อนทดสอบ</b> S<sub>O</sub> ไม่ใช่พื้นที่ตรงคอคอด เพราะวัดง่าย ใช้เทียบกันได้ทุกห้องแล็บ
         และวิศวกรใช้ค่านี้ออกแบบชิ้นงานจริง (เรียกว่า ความเค้นทางวิศวกรรม)</div>
       <div class="table-wrap"><table class="vars">
         <thead><tr><th>ตัวแปร</th><th class="left">คืออะไร</th><th>หน่วย</th><th class="left">ได้ค่ามาจากไหน</th></tr></thead>
         <tbody>
           <tr><td>σ<sub>u</sub></td><td class="left">ความแข็งแรงดึงสูงสุด (u = ultimate)</td><td>MN/m²</td><td class="left">ผลลัพธ์ที่คำนวณได้</td></tr>
           <tr><td>F<sub>u</sub></td><td class="left">แรงดึง<b>สูงสุด</b>ที่ชิ้นงานรับได้ก่อนเริ่มคอด</td><td>N</td><td class="left">ค่าสูงสุดในตารางบันทึกผล หรือค่า peak บนหน้าจอเครื่อง</td></tr>
-          <tr><td>S<sub>o</sub></td><td class="left">พื้นที่หน้าตัดเดิม (o = original)</td><td>mm²</td><td class="left">คำนวณจาก d ที่วัดก่อนทดสอบ (สูตรที่ 2)</td></tr>
+          <tr><td>S<sub>O</sub></td><td class="left">พื้นที่หน้าตัดเดิม (o = original)</td><td>mm²</td><td class="left">คำนวณจาก d ที่วัดก่อนทดสอบ (สูตรที่ 2)</td></tr>
         </tbody></table></div>
-      <p class="fx-ex"><b>ตัวอย่าง (2.1):</b> F<sub>u</sub> = 14.5 kN, d = 5.64 mm → S<sub>o</sub> = 24.98 mm² → σ<sub>u</sub> = 14,500 ÷ 24.98 = <b>580.4 MN/m²</b></p>
+      <p class="fx-ex"><b>ตัวอย่าง (2.1):</b> F<sub>u</sub> = 14.5 kN, d = 5.64 mm → S<sub>O</sub> = 24.98 mm² → σ<sub>u</sub> = 14,500 ÷ 24.98 = <b>580.4 MN/m²</b></p>
     </article>
 
     <article class="fx">
@@ -1023,18 +1023,18 @@
 
     <article class="fx">
       <div class="fx-head"><span class="fx-no">8</span><h4>ความยาวพิกัดของชิ้นทดสอบแบบสัดส่วน</h4></div>
-      <div class="formula"><span class="eq">L<sub>o</sub> = 5.65 √S<sub>o</sub></span></div>
+      <div class="formula"><span class="eq">L<sub>o</sub> = 5.65 √S<sub>O</sub></span></div>
       <div class="origin"><b>ที่มา:</b> มาตรฐานกำหนดให้ชิ้นทดสอบกลมมีความยาวพิกัด <b>5 เท่าของเส้นผ่าศูนย์กลาง</b> (L<sub>o</sub> = 5d)
         เพื่อให้ค่าเปอร์เซ็นต์ความยืดเทียบกันได้ไม่ว่าชิ้นงานจะใหญ่หรือเล็ก
-        จาก S<sub>o</sub> = πd²/4 จะได้ d = √(4S<sub>o</sub>/π) = 1.128√S<sub>o</sub>
-        ดังนั้น 5d = 5 × 1.128√S<sub>o</sub> ≈ 5.64√S<sub>o</sub> ซึ่งมาตรฐานกำหนดใช้เป็น <b>5.65√S<sub>o</sub></b> สูตรนี้จึงใช้ได้กับหน้าตัดทุกรูปทรง</div>
+        จาก S<sub>O</sub> = πd²/4 จะได้ d = √(4S<sub>O</sub>/π) = 1.128√S<sub>O</sub>
+        ดังนั้น 5d = 5 × 1.128√S<sub>O</sub> ≈ 5.64√S<sub>O</sub> ซึ่งมาตรฐานกำหนดใช้เป็น <b>5.65√S<sub>O</sub></b> สูตรนี้จึงใช้ได้กับหน้าตัดทุกรูปทรง</div>
       <div class="table-wrap"><table class="vars">
         <thead><tr><th>ตัวแปร</th><th class="left">คืออะไร</th><th>หน่วย</th><th class="left">ได้ค่ามาจากไหน</th></tr></thead>
         <tbody>
           <tr><td>L<sub>o</sub></td><td class="left">ความยาวพิกัดที่ควรทำเครื่องหมาย</td><td>mm</td><td class="left">ผลลัพธ์ที่คำนวณได้</td></tr>
-          <tr><td>S<sub>o</sub></td><td class="left">พื้นที่หน้าตัดเดิม</td><td>mm²</td><td class="left">คำนวณจากขนาดชิ้นงาน</td></tr>
+          <tr><td>S<sub>O</sub></td><td class="left">พื้นที่หน้าตัดเดิม</td><td>mm²</td><td class="left">คำนวณจากขนาดชิ้นงาน</td></tr>
         </tbody></table></div>
-      <p class="fx-ex"><b>ตัวอย่าง:</b> S<sub>o</sub> = 25 mm² → L<sub>o</sub> = 5.65 × 5 = 28.25 ≈ <b>28 mm</b> (ตรงกับตาราง 2-1)</p>
+      <p class="fx-ex"><b>ตัวอย่าง:</b> S<sub>O</sub> = 25 mm² → L<sub>o</sub> = 5.65 × 5 = 28.25 ≈ <b>28 mm</b> (ตรงกับตาราง 2-1)</p>
     </article>
 
     <!-- ===== กลุ่ม 3 ===== -->
@@ -1042,7 +1042,7 @@
 
     <article class="fx">
       <div class="fx-head"><span class="fx-no">9</span><h4>ความแข็งแรงอัดสูงสุด (Compressive strength)</h4></div>
-      <div class="formula"><span class="eq">σ<sub>c</sub> = <span class="frac"><span>F<sub>B</sub></span><span>S<sub>o</sub></span></span></span></div>
+      <div class="formula"><span class="eq">σ<sub>c</sub> = <span class="frac"><span>F<sub>B</sub></span><span>S<sub>O</sub></span></span></span></div>
       <div class="origin"><b>ที่มา:</b> คือสูตรความเค้น σ = F/A (สูตรที่ 1) แต่แรงเป็น<b>แรงอัด</b> (c = compression)
         ใช้พื้นที่หน้าตัดก่อนทดสอบเช่นเดียวกับการดึง แม้ชิ้นงานจะป่องออกด้านข้างระหว่างอัดก็ตาม</div>
       <div class="table-wrap"><table class="vars">
@@ -1050,25 +1050,25 @@
         <tbody>
           <tr><td>σ<sub>c</sub></td><td class="left">ความแข็งแรงอัดสูงสุด</td><td>MN/m²</td><td class="left">ผลลัพธ์ที่คำนวณได้</td></tr>
           <tr><td>F<sub>B</sub></td><td class="left">แรงอัดสูงสุด: วัสดุเปราะ = แรงขณะ<b>แตก</b> · วัสดุเหนียว = แรงเมื่ออัดจนสูงเหลือ ⅓</td><td>N</td><td class="left">ค่าสูงสุดที่อ่านได้จากหน้าจอแรงของเครื่อง</td></tr>
-          <tr><td>S<sub>o</sub></td><td class="left">พื้นที่หน้าตัดเดิม</td><td>mm²</td><td class="left">คำนวณจาก d ก่อนทดสอบ</td></tr>
+          <tr><td>S<sub>O</sub></td><td class="left">พื้นที่หน้าตัดเดิม</td><td>mm²</td><td class="left">คำนวณจาก d ก่อนทดสอบ</td></tr>
         </tbody></table></div>
-      <p class="fx-ex"><b>ตัวอย่าง (2.2):</b> F<sub>B</sub> = 35 kN, d = 15 mm → S<sub>o</sub> = 176.71 mm² → σ<sub>c</sub> = <b>198.06 MN/m²</b></p>
+      <p class="fx-ex"><b>ตัวอย่าง (2.2):</b> F<sub>B</sub> = 35 kN, d = 15 mm → S<sub>O</sub> = 176.71 mm² → σ<sub>c</sub> = <b>198.06 MN/m²</b></p>
     </article>
 
     <article class="fx">
       <div class="fx-head"><span class="fx-no">10</span><h4>เปอร์เซ็นต์การยุบตัว</h4></div>
-      <div class="formula"><span class="eq">ε<sub>c</sub> = <span class="frac"><span>h<sub>c</sub></span><span>h<sub>o</sub></span></span> × 100 = <span class="frac"><span>h<sub>o</sub> − h<sub>L</sub></span><span>h<sub>o</sub></span></span> × 100</span></div>
+      <div class="formula"><span class="eq">ε<sub>c</sub> = <span class="frac"><span>Δh<sub>c</sub></span><span>h<sub>O</sub></span></span> × 100 = <span class="frac"><span>h<sub>O</sub> − h<sub>L</sub></span><span>h<sub>O</sub></span></span> × 100</span></div>
       <div class="origin"><b>ที่มา:</b> คือสูตรความเครียด (สูตรที่ 3) ของการอัด ระยะที่เปลี่ยน คือระยะที่<b>ยุบลง</b>
-        h<sub>c</sub> = h<sub>o</sub> − h<sub>L</sub> หารด้วยความสูงเดิม แล้วคูณ 100</div>
+        Δh<sub>c</sub> = h<sub>O</sub> − h<sub>L</sub> หารด้วยความสูงเดิม แล้วคูณ 100</div>
       <div class="table-wrap"><table class="vars">
         <thead><tr><th>ตัวแปร</th><th class="left">คืออะไร</th><th>หน่วย</th><th class="left">ได้ค่ามาจากไหน</th></tr></thead>
         <tbody>
           <tr><td>ε<sub>c</sub></td><td class="left">เปอร์เซ็นต์การยุบตัว</td><td>%</td><td class="left">ผลลัพธ์ที่คำนวณได้</td></tr>
-          <tr><td>h<sub>o</sub></td><td class="left">ความสูง (ยาว) ของชิ้นงานก่อนอัด</td><td>mm</td><td class="left">วัดด้วยเวอร์เนียร์ก่อนทดสอบ</td></tr>
+          <tr><td>h<sub>O</sub></td><td class="left">ความสูง (ยาว) ของชิ้นงานก่อนอัด</td><td>mm</td><td class="left">วัดด้วยเวอร์เนียร์ก่อนทดสอบ</td></tr>
           <tr><td>h<sub>L</sub></td><td class="left">ความสูงของชิ้นงานหลังอัด</td><td>mm</td><td class="left">วัดด้วยเวอร์เนียร์หลังทดสอบ</td></tr>
-          <tr><td>h<sub>c</sub></td><td class="left">ระยะที่ยุบลง</td><td>mm</td><td class="left">h<sub>o</sub> − h<sub>L</sub></td></tr>
+          <tr><td>Δh<sub>c</sub></td><td class="left">ระยะยุบตัวของชิ้นทดสอบ</td><td>mm</td><td class="left">h<sub>O</sub> − h<sub>L</sub></td></tr>
         </tbody></table></div>
-      <p class="fx-ex"><b>ตัวอย่าง (2.2):</b> h<sub>o</sub> = 30 mm, h<sub>L</sub> = 23 mm → ε<sub>c</sub> = 7 ÷ 30 × 100 = <b>23.33 %</b></p>
+      <p class="fx-ex"><b>ตัวอย่าง (2.2):</b> h<sub>O</sub> = 30 mm, h<sub>L</sub> = 23 mm → ε<sub>c</sub> = 7 ÷ 30 × 100 = <b>23.33 %</b></p>
     </article>
 
     <!-- ===== กลุ่ม 4 ===== -->
