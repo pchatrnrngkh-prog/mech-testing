@@ -1,0 +1,199 @@
+/* ===== ห้องทดลองเสมือน (แบบจำลองใบงาน 2.1–2.7) ===== */
+:root {
+  --lcd-bg: #0f2418; --lcd-text: #45f08a;
+  --steel-frame: #8f9bab; --machine-blue: #2f6db5; --hydraulic: #d9622b; --cell: #f2b705;
+}
+
+/* ศูนย์รวมใบงาน */
+.lab-hub { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.lab-hub a {
+  display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: var(--text);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px;
+  box-shadow: var(--shadow); transition: border-color .15s, transform .15s;
+}
+.lab-hub a:hover { border-color: var(--accent); transform: translateY(-2px); }
+.lab-hub .hub-ic { font-size: 1.7rem; line-height: 1; }
+.lab-hub b { display: block; color: var(--brand); }
+.lab-hub span.small { color: var(--muted); line-height: 1.5; display: block; }
+.how-steps { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: 14px 0 0; padding: 0; list-style: none; counter-reset: st; }
+.how-steps li { background: var(--surface-2); border-radius: 10px; padding: 10px 12px 10px 46px; position: relative; font-size: .93rem; line-height: 1.5; }
+.how-steps li::before {
+  counter-increment: st; content: counter(st); position: absolute; left: 12px; top: 10px; width: 24px; height: 24px;
+  border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .85rem;
+}
+
+/* กล่องห้องทดลอง */
+.lab {
+  margin: 28px 0 8px; border: 2px solid var(--accent); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); overflow: hidden; box-shadow: var(--shadow);
+}
+.lab-top {
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 60%, var(--brand)));
+  color: #fff; padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+}
+.lab-top h3 { margin: 0; font-size: 1.2rem; }
+.lab-top .lab-sub { font-size: .92rem; opacity: .95; }
+.lab-body { padding: 16px; display: grid; gap: 16px; }
+.lab-step { font-weight: 700; color: var(--brand); display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 1.02rem; }
+.lab-step .n { background: var(--brand); color: var(--surface); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: .85rem; flex-shrink: 0; }
+.lab-panel { background: var(--surface-2); border-radius: 12px; padding: 14px; }
+.lab-row { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.lab-row.r-machine { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .lab-row, .lab-row.r-machine { grid-template-columns: minmax(0, 1fr); } }
+
+/* ช่องกรอกค่า */
+.lab-inputs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.lab label { display: flex; flex-direction: column; gap: 4px; font-size: .88rem; color: var(--muted); }
+.lab input, .lab select {
+  font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 10px; width: 100%;
+}
+.lab input:focus, .lab select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.lab input:disabled, .lab select:disabled { opacity: .6; }
+.mat-pick { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.mat-pick button {
+  font: inherit; font-size: .92rem; display: flex; align-items: center; gap: 8px; cursor: pointer;
+  border: 2px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 4px 12px 4px 6px;
+}
+.mat-pick button i { width: 22px; height: 22px; border-radius: 50%; display: inline-block; box-shadow: inset 0 -3px 5px rgba(0,0,0,.25), inset 0 3px 5px rgba(255,255,255,.4); }
+.mat-pick button.on { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.mat-pick button:disabled { cursor: not-allowed; opacity: .55; }
+.mat-note { font-size: .88rem; color: var(--muted); margin: -4px 0 10px; }
+
+/* สูตรสด: แสดงสูตร แทนค่า และคำตอบ ทันทีที่ใส่ค่า */
+.lf-list { display: grid; gap: 8px; margin-top: 10px; grid-template-columns: minmax(0, 1fr); }
+.lf {
+  background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 10px;
+  padding: 8px 12px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px;
+}
+.lf.hl { border-left-color: var(--accent); }
+.lf .lf-k { font-size: .82rem; color: var(--muted); }
+.lf .lf-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 1rem; }
+.lf .lf-eq { font-style: italic; white-space: nowrap; color: var(--brand); font-weight: 600; }
+.lf .lf-sub { white-space: nowrap; color: var(--muted); font-size: .92rem; overflow-x: auto; max-width: 100%; }
+.lf .lf-ans { white-space: nowrap; font-weight: 700; color: var(--ok); }
+.lf .frac { font-size: .95em; }
+.lf.wait .lf-ans { color: var(--muted); font-weight: 400; }
+
+/* เครื่องทดสอบ */
+.mach-box { background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
+.mach-box svg { width: 100%; height: auto; display: block; }
+.mach-box svg text { font-family: var(--font); }
+.mach-label { fill: var(--text); font-size: 12.5px; }
+.mach-line { stroke: var(--muted); stroke-width: 1; fill: none; }
+.lcd { fill: var(--lcd-bg); }
+.lcd-t { fill: var(--lcd-text); font-size: 15px; font-weight: 700; letter-spacing: .5px; }
+.lcd-u { fill: #a8b3c2; font-size: 9px; }
+.spec-zoom { width: 100%; height: auto; display: block; margin-top: 6px; }
+.spec-zoom text { font-family: var(--font); }
+
+/* หน้าจอและปุ่มควบคุม */
+.readouts { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ro { background: var(--lcd-bg); border-radius: 10px; padding: 8px 12px; color: #a8b3c2; font-size: .8rem; line-height: 1.3; }
+.ro b { display: block; color: var(--lcd-text); font-size: 1.45rem; letter-spacing: .5px; font-variant-numeric: tabular-nums; }
+.ro.alt b { color: #ffd36a; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.ctrl .btn { padding: 9px 14px; }
+.btn-go { background: var(--ok); color: #fff; }
+.btn-go:disabled, .btn-line:disabled, .btn-accent:disabled { opacity: .45; cursor: not-allowed; }
+.speed { display: flex; gap: 4px; align-items: center; font-size: .85rem; color: var(--muted); flex-wrap: wrap; }
+.speed button { font: inherit; font-size: .85rem; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.speed button.on { background: var(--brand); color: var(--surface); border-color: var(--brand); }
+.status { margin-top: 10px; padding: 8px 12px; border-radius: 10px; background: var(--brand-soft); font-size: .93rem; min-height: 2.4em; }
+.status.ok { background: var(--ok-soft); }
+.status.warn { background: var(--accent-soft); }
+.status.bad { background: var(--bad-soft); }
+
+/* กราฟ */
+.chart-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 8px 4px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+.chart-box svg text { font-family: var(--font); }
+.ch-grid { stroke: var(--line); stroke-width: 1; }
+.ch-axis { stroke: var(--muted); stroke-width: 1.5; }
+.ch-tick { fill: var(--muted); font-size: 11px; }
+.ch-lab { fill: var(--text); font-size: 12px; font-weight: 600; }
+.ch-line { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ch-old { fill: none; stroke-width: 2; opacity: .55; stroke-dasharray: 6 4; }
+.ch-dot { stroke: var(--surface); stroke-width: 1.5; }
+.ch-pick { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.ch-head { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.ch-head .tabs { margin: 0; }
+.ch-head .tabs button { padding: 2px 12px; font-size: .85rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: .82rem; color: var(--muted); padding: 2px 6px 6px; }
+.legend i { display: inline-block; width: 18px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+
+/* ตารางบันทึกผล */
+.rec-wrap { max-height: 330px; overflow: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.rec-wrap table { font-size: .88rem; }
+.rec-wrap th { position: sticky; top: 0; z-index: 1; }
+.rec-wrap td, .rec-wrap th { padding: 5px 8px; font-variant-numeric: tabular-nums; }
+.rec-wrap tr.new td { animation: rowflash 1s ease-out; }
+.rec-wrap tr.peak td { background: var(--accent-soft); font-weight: 700; }
+.rec-wrap tr.brk td { background: var(--bad-soft); }
+.rec-wrap tr.pick td { outline: 2px solid var(--ok); outline-offset: -2px; background: var(--ok-soft); }
+.rec-wrap.clickable tbody tr { cursor: pointer; }
+.rec-wrap.clickable tbody tr:hover td { background: var(--brand-soft); }
+.rec-empty { padding: 18px; text-align: center; color: var(--muted); font-size: .9rem; }
+@keyframes rowflash { from { background: #ffe08a; } to { background: transparent; } }
+.rec-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-top: 8px; font-size: .85rem; color: var(--muted); }
+
+/* ผลการทดลอง */
+.result-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.conclude { background: var(--ok-soft); border-radius: 10px; padding: 10px 14px; font-size: .95rem; margin-top: 10px; }
+.conclude b:first-child { margin-right: 4px; }
+.compare-bar { display: grid; gap: 6px; margin-top: 8px; }
+.compare-bar .cb { display: grid; grid-template-columns: 120px minmax(0, 1fr) 80px; gap: 8px; align-items: center; font-size: .88rem; }
+.compare-bar .cb-track { background: var(--surface-2); border-radius: 6px; height: 16px; overflow: hidden; }
+.compare-bar .cb-fill { height: 100%; border-radius: 6px; transition: width .6s; }
+.compare-bar .cb-v { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* กล้องไมโครสโคป (ความแข็ง) */
+.scope { position: relative; background: radial-gradient(circle, #e9edf2 0 62%, #222 63%); border-radius: 50%; aspect-ratio: 1; max-width: 300px; margin: 0 auto; overflow: hidden; }
+.scope svg { width: 100%; height: 100%; display: block; }
+.scope-ctl { display: grid; gap: 8px; margin-top: 10px; }
+.scope-ctl label { flex-direction: row; align-items: center; gap: 8px; }
+.scope-ctl input[type=range] { flex: 1; accent-color: var(--accent); padding: 0; }
+.scope-ctl output { min-width: 74px; font-weight: 700; color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ขั้นตอนการทดลองแบบเช็กลิสต์ */
+.proc { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.proc li { display: flex; gap: 10px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: .92rem; line-height: 1.45; }
+.proc li .ck { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-size: .75rem; color: transparent; margin-top: 1px; }
+.proc li.done .ck { background: var(--ok); border-color: var(--ok); color: #fff; }
+.proc li.now { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.proc li .proc-t { flex: 1; }
+.proc li button { margin-top: 6px; }
+
+/* ภาพประกอบสีที่วาดใหม่ */
+.svg-fig { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+.svg-fig svg { width: 100%; height: auto; display: block; max-height: 360px; }
+.svg-fig svg text { font-family: var(--font); }
+.fig-label { fill: var(--text); font-size: 13px; }
+.fig-dim { fill: var(--brand); font-size: 13px; font-weight: 700; }
+.fig-acc { fill: var(--accent); font-size: 13px; font-weight: 700; }
+.stress-play { display: grid; gap: 14px; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; }
+@media (max-width: 760px) { .stress-play { grid-template-columns: minmax(0, 1fr); } }
+.stress-play input[type=range] { width: 100%; accent-color: var(--accent); }
+
+/* แอนิเมชันวนซ้ำของภาพประกอบ */
+.a-pull { animation: a-pull 3s ease-in-out infinite; }
+@keyframes a-pull { 0%, 15% { transform: translateY(0); } 60%, 100% { transform: translateY(-14px); } }
+.a-press { animation: a-press 2.6s ease-in-out infinite; }
+@keyframes a-press { 0%, 20% { transform: translateY(-16px); } 55%, 75% { transform: translateY(0); } 100% { transform: translateY(-16px); } }
+.a-shear-mid { animation: a-shear-mid 3.2s ease-in-out infinite; }
+@keyframes a-shear-mid { 0%, 15% { transform: translateY(0); } 70%, 100% { transform: translateY(-12px); } }
+.a-load { animation: a-load 3.2s ease-in-out infinite; }
+@keyframes a-load { 0%, 15% { transform: translateY(0); } 70%, 100% { transform: translateY(12px); } }
+.a-blink { animation: a-blink 1.2s steps(2, end) infinite; }
+@keyframes a-blink { 50% { opacity: .25; } }
+.a-indent { animation: a-indent 2.8s ease-in-out infinite; transform-box: fill-box; }
+@keyframes a-indent { 0%, 10% { transform: translateY(-14px); } 40%, 70% { transform: translateY(0); } 100% { transform: translateY(-14px); } }
+@media (prefers-reduced-motion: reduce) { .a-pull, .a-press, .a-shear-mid, .a-load, .a-blink, .a-indent { animation: none; } }
+
+@media print { .lab, .lab-hub-wrap { display: none !important; } }
+
+/* ให้แอตทริบิวต์ hidden ชนะ display ที่ตั้งไว้ด้านบน */
+.lab [hidden] { display: none !important; }
+.mach-box > svg { max-height: 560px; }
+
+.chart-box svg { max-width: 640px; margin: 0 auto; }
