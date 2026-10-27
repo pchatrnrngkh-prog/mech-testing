@@ -1565,6 +1565,7 @@
           if (x.b) ctl = `<button type="button" class="btn btn-sm btn-accent" data-go="${i}">${x.b}</button>`;
           if (x.ch) ctl = `<div class="tabs" style="margin:6px 0 0">${x.ch.map(c => `<button type="button" data-go="${i}" data-v="${c[0]}">${c[1]}</button>`).join('')}</div>`;
         }
+        if (i === hm.step && hm.warn) ctl += `<div class="note note-warn" style="margin:8px 0 0">${hm.warn}</div>`;
         if (i < hm.step && hm.pickTxt && hm.pickTxt[i]) ctl = `<div class="small muted">✔ ${hm.pickTxt[i]}</div>`;
         return `<li class="${cls}"><span class="ck">✓</span><div class="proc-t">${i + 1}. ${x.t}${ctl}</div></li>`;
       }).join('');
@@ -1574,7 +1575,9 @@
       const S = steps();
       S[+b.dataset.go].go(b.dataset.v, b.textContent);
     });
-    const done = (txt, msg, cls = 'ok') => { hm.pickTxt = hm.pickTxt || []; hm.pickTxt[hm.step] = txt; hm.step++; renderProc(); if (msg) status(msg, cls); };
+    // แจ้งเตือนเมื่อเลือกผิด ให้ขึ้นใต้ขั้นตอนที่กำลังทำ (บนมือถือกล่องสถานะอยู่ไกลจนมองไม่เห็น)
+    const bad = msg => { hm.warn = msg; renderProc(); status(msg, 'warn'); };
+    const done = (txt, msg, cls = 'ok') => { hm.warn = null; hm.pickTxt = hm.pickTxt || []; hm.pickTxt[hm.step] = txt; hm.step++; renderProc(); if (msg) status(msg, cls); };
 
     async function polish() {
       hm.busy = true; renderProc();
@@ -1585,20 +1588,20 @@
       drawView();
     }
     function pickAnvil(v, t) {
-      if (v !== 'flat') return status('⚠️ ผิวที่ทดสอบเป็นหน้าตัดเรียบของเพลา ต้องใช้<b>แท่นรองรับผิวราบ</b> (แท่นผิวโค้งใช้กับการกดบนผิวโค้งของเพลา)', 'warn');
+      if (v !== 'flat') return bad('⚠️ ผิวที่ทดสอบเป็นหน้าตัดเรียบของเพลา ต้องใช้<b>แท่นรองรับผิวราบ</b> (แท่นผิวโค้งใช้กับการกดบนผิวโค้งของเพลา)');
       done(t, 'ประกอบแท่นรองรับผิวราบเข้ากับเครื่องแล้ว');
     }
     function pickInd(v, t) {
       const M = MODES[hm.mode];
-      if (hm.mode === 'HR') { if (v !== 'ball16' && v !== 'cone') return status('⚠️ รอคเวลล์สเกล B ใช้ลูกบอล 1/16 นิ้ว ส่วนสเกล C ใช้หัวเพชรกรวย 120°', 'warn'); }
-      else if (v !== M.ind) return status(`⚠️ การทดสอบแบบ${M.name}ต้องใช้<b>${IND[M.ind]}</b>`, 'warn');
+      if (hm.mode === 'HR') { if (v !== 'ball16' && v !== 'cone') return bad('⚠️ รอคเวลล์สเกล B ใช้ลูกบอล 1/16 นิ้ว ส่วนสเกล C ใช้หัวเพชรกรวย 120°'); }
+      else if (v !== M.ind) return bad(`⚠️ การทดสอบแบบ${M.name}ต้องใช้<b>${IND[M.ind]}</b>`);
       hm.ind = v; setTip();
       done(t, `ประกอบ${t}เข้ากับเครื่องแล้ว`);
     }
     function pickLoad(v, t) {
       v = +v;
       if (hm.mode === 'HR') {
-        if ((v === 100) !== (hm.ind === 'ball16')) return status('⚠️ สเกลต้องตรงกับหัวกด: ลูกบอล 1/16 นิ้ว → สเกล B (100 kgf) · หัวเพชรกรวย → สเกล C (150 kgf)', 'warn');
+        if ((v === 100) !== (hm.ind === 'ball16')) return bad('⚠️ สเกลต้องตรงกับหัวกด: ลูกบอล 1/16 นิ้ว → สเกล B (100 kgf) · หัวเพชรกรวย → สเกล C (150 kgf)');
       }
       hm.load = v;
       wsel.setAttribute('y', v >= 150 ? 36 : v >= 100 ? 46 : v >= 62 ? 54 : 62);
@@ -1650,7 +1653,7 @@
         if (e1 > SC_TOL || e2 > SC_TOL) {
           const msg = `⚠️ เส้นเล็ง${e1 > SC_TOL && e2 > SC_TOL ? 'ทั้ง d₁ และ d₂' : e1 > SC_TOL ? ' d₁ (แนวนอน)' : ' d₂ (แนวตั้ง)'}ยังไม่ตรงขอบรอยกด เลื่อนแถบหรือกดปุ่ม − / + ที่กล้องไมโครสโคปจนเส้นเป็น<b style="color:var(--ok)">สีเขียว</b> แล้วกดบันทึกผลอีกครั้ง`;
           const w = q('.sc-msg'); if (w) { w.innerHTML = msg; w.hidden = false; q('.scope').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-          return status(msg, 'warn');
+          return bad(msg);
         }
         r.d1 = m1; r.d2 = m2; r.d = (m1 + m2) / 2;
         r.val = M === 'HB' ? hbOf(hm.load, 2.5, r.d) : 1.8544 * hm.load / r.d ** 2;
@@ -1670,7 +1673,7 @@
       hm.busy = true; renderProc();
       await anim(600, u => setAnvil(1 - u));
       hm.busy = false;
-      hm.step = 5; hm.cur = null; hm.pickTxt.length = 5;
+      hm.step = 5; hm.cur = null; hm.warn = null; hm.pickTxt.length = 5;
       lcd.textContent = hm.mode === 'HB' ? (hm.load >= 187.5 ? 'hb30' : 'hb10') : hm.mode === 'HV' ? 'hv' : (hm.load === 100 ? 'hrb' : 'hrc');
       renderProc(); drawView();
       status(`เลื่อนชิ้นงานไปตำแหน่งที่ ${hm.dents.length + 1} แล้ว (ห่างจากรอยเดิมพอสมควร)`);
@@ -1810,7 +1813,7 @@
     function newTest() {
       setMat(hm.mat);
       q('.mat-note').textContent = `${MATS[hm.mat].name}: ${MATS[hm.mat].note}`;
-      Object.assign(hm, { step: 0, dents: [], cur: null, polished: false, ind: null, load: null, time: null, busy: false, pickTxt: [], avg: null, k: jitter(0.03) });
+      Object.assign(hm, { step: 0, warn: null, dents: [], cur: null, polished: false, ind: null, load: null, time: null, busy: false, pickTxt: [], avg: null, k: jitter(0.03) });
       spec.setAttribute('fill', `url(#gm-${hm.mat}-h)`); spec.setAttribute('stroke', '#555');
       lcd.textContent = '----'; setAnvil(0); setLever(0); setTip(); wsel.setAttribute('y', 62);
       makeTbl(); calc(); renderProc(); drawView(); drawCmp();
