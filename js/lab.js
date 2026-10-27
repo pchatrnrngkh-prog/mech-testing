@@ -1638,7 +1638,7 @@
         lcd.textContent = bad === 'over' ? 'Err' : bad === 'under' ? 'Lo' : N(c.val, 1);
         c.bad = bad;
       } else lcd.textContent = N(c.val, 0);
-      hm.scopeD = [hm.cur.d1 ? Math.round(hm.cur.d1 * 0.6 * 200) / 200 : 0, hm.cur.d2 ? Math.round(hm.cur.d2 * 1.35 * 200) / 200 : 0];
+      hm.scopeD = [hm.cur.d1 ? Math.round(hm.cur.d1 * 0.75 * 200) / 200 : 0, hm.cur.d2 ? Math.round(hm.cur.d2 * 1.25 * 200) / 200 : 0];
       done('เสียงสัญญาณดัง โยกคานกลับแล้ว', M === 'HR' ? `หน้าจอแสดงค่าความแข็ง ${lcd.textContent} ${c.scaleB ? 'HRB' : 'HRC'}` : 'เกิดรอยกดบนผิวชิ้นงานแล้ว ส่องกล้องไมโครสโคปสเกลด้านล่าง แล้วเลื่อนเส้นเล็งให้ตรงขอบรอย');
       drawView();
     }
@@ -1647,7 +1647,11 @@
       const r = { val: c.val, screen: c.val };
       if (M !== 'HR') {
         const [m1, m2] = hm.scopeD, e1 = Math.abs(m1 - c.d1) / c.d1, e2 = Math.abs(m2 - c.d2) / c.d2;
-        if (e1 > 0.03 || e2 > 0.03) return status('⚠️ เส้นเล็งยังไม่ตรงขอบรอยกด ลองเลื่อนแถบให้เส้นทั้งสองแตะขอบรอยพอดี (เส้นจะเปลี่ยนเป็นสีเขียว)', 'warn');
+        if (e1 > SC_TOL || e2 > SC_TOL) {
+          const msg = `⚠️ เส้นเล็ง${e1 > SC_TOL && e2 > SC_TOL ? 'ทั้ง d₁ และ d₂' : e1 > SC_TOL ? ' d₁ (แนวนอน)' : ' d₂ (แนวตั้ง)'}ยังไม่ตรงขอบรอยกด เลื่อนแถบหรือกดปุ่ม − / + ที่กล้องไมโครสโคปจนเส้นเป็น<b style="color:var(--ok)">สีเขียว</b> แล้วกดบันทึกผลอีกครั้ง`;
+          const w = q('.sc-msg'); if (w) { w.innerHTML = msg; w.hidden = false; q('.scope').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          return status(msg, 'warn');
+        }
         r.d1 = m1; r.d2 = m2; r.d = (m1 + m2) / 2;
         r.val = M === 'HB' ? hbOf(hm.load, 2.5, r.d) : 1.8544 * hm.load / r.d ** 2;
         r.ratio = M === 'HB' ? r.d / 2.5 : null;
@@ -1671,6 +1675,7 @@
       renderProc(); drawView();
       status(`เลื่อนชิ้นงานไปตำแหน่งที่ ${hm.dents.length + 1} แล้ว (ห่างจากรอยเดิมพอสมควร)`);
     }
+    const SC_TOL = 0.04; // วัดคลาดได้ไม่เกิน 4% ถือว่าเส้นเล็งตรงขอบรอย
     const hbOf = (F, D, d) => 2 * F / (Math.PI * D * (D - Math.sqrt(D * D - d * d)));
 
     /* ---- กล้องไมโครสโคป / ภาพรอยกด ---- */
@@ -1711,9 +1716,10 @@
       box.innerHTML = `<p class="lab-step" style="margin-top:0"><span class="n">🔍</span>กล้องไมโครสโคปสเกล (ช่องมองกว้าง ${tick(fov)} mm)</p>
         <div class="scope"><svg viewBox="0 0 300 300" class="sc-svg"></svg></div>
         <div class="scope-ctl">
-          <label>d₁ (แนวนอน)<input type="range" class="sc1" min="0" max="${fov}" step="${fov / 600}" value="${m1}"><output class="o1"></output></label>
-          <label>d₂ (แนวตั้ง)<input type="range" class="sc2" min="0" max="${fov}" step="${fov / 600}" value="${m2}"><output class="o2"></output></label>
+          <label><span class="sc-lb">d₁ (แนวนอน)</span><button type="button" class="btn btn-sm sc-fine" data-s="sc1" data-d="-1" aria-label="ลด d₁">−</button><input type="range" class="sc1" min="0" max="${fov}" step="${fov / 600}" value="${m1}"><button type="button" class="btn btn-sm sc-fine" data-s="sc1" data-d="1" aria-label="เพิ่ม d₁">+</button><output class="o1"></output></label>
+          <label><span class="sc-lb">d₂ (แนวตั้ง)</span><button type="button" class="btn btn-sm sc-fine" data-s="sc2" data-d="-1" aria-label="ลด d₂">−</button><input type="range" class="sc2" min="0" max="${fov}" step="${fov / 600}" value="${m2}"><button type="button" class="btn btn-sm sc-fine" data-s="sc2" data-d="1" aria-label="เพิ่ม d₂">+</button><output class="o2"></output></label>
         </div>
+        <div class="note note-warn sc-msg" hidden></div>
         <div class="lf-list sc-lf"></div>
         <p class="small muted" style="margin:6px 0 0">เลื่อนแถบให้เส้นเล็งแตะขอบรอยกดพอดี เส้นจะเปลี่ยนเป็น<b style="color:var(--ok)">สีเขียว</b> · หน้าจอเครื่องแสดง ${N(c.val, 0)} ${M}</p>`;
       const svgS = box.querySelector('.sc-svg'), lf = box.querySelector('.sc-lf');
@@ -1730,7 +1736,8 @@
       const upd = () => {
         const a = +box.querySelector('.sc1').value, b = +box.querySelector('.sc2').value;
         hm.scopeD = [a, b];
-        const ok1 = Math.abs(a - c.d1) / c.d1 <= 0.03, ok2 = Math.abs(b - c.d2) / c.d2 <= 0.03;
+        const ok1 = Math.abs(a - c.d1) / c.d1 <= SC_TOL, ok2 = Math.abs(b - c.d2) / c.d2 <= SC_TOL;
+        if (ok1 && ok2) box.querySelector('.sc-msg').hidden = true;
         const c1 = ok1 ? '#1d7a46' : '#d62828', c2 = ok2 ? '#1d7a46' : '#d62828';
         svgS.innerHTML = base
           + `<line x1="${cx - a * sc / 2}" y1="20" x2="${cx - a * sc / 2}" y2="250" stroke="${c1}" stroke-width="2"/><line x1="${cx + a * sc / 2}" y1="20" x2="${cx + a * sc / 2}" y2="250" stroke="${c1}" stroke-width="2"/>`
@@ -1745,6 +1752,15 @@
       };
       box.querySelector('.sc1').addEventListener('input', upd);
       box.querySelector('.sc2').addEventListener('input', upd);
+      // ปุ่ม − / + ปรับละเอียดครั้งละ 0.01 mm (กดค้างได้)
+      box.querySelectorAll('.sc-fine').forEach(btn => {
+        let tm;
+        const nudge = () => { const r = box.querySelector('.' + btn.dataset.s); r.value = Math.min(fov, Math.max(0, +r.value + btn.dataset.d * 0.01)); upd(); };
+        const stop = () => clearTimeout(tm);
+        btn.addEventListener('pointerdown', e => { e.preventDefault(); nudge(); const rep = (d) => { tm = setTimeout(() => { nudge(); rep(60); }, d); }; rep(400); });
+        ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => btn.addEventListener(ev, stop));
+        btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nudge(); } });
+      });
       upd();
     }
 

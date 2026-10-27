@@ -153,6 +153,9 @@
 .scope-ctl { display: grid; gap: 8px; margin-top: 10px; }
 .scope-ctl label { flex-direction: row; align-items: center; gap: 8px; }
 .scope-ctl input[type=range] { flex: 1; accent-color: var(--accent); padding: 0; }
+.scope-ctl .sc-fine { flex-shrink: 0; min-width: 34px; min-height: 34px; padding: 0; font-size: 1.15rem; line-height: 1; touch-action: manipulation; }
+.sc-msg { margin-top: 10px; }
+@media (max-width: 560px) { .scope-ctl label { flex-wrap: wrap; } .scope-ctl .sc-lb { flex-basis: 100%; } }
 .scope-ctl output { min-width: 74px; font-weight: 700; color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
 
 /* ขั้นตอนการทดลองแบบเช็กลิสต์ */
