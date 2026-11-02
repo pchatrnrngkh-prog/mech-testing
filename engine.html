@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ทดสอบสมรรถนะเครื่องยนต์</title>
+<meta name="description" content="บทเรียนออนไลน์ บทที่ 3 งานทดสอบสมรรถนะของเครื่องยนต์ วิชางานทดลองเครื่องกล (30101-2007) ระดับ ปวส. แรงบิด กำลังม้า ไดนาโมมิเตอร์ กราฟสมรรถนะ อัตราสิ้นเปลืองเชื้อเพลิง ประสิทธิภาพ">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e8710a'/><circle cx='16' cy='16' r='8' stroke='white' stroke-width='3' fill='none'/><path d='M16 16 L22 10' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/lab.css?v=4">
+<link rel="stylesheet" href="css/engine.css?v=1">
+</head>
+<body>
+
+<!-- ===== เมนูบน ===== -->
+<header class="topbar">
+  <div class="wrap chap-row" aria-label="เลือกบทเรียน">
+    <span class="chap-lbl">📚 เลือกบท:</span>
+    <a href="index.html"><span class="cn">บทที่ 2</span>ทดสอบคุณสมบัติเชิงกลของวัสดุ</a>
+    <a href="engine.html" class="on" aria-current="page"><span class="cn">บทที่ 3</span>ทดสอบสมรรถนะเครื่องยนต์</a>
+  </div>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-badge">บทที่ 3</span><span class="brand-text">สมรรถนะเครื่องยนต์</span></a>
+    <nav class="nav" id="nav">
+      <a href="#torque">แรงบิด</a>
+      <a href="#power">กำลังม้า</a>
+      <a href="#dyno">ไดนาโมมิเตอร์</a>
+      <a href="#curves">กราฟสมรรถนะ</a>
+      <a href="#fuel">สิ้นเปลืองเชื้อเพลิง</a>
+      <a href="#eff">ประสิทธิภาพ</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#practice">แบบฝึกหัด</a>
+      <a href="#formulas">สรุปสูตร</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="สลับโหมดสว่าง/มืด" aria-label="สลับโหมดสว่าง/มืด">◐</button>
+  </div>
+</header>
+
+<!-- ===== ส่วนหัว ===== -->
+<div class="hero engine-hero" id="top">
+  <div class="wrap">
+    <span class="kicker">วิชางานทดลองเครื่องกล · รหัสวิชา 30101-2007 · ปวส. · บทที่ 3</span>
+    <h1>งานทดสอบสมรรถนะของเครื่องยนต์</h1>
+    <p class="lead">เครื่องยนต์แรงแค่ไหน กินน้ำมันเท่าไร และเปลี่ยนพลังงานจากน้ำมันเป็นงานได้กี่เปอร์เซ็นต์
+      บทนี้สอนวิธีวัดแรงบิด กำลังม้า อัตราสิ้นเปลืองเชื้อเพลิง และประสิทธิภาพ แล้วนำผลมาเขียนกราฟสมรรถนะ</p>
+    <div class="hero-meta">
+      <span>📅 สัปดาห์ที่ 6–8</span>
+      <span>🔧 ชุดทดลองเครื่องยนต์เสมือน ใบงาน 3.1–3.3</span>
+      <span>📈 กราฟสมรรถนะแบบเลื่อนดูได้</span>
+      <span>🧮 เครื่องคิดเลขแสดงการแทนค่า</span>
+      <span>✅ แบบทดสอบตรวจคำตอบทันที</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-accent" href="#intro">เริ่มเรียน →</a>
+      <a class="btn btn-ghost" href="#lab31">ไปที่ชุดทดลองเสมือน</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== 3.1 บทนำ ===== -->
+<section class="block" id="intro" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.1</span><h2>บทนำ: ทำไมต้องทดสอบสมรรถนะเครื่องยนต์</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">🧭 สาระสำคัญ</h3>
+        <p>การเลือกเครื่องยนต์หรือรถยนต์ นอกจากราคาแล้ว สิ่งที่สำคัญอันดับต้น ๆ คือ<b>สมรรถนะของเครื่องยนต์</b>
+          ซึ่งเป็นข้อมูลที่แสดงความสามารถในการทำงาน เช่น กำลังม้า แรงบิด และความสิ้นเปลืองน้ำมันเชื้อเพลิง</p>
+        <p>ผู้ผลิตบอกสมรรถนะไว้ก็จริง แต่เป็นค่าของ<b>เครื่องยนต์ใหม่</b>ภายใต้เงื่อนไขการทดสอบของผู้ผลิต
+          เครื่องยนต์ที่ใช้งานมานาน หรือผ่านการซ่อมมาแล้ว อาจมีสมรรถนะต่างจากเดิมมาก
+          ช่างเทคนิคและวิศวกรจึงต้องทดสอบเอง เพื่อหาข้อขัดข้อง ซ่อมแซม ออกแบบ และพัฒนาเครื่องยนต์ต่อไป</p>
+        <p class="muted small" style="margin:0">สมรรถนะที่สำคัญซึ่งเรียนในบทนี้: ① แรงบิด ② กำลังม้า ③ อัตราการสิ้นเปลืองเชื้อเพลิง ④ ประสิทธิภาพของเครื่องยนต์</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">🎯 เรียนจบแล้วต้องทำได้</h3>
+        <ul class="goal-list">
+          <li><span class="tag tag-k">ความรู้</span><span>อธิบายความหมายของแรงบิดได้</span></li>
+          <li><span class="tag tag-k">ความรู้</span><span>บอกเครื่องมือทดสอบแรงบิดและกำลังม้าของเครื่องยนต์ได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>วัดอัตราการสิ้นเปลืองเชื้อเพลิงได้</span></li>
+          <li><span class="tag tag-a">เจตคติ</span><span>นำความรู้เรื่องสมรรถนะเครื่องยนต์ไปปรับใช้ในชีวิตประจำวันได้</span></li>
+        </ul>
+        <details style="margin-top:10px">
+          <summary style="cursor:pointer;color:var(--accent);font-weight:600">ดูผลการเรียนรู้ที่คาดหวังทั้ง 25 ข้อ (จากหนังสือ)</summary>
+          <ol class="outcome-list">
+            <li>บอกความหมายของแรงบิดได้</li><li>อธิบายวิธีการหลักในการทดสอบแรงบิดของเครื่องยนต์ได้</li>
+            <li>บอกหน่วยการวัดกำลังงานได้</li><li>เปรียบเทียบหน่วยการวัดกำลังงานแต่ละหน่วยได้</li>
+            <li>จำแนกชนิดของกำลังม้าเครื่องยนต์ได้</li><li>อธิบายกราฟสมรรถนะของเครื่องยนต์ได้</li>
+            <li>คำนวณเกี่ยวกับแรงบิดและกำลังม้าของเครื่องยนต์ได้</li><li>อธิบายวิธีการหลักในการทดสอบกำลังม้าของเครื่องยนต์ได้</li>
+            <li>จำแนกชนิดของไดนาโมมิเตอร์ได้</li><li>บอกส่วนประกอบของ Dynamometer ได้</li>
+            <li>ทดสอบแรงบิดและกำลังม้าของเครื่องยนต์ได้</li><li>คำนวณหาแรงบิดและกำลังม้าของเครื่องยนต์จากผลการทดลองได้</li>
+            <li>บอกความหมายของอัตราการสิ้นเปลืองเชื้อเพลิงได้</li><li>บอกหน่วยการวัดอัตราการสิ้นเปลืองเชื้อเพลิงได้</li>
+            <li>อธิบายหลักการวัดอัตราการสิ้นเปลืองเชื้อเพลิงได้</li><li>บอกส่วนประกอบของเครื่องมือวัดอัตราการสิ้นเปลืองเชื้อเพลิงอย่างง่ายได้</li>
+            <li>อธิบายวิธีการวัดอัตราการสิ้นเปลืองเชื้อเพลิงได้</li><li>วัดอัตราการสิ้นเปลืองเชื้อเพลิงได้</li>
+            <li>คำนวณอัตราการสิ้นเปลืองเชื้อเพลิงจากผลการทดลองได้</li><li>อธิบายความหมายของประสิทธิภาพของเครื่องยนต์ได้</li>
+            <li>จำแนกชนิดของประสิทธิภาพของเครื่องยนต์ได้</li><li>คำนวณหาประสิทธิภาพของเครื่องยนต์ได้</li>
+            <li>อธิบายวิธีการหลักในการทดสอบประสิทธิภาพของเครื่องยนต์ได้</li><li>ทดสอบประสิทธิภาพของเครื่องยนต์ได้</li>
+            <li>คำนวณประสิทธิภาพของเครื่องยนต์จากผลการทดลองได้</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+    <div class="note note-info"><b>🗺️ แผนที่บทเรียน</b>แรงบิด (3.2) → กำลังม้า (3.3) → เครื่องมือวัด/ไดนาโมมิเตอร์ (3.4) → กราฟสมรรถนะ (3.5)
+      → อัตราสิ้นเปลืองเชื้อเพลิง (3.6) → ประสิทธิภาพ (3.7) · ชุดทดลองเสมือนของใบงาน 3.1, 3.2, 3.3 อยู่ท้ายหัวข้อ 3.4, 3.6 และ 3.7 ตามลำดับ</div>
+  </div>
+</section>
+
+<!-- ===== 3.2 แรงบิด ===== -->
+<section class="block" id="torque">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.2</span><h2>แรงบิดของเครื่องยนต์ (Torque)</h2></div>
+    <p class="sec-intro"><b>แรงบิด</b> หรือ <b>ทอร์ก (torque)</b> คือผลของแรงที่กระทำต่อวัตถุแล้วพยายามทำให้วัตถุนั้น<b>หมุน</b>
+      เช่น มือที่บิดฝาขวด (รูป 3-1) หรือประแจที่ขันน็อต</p>
+
+    <div class="formula">
+      <span class="eq">T = F · r</span>
+      <div class="where">
+        <div>T = แรงบิด หรือทอร์ก (N·m) · F = ขนาดของแรงที่พยายามทำให้หมุน (N)</div>
+        <div>r = ระยะห่างจากจุดหมุนไป<b>ตั้งฉาก</b>กับแนวของแรง เรียกว่า "แขนของแรง" (m)</div>
+      </div>
+    </div>
+
+    <h3>ลองขันน็อตด้วยประแจ — เลื่อนแรงและความยาวแขนดู</h3>
+    <div class="lab-row">
+      <figure class="fig">
+        <svg id="torqueSvg" viewBox="0 0 460 250" role="img" aria-label="ประแจขันน็อต แสดงแรง F และแขนของแรง r"></svg>
+        <figcaption>แรงเท่าเดิม แต่ด้ามประแจยาวขึ้น แรงบิดก็มากขึ้น — เหตุผลที่ช่างใช้ด้ามต่อขันน็อตที่แน่นมาก</figcaption>
+      </figure>
+      <div>
+        <div class="demo-ctrl">
+          <label><span>แรงที่มือกด F <b><span id="tqF">150</span> N</b></span><input type="range" id="tqFr" min="10" max="400" step="5" value="150"></label>
+          <label><span>ความยาวแขนของแรง r <b><span id="tqR">0.30</span> m</b></span><input type="range" id="tqRr" min="0.05" max="0.50" step="0.01" value="0.30"></label>
+        </div>
+        <div class="lf-list" id="tqOut"></div>
+        <div class="note note-warn"><b>⚠️ ระวัง</b>r ต้องวัด<b>ตั้งฉาก</b>กับแนวแรง ถ้าดึงประแจเฉียง ๆ แขนของแรงจะสั้นลง แรงบิดจึงลดลง
+          และหน่วย N·m ของแรงบิด<b>ไม่ใช่</b>หน่วยของงาน (J) แม้จะเขียนเหมือนกัน</div>
+      </div>
+    </div>
+
+    <h3>แรงบิดของเครื่องยนต์</h3>
+    <p>แรงบิดของเครื่องยนต์ คือ<b>ความพยายามของเครื่องยนต์ในการทำให้วัตถุหมุน</b> เช่น หมุนล้อรถยนต์
+      ในทางกลับกัน วัตถุที่หมุนอยู่ก็มีแรงบิดเกิดขึ้น เมื่อเครื่องยนต์หมุนจึงผลิตแรงบิดออกมาได้</p>
+    <p>ถ้าเราวัด<b>ขนาดของแรง F</b> ที่เกิดขึ้นขณะเครื่องยนต์หมุน ณ ตำแหน่งที่ห่างจากจุดหมุนเป็นระยะ r ที่รู้ค่า
+      ก็คำนวณแรงบิดได้ด้วย T = F·r — <b>หลักการนี้คือหัวใจของเครื่องทดสอบแรงบิด (ไดนาโมมิเตอร์)</b> ในหัวข้อ 3.4
+      ดังรูป 3-2 ที่ใช้เครื่องชั่งสปริงดึงเชือกที่พันรอบล้อ: อ่านแรง F จากเครื่องชั่ง และ r คือรัศมีของล้อ</p>
+  </div>
+</section>
+
+<!-- ===== 3.3 กำลังม้า ===== -->
+<section class="block" id="power">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.3</span><h2>กำลังม้าของเครื่องยนต์ (Horse Power)</h2></div>
+    <p class="sec-intro">กำลังม้าเป็นหน่วยวัด<b>กำลังงาน</b> (งานที่ทำได้ใน 1 หน่วยเวลา)
+      1 กำลังม้า คือความพยายามทำให้วัตถุที่มีน้ำหนักค่าหนึ่งเคลื่อนที่ได้ 1 หน่วยความยาว ภายใน 1 หน่วยเวลา</p>
+
+    <h3>3.3.1 หน่วยการวัดกำลังม้า (รูป 3-3 แบบเคลื่อนไหว)</h3>
+    <div class="lab-row">
+      <figure class="fig">
+        <div class="tabs" id="hpUnitTabs" style="margin-bottom:6px">
+          <button class="on" data-u="HP">กำลังม้าอังกฤษ HP</button>
+          <button data-u="PS">กำลังม้าเมตริก PS</button>
+          <button data-u="W">วัตต์ W</button>
+        </div>
+        <svg viewBox="0 0 560 330" role="img" aria-label="ม้าดึงเชือกผ่านรอกยกน้ำหนักขึ้น">
+          <defs>
+            <linearGradient id="gWeight" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9aa5b3"/><stop offset="1" stop-color="#55606e"/></linearGradient>
+          </defs>
+          <rect x="0" y="232" width="420" height="98" fill="var(--surface-2)"/>
+          <line x1="0" y1="232" x2="420" y2="232" class="stk" stroke-width="2"/>
+          <line x1="420" y1="232" x2="420" y2="330" class="stk" stroke-width="2"/>
+          <!-- โครงรอก -->
+          <path d="M360 232 L440 190 L440 232" fill="none" stroke="#8a5a2b" stroke-width="6" stroke-linejoin="round"/>
+          <circle cx="440" cy="190" r="12" fill="var(--surface)" stroke="var(--text)" stroke-width="3"/>
+          <circle cx="440" cy="190" r="3" fill="var(--text)"/>
+          <!-- เชือกแนวนอน -->
+          <line x1="300" y1="178" x2="440" y2="178" stroke="var(--accent)" stroke-width="3">
+            <animate attributeName="x1" from="300" to="200" dur="4s" repeatCount="indefinite"/>
+          </line>
+          <!-- เชือกแนวตั้ง -->
+          <line x1="452" y1="190" x2="452" y2="290" stroke="var(--accent)" stroke-width="3">
+            <animate attributeName="y2" from="290" to="200" dur="4s" repeatCount="indefinite"/>
+          </line>
+          <!-- น้ำหนัก -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" from="0 0" to="0 -90" dur="4s" repeatCount="indefinite"/>
+            <path d="M436 290 h32 l8 40 h-48 z" fill="url(#gWeight)" stroke="var(--text)" stroke-width="1.5"/>
+            <text id="hpW" x="452" y="318" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">550 lb</text>
+          </g>
+          <!-- ม้า -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" from="0 0" to="-100 0" dur="4s" repeatCount="indefinite"/>
+            <g fill="#8a5a2b" stroke="#5a3a1a" stroke-width="1.5" stroke-linejoin="round">
+              <path d="M268 200 q-6 2 -4 32 M278 202 q4 14 -2 30 M232 200 q-4 14 -10 32 M242 202 q2 14 4 30" fill="none" stroke="#5a3a1a" stroke-width="6" stroke-linecap="round"/>
+              <ellipse cx="252" cy="188" rx="34" ry="16"/>
+              <path d="M226 182 L208 150 L220 144 L240 176 Z"/>
+              <path d="M210 146 q-14 -2 -22 10 q4 6 12 4 q8 -2 16 -6 Z"/>
+              <path d="M214 146 l2 -10 l5 9 Z"/>
+              <path d="M285 182 q14 6 12 30" fill="none" stroke="#5a3a1a" stroke-width="5" stroke-linecap="round"/>
+              <path d="M214 148 q6 4 14 2" fill="none" stroke="#3a250f" stroke-width="2"/>
+            </g>
+            <circle cx="196" cy="152" r="1.8" fill="#111"/>
+            <path d="M230 170 L300 178" stroke="#3a250f" stroke-width="2.5"/>
+            <line x1="285" y1="178" x2="300" y2="178" stroke="var(--accent)" stroke-width="3"/>
+          </g>
+          <!-- ป้ายความเร็ว -->
+          <g fill="var(--brand)" stroke="var(--brand)">
+            <line x1="330" y1="150" x2="270" y2="150" stroke-width="2.5"/><path d="M262 150 l10 -6 v12z" stroke="none"/>
+          </g>
+          <text id="hpV1" x="300" y="140" text-anchor="middle" class="svg-b" fill="var(--brand)">1 ft/s</text>
+          <g fill="var(--brand)" stroke="var(--brand)">
+            <line x1="500" y1="300" x2="500" y2="230" stroke-width="2.5"/><path d="M500 222 l-6 10 h12z" stroke="none"/>
+          </g>
+          <text id="hpV2" x="510" y="270" class="svg-b" fill="var(--brand)">1 ft/s</text>
+          <text id="hpDef" x="16" y="30" class="svg-b">1 HP = ยกของหนัก 550 lb ขึ้นได้ 1 ft ใน 1 วินาที</text>
+          <text id="hpEq" x="16" y="54" class="svg-t">1 HP = 550 ft·lb/s ≈ 746 W</text>
+        </svg>
+        <figcaption>รูป 3-3 การวัดกำลังม้า (วาดใหม่) — กดแท็บด้านบนเพื่อเปลี่ยนหน่วย</figcaption>
+      </figure>
+      <div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>หน่วย</th><th class="left">ความหมาย</th><th>เทียบเป็นวัตต์</th></tr></thead>
+          <tbody>
+            <tr><td><b>HP</b><br><span class="small muted">กำลังม้าอังกฤษ</span></td><td class="left">ทำให้วัตถุหนัก 550 ปอนด์ (lb) เคลื่อนที่ได้ 1 ฟุต (ft) ใน 1 วินาที<br><b>1 HP = 550 ft·lb/s</b></td><td><b>746 W</b></td></tr>
+            <tr><td><b>PS</b><br><span class="small muted">กำลังม้าเมตริก</span></td><td class="left">ทำให้วัตถุหนัก 75 กิโลกรัม (kg) เคลื่อนที่ได้ 1 เมตร (m) ใน 1 วินาที<br><b>1 PS = 75 kg·m/s</b></td><td><b>736 W</b></td></tr>
+            <tr><td><b>W</b><br><span class="small muted">วัตต์ (ระบบ SI)</span></td><td class="left">ทำให้วัตถุหนัก 1 นิวตัน (N) เคลื่อนที่ได้ 1 เมตร (m) ใน 1 วินาที<br><b>1 W = 1 N·m/s = 1 J/s</b></td><td>1 W</td></tr>
+          </tbody></table></div>
+        <p class="small muted">ค่าละเอียด: 1 HP = 745.7 W และ 1 PS = 735.5 W หนังสือปัดเป็น 746 W และ 736 W
+          (มาจาก 550 lbf × 0.3048 m × 4.448 N/lbf และ 75 kgf × 9.80665 N/kgf)</p>
+        <div class="ecalc" data-ecalc="units">
+          <h4>🔄 แปลงหน่วยกำลังงาน</h4>
+          <div class="ecalc-in">
+            <label><span>ค่ากำลัง</span><input type="number" data-k="v" value="100" step="any"></label>
+            <label><span>หน่วย</span><select data-k="u"><option value="kW">kW</option><option value="W">W</option><option value="HP" selected>HP</option><option value="PS">PS</option></select></label>
+          </div>
+          <div class="lf-list" data-out></div>
+        </div>
+      </div>
+    </div>
+    <div class="note note-info"><b>💡 รู้ไว้</b>ปัจจุบันหน่วยวัดกำลังงานของเครื่องยนต์ใช้ระบบ SI คือวัตต์ (W) หรือกิโลวัตต์ (kW)
+      แต่คำว่า "กำลังม้า" ยังคุ้นเคยกันดี ใบรายการรถยนต์จึงมักบอกทั้ง kW และ PS (หรือ HP) คู่กัน</div>
+
+    <h3>3.3.2 ชนิดของกำลังม้าของเครื่องยนต์ (3 ชนิด)</h3>
+    <div class="grid g3">
+      <div class="card" style="border-top:4px solid var(--heat)">
+        <h4 style="margin-top:0">① กำลังม้าอินดิเคต (IHP)</h4>
+        <p class="small" style="margin:0">Indicated Horse Power · กำลังงานที่ได้จาก<b>การระเบิดของไอดีในกระบอกสูบ</b>ผลักลูกสูบให้เคลื่อนที่
+          คำนวณโดยพิจารณาที่ลูกสูบเป็นหลัก</p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--power)">
+        <h4 style="margin-top:0">② กำลังม้าเบรก (BHP)</h4>
+        <p class="small" style="margin:0">Brake Horse Power หรือกำลังม้าเพลา · กำลังที่วัดได้จาก<b>เพลาข้อเหวี่ยงหรือล้อช่วยแรง</b>
+          พร้อมนำไปใช้งาน ผู้ผลิตนิยมบอกกำลังม้าชนิดนี้ <b>มีค่าน้อยกว่า IHP เสมอ</b></p>
+      </div>
+      <div class="card" style="border-top:4px solid var(--bad)">
+        <h4 style="margin-top:0">③ กำลังม้าเสียดทาน (FHP)</h4>
+        <p class="small" style="margin:0">Friction Horse Power · กำลังที่เครื่องยนต์<b>สูญเสียไปเพื่อเอาชนะแรงเสียดทาน</b>
+          ของชิ้นส่วนที่เคลื่อนที่ เช่น ลูกสูบ แหวน แบริ่ง เพลาลูกเบี้ยว</p>
+      </div>
+    </div>
+
+    <figure class="fig" style="margin-top:16px">
+      <svg viewBox="0 0 640 170" role="img" aria-label="แผนภาพการไหลของกำลัง จากกระบอกสูบไปเพลาข้อเหวี่ยง">
+        <rect x="10" y="40" width="150" height="90" rx="12" fill="var(--bad-soft)" stroke="var(--heat)" stroke-width="2"/>
+        <text x="85" y="78" text-anchor="middle" class="svg-b">🔥 กระบอกสูบ</text>
+        <text x="85" y="102" text-anchor="middle" class="svg-t">IHP (100%)</text>
+        <path d="M160 60 H430" stroke="var(--power)" stroke-width="36" fill="none" opacity=".85"/>
+        <path d="M160 60 H430" stroke="#fff" stroke-width="3" fill="none" class="flow" opacity=".7"/>
+        <path d="M200 96 Q240 96 240 130 V150" stroke="var(--bad)" stroke-width="14" fill="none" opacity=".85"/>
+        <path d="M160 96 H200" stroke="var(--bad)" stroke-width="14" fill="none" opacity=".85"/>
+        <text x="252" y="150" class="svg-t" fill="var(--bad)">FHP สูญเสียเป็นความเสียดทาน → ความร้อน</text>
+        <rect x="430" y="30" width="200" height="70" rx="12" fill="var(--brand-soft)" stroke="var(--power)" stroke-width="2"/>
+        <text x="530" y="60" text-anchor="middle" class="svg-b">⚙️ เพลาข้อเหวี่ยง</text>
+        <text x="530" y="84" text-anchor="middle" class="svg-t">BHP = IHP − FHP</text>
+        <text x="295" y="30" text-anchor="middle" class="svg-m">กำลังที่เหลือส่งถึงเพลา</text>
+      </svg>
+      <figcaption>กำลังจากการเผาไหม้ (IHP) ต้องเสียส่วนหนึ่งเพื่อชนะแรงเสียดทาน (FHP) ส่วนที่เหลือคือกำลังที่เพลา (BHP)</figcaption>
+    </figure>
+
+    <h3>3.3.2.1 สูตรกำลังม้าอินดิเคต</h3>
+    <div class="grid g2">
+      <div class="formula">
+        <div class="small muted" style="font-style:normal">เครื่องยนต์ 2 จังหวะ</div>
+        <span class="eq">IHP = imep · A · s · n · k</span>
+      </div>
+      <div class="formula accent">
+        <div class="small muted" style="font-style:normal">เครื่องยนต์ 4 จังหวะ (ใช้ n หารด้วย 2)</div>
+        <span class="eq">IHP = imep · A · s · <span class="frac"><span>n</span><span>2</span></span> · k</span>
+      </div>
+    </div>
+    <div class="table-wrap"><table class="vars">
+      <thead><tr><th>ตัวแปร</th><th class="left">ความหมาย</th><th>หน่วย</th></tr></thead>
+      <tbody>
+        <tr><td>IHP</td><td class="left">กำลังม้าอินดิเคต</td><td>W</td></tr>
+        <tr><td>imep</td><td class="left">ความดันเฉลี่ยในกระบอกสูบ (indicated mean effective pressure)</td><td>N/m²</td></tr>
+        <tr><td>A</td><td class="left">พื้นที่หน้าตัดกระบอกสูบ = π d²/4</td><td>m²</td></tr>
+        <tr><td>s</td><td class="left">ระยะชัก</td><td>m</td></tr>
+        <tr><td>n</td><td class="left">ความเร็วรอบของเครื่องยนต์</td><td>rps (รอบต่อวินาที)</td></tr>
+        <tr><td>k</td><td class="left">จำนวนสูบของเครื่องยนต์</td><td>สูบ</td></tr>
+      </tbody></table></div>
+    <div class="note note-info"><b>🤔 ทำไม 4 จังหวะต้องหาร 2?</b>เครื่องยนต์ 2 จังหวะทำงานครบ 1 กลวัตร เพลาหมุน <b>1 รอบ</b>
+      (ระเบิด 1 ครั้งต่อรอบ) ส่วนเครื่องยนต์ 4 จังหวะ (ดูด อัด ระเบิด คาย) ทำงานครบ 1 กลวัตร เพลาหมุน <b>2 รอบ</b>
+      จึงระเบิดเพียงครึ่งหนึ่งของจำนวนรอบ</div>
+
+    <h3>3.3.2.2 กำลังม้าเบรก และ 3.3.2.3 กำลังม้าเสียดทาน</h3>
+    <div class="grid g2">
+      <div class="formula">
+        <span class="eq">BHP = 2π · T<sub>e</sub> · n</span>
+        <div class="where"><div>BHP = กำลังม้าเบรก (W) · T<sub>e</sub> = แรงบิดของเครื่องยนต์ (N·m) · n = ความเร็วรอบ (rps)</div></div>
+      </div>
+      <div class="formula accent">
+        <span class="eq">BHP = IHP − FHP</span> <span class="small muted" style="font-style:normal">หรือ</span> <span class="eq">FHP = IHP − BHP</span>
+        <div class="where"><div>FHP = กำลังม้าเสียดทาน (W) · IHP = กำลังม้าอินดิเคต (W) · BHP = กำลังม้าเบรก (W)</div></div>
+      </div>
+    </div>
+
+    <div class="lab-row">
+      <figure class="fig">
+        <svg id="fhpChart" viewBox="0 0 460 280" role="img" aria-label="กราฟกำลังม้าเสียดทานกับความเร็วรอบ"></svg>
+        <figcaption>รูป 3-4 กำลังม้าเสียดทานเปลี่ยนไปตามความเร็วรอบ (วาดใหม่จากหนังสือ) — ยิ่งรอบสูง ยิ่งสูญเสียมาก</figcaption>
+      </figure>
+      <div class="note note-warn" style="align-self:center"><b>📌 สังเกต</b>กำลังม้าเสียดทานไม่ได้คงที่ รอบต่ำเสียน้อย รอบสูงเสียมากขึ้นเร็ว
+        (ความเสียดทานของลูกสูบ แบริ่ง และการปั๊มอากาศเพิ่มตามความเร็ว) นี่คือเหตุผลหนึ่งที่กำลังม้าเบรกเริ่มลดลงเมื่อรอบสูงมาก</div>
+    </div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 3.1</h4>
+      <p>เครื่องยนต์ดีเซล 4 จังหวะ 6 สูบ เส้นผ่าศูนย์กลางกระบอกสูบ 79 mm ระยะชัก 81 mm ให้แรงบิด 140 N·m ที่ 4,500 rpm
+        โดยมีความดันเฉลี่ยอินดิเคต 7.97 bar จงคำนวณหา ก. กำลังม้าอินดิเคต ข. กำลังม้าเบรก ค. กำลังม้าเสียดทาน</p>
+      <details><summary>ดูวิธีทำ</summary>
+        <div class="ex-steps">
+          <div><b>แปลงหน่วยก่อน:</b> imep = 7.97 bar = 7.97 × 10⁵ N/m² · d = 0.079 m · s = 0.081 m · n = 4,500/60 = 75 rps</div>
+          <div><b>ก.</b> IHP = imep · A · s · (n/2) · k = (7.97×10⁵)(π/4 × 0.079²)(0.081)(75/2)(6)</div>
+          <div>&nbsp;&nbsp;&nbsp;= <span class="ans">71,198 W = 71.20 kW</span></div>
+          <div><b>ข.</b> BHP = 2π · T<sub>e</sub> · n = (2π)(140)(4,500/60) = <span class="ans">65,973 W = 65.97 kW</span></div>
+          <div><b>ค.</b> FHP = IHP − BHP = 71.20 − 65.97 = <span class="ans">5.23 kW</span></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="ecalc" data-ecalc="ihp">
+      <h4>🧮 เครื่องคิดเลข IHP · BHP · FHP (ลองเปลี่ยนค่าดู)</h4>
+      <p class="muted small">ใส่ข้อมูลเครื่องยนต์ แล้วดูสูตร การแทนค่า และคำตอบทันที</p>
+      <div class="ecalc-in">
+        <label><span>ชนิดเครื่องยนต์</span><select data-k="st"><option value="4" selected>4 จังหวะ</option><option value="2">2 จังหวะ</option></select></label>
+        <label><span>เส้นผ่าศูนย์กลางกระบอกสูบ d (mm)</span><input type="number" data-k="d" value="79" step="any"></label>
+        <label><span>ระยะชัก s (mm)</span><input type="number" data-k="s" value="81" step="any"></label>
+        <label><span>ความดันเฉลี่ย imep (bar)</span><input type="number" data-k="p" value="7.97" step="any"></label>
+        <label><span>ความเร็วรอบ (rpm)</span><input type="number" data-k="rpm" value="4500" step="any"></label>
+        <label><span>จำนวนสูบ k</span><input type="number" data-k="k" value="6" step="1"></label>
+        <label><span>แรงบิด T<sub>e</sub> (N·m)</span><input type="number" data-k="T" value="140" step="any"></label>
+      </div>
+      <div class="lf-list" data-out></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3.4 เครื่องมือทดสอบ ===== -->
+<section class="block" id="dyno">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.4</span><h2>เครื่องมือทดสอบแรงบิดและกำลังม้า: ไดนาโมมิเตอร์</h2></div>
+    <p class="sec-intro">เครื่องมือทดสอบแรงบิดและกำลังม้า<b>ไม่ได้วัดค่าออกมาตรง ๆ</b> เหมือนวัดความยาวด้วยไม้บรรทัด
+      แต่วัดค่าที่เกี่ยวข้อง (แรง ระยะแขน ความเร็วรอบ) แล้วนำไปคำนวณด้วยสมการ
+      ไดนาโมมิเตอร์สมัยใหม่ที่แสดงค่าออกมาทันที ก็ยังใช้หลักการเดียวกัน เพียงให้คอมพิวเตอร์คำนวณแทนการจดบันทึก</p>
+
+    <h3>3.4.1 หลักการทดสอบด้วยไดนาโมมิเตอร์ (Dynamometer)</h3>
+    <div class="lab-row">
+      <figure class="fig">
+        <svg id="pronySvg" viewBox="0 0 470 300" role="img" aria-label="ไดนาโมมิเตอร์แบบเบรกโพรนี: ล้อหมุน แขนกดลงบนเครื่องชั่ง"></svg>
+        <figcaption>รูป 3-5 การทดสอบแรงบิดและกำลังม้าเบรกด้วยไดนาโมมิเตอร์ (วาดใหม่) — เบรกฝืนล้อที่หมุน แรงฝืนพยายามหมุนแขนตาม แขนจึงกดลงบนเครื่องชั่ง</figcaption>
+      </figure>
+      <div>
+        <p>เบรกรัดล้อช่วยแรงที่เครื่องยนต์หมุนอยู่ แรงเสียดทานพยายามพาแขนหมุนตามล้อ ปลายแขนจึงกดลงบนเครื่องชั่งด้วยแรง F
+          แรงนี้คูณระยะ r (<b>ความยาวแขนของไดนาโมมิเตอร์</b> วัดจากศูนย์กลางเพลาถึงจุดที่แรงกระทำ) ก็คือแรงบิดของเครื่องยนต์</p>
+        <div class="grid g2">
+          <div class="formula"><span class="eq">T<sub>e</sub> = F · r</span></div>
+          <div class="formula accent"><span class="eq">BHP = 2π · T<sub>e</sub> · n</span></div>
+        </div>
+        <div class="ecalc" data-ecalc="dyno" style="margin-top:8px">
+          <h4>🧮 คำนวณจากค่าที่อ่านได้</h4>
+          <div class="ecalc-in">
+            <label><span>ค่าที่เครื่องชั่ง (kg)</span><input type="number" data-k="kg" value="12.3" step="any"></label>
+            <label><span>ความยาวแขน r (m)</span><input type="number" data-k="r" value="0.15" step="any"></label>
+            <label><span>ความเร็วรอบ (rpm)</span><input type="number" data-k="rpm" value="3500" step="any"></label>
+          </div>
+          <div class="lf-list" data-out></div>
+        </div>
+      </div>
+    </div>
+    <div class="note note-warn"><b>⚠️ จุดที่มักพลาด</b>เครื่องชั่งอ่านค่าเป็น <b>kg</b> (จริง ๆ คือ kgf) ต้อง<b>คูณ 9.81</b> ให้เป็นนิวตันก่อน
+      และความเร็วรอบที่อ่านเป็น <b>rpm ต้องหาร 60</b> ให้เป็น rps ก่อนแทนในสูตร BHP</div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 3.2</h4>
+      <p>ทดสอบเครื่องยนต์ด้วยไดนาโมมิเตอร์ที่มีความยาวแขน 0.15 m ที่ 3,500 rpm อ่านค่าแรงที่เครื่องชั่งได้ 12.3 kg
+        จงคำนวณหา ก. แรงบิด ข. กำลังม้าเบรก</p>
+      <details><summary>ดูวิธีทำ</summary>
+        <div class="ex-steps">
+          <div><b>ก.</b> T<sub>e</sub> = F · r = (12.3 × 9.81)(0.15) = <span class="ans">18.10 N·m</span></div>
+          <div><b>ข.</b> BHP = 2π · T<sub>e</sub> · n = 2π(18.10)(3,500/60) = <span class="ans">6,634 W = 6.63 kW</span></div>
+        </div>
+      </details>
+    </div>
+
+    <h3>3.4.2 ชนิดของไดนาโมมิเตอร์</h3>
+    <p>ไดนาโมมิเตอร์ในหัวข้อ 3.4.1 คือแบบ <b>Prony Brake</b> ซึ่งเป็นแบบพื้นฐาน กลไกไม่ซับซ้อน เข้าใจหลักการง่าย
+      นอกจากนี้ยังจำแนกได้ 2 เกณฑ์ ดังนี้</p>
+    <h4>3.4.2.1 จำแนกตามการติดตั้งทดสอบ (2 แบบ)</h4>
+    <div class="grid g2">
+      <figure class="photo card" style="padding:0;overflow:hidden">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-engine-testbench.jpg" alt="เครื่องยนต์ติดตั้งบนแท่นทดสอบในห้องทดสอบ" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left"><b style="color:var(--brand)">(1) Engine Dynamometer</b> ทดสอบเครื่องยนต์ที่<b>ไม่ได้ติดตั้งอยู่บนรถ</b>
+          ถ้าเครื่องอยู่บนรถต้องถอดออกมาติดตั้งเข้ากับเครื่องทดสอบก่อน (เทียบรูป 3-6)
+          <span class="credit">ภาพ: FOTO:Fortepan / Lissák · <a href="https://commons.wikimedia.org/wiki/File:Engine,_test_bench,_fire_extinguisher,_military_Fortepan_72521.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+      <figure class="photo card" style="padding:0;overflow:hidden">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-chassis-dyno.jpg" alt="รถยนต์จอดบนลูกกลิ้งของเครื่องทดสอบแชสซีไดนาโมมิเตอร์ในโรงงาน" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left"><b style="color:var(--brand)">(2) Chassis Dynamometer</b> ทดสอบเครื่องยนต์ที่<b>ติดตั้งในรถได้เลย</b>
+          เพียงนำรถไปจอดบนลูกกลิ้งของเครื่องทดสอบ ไม่ต้องถอดเครื่องยนต์ (เทียบรูป 3-7)
+          <span class="credit">ภาพ: Marek Ślusarczyk (Tupungato) · <a href="https://commons.wikimedia.org/wiki/File:005_Chassis_dynamometer_car_testing_in_car_factory_-_Opel_Factory_in_Gliwice,_Poland_-_Rollenpr%C3%BCfstand.jpg" target="_blank" rel="noopener">CC BY 3.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+    <div class="note note-info"><b>💡 ข้อสังเกต</b>แชสซีไดนาโมมิเตอร์วัดกำลังที่<b>ล้อ</b> ซึ่งน้อยกว่ากำลังที่เพลาข้อเหวี่ยง
+      เพราะเสียไปในระบบส่งกำลัง (เกียร์ เพลากลาง เฟืองท้าย ยาง) ร้านแต่งรถจึงมักบอกว่าเป็น "แรงม้าที่ล้อ"</div>
+
+    <h4>3.4.2.2 จำแนกตามกลไกการทำงาน (5 แบบ)</h4>
+    <ol class="type-list">
+      <li><b>(1) แบบเบรกด้วยเชือกรัด</b>rope brake · ใช้เชือกพันรอบล้อแล้วถ่วงน้ำหนัก อ่านแรงตึงจากเครื่องชั่งสปริง</li>
+      <li><b>(2) แบบโพรนีเบรก</b>prony brake · แท่งไม้หรือผ้าเบรกรัดล้อ มีแขนกดเครื่องชั่ง (ชุดทดลองในบทนี้)</li>
+      <li><b>(3) แบบเบรกด้วยน้ำ</b>water brake · ใบพัดตีน้ำในเรือนสร้างแรงต้าน รับกำลังได้สูง ระบายความร้อนด้วยน้ำ</li>
+      <li><b>(4) แบบเบรกด้วยไฟฟ้า</b>electric brake · ให้เครื่องยนต์หมุนเครื่องกำเนิดไฟฟ้าหรือเบรกกระแสไหลวน ควบคุมภาระด้วยไฟฟ้า</li>
+      <li><b>(5) แบบทรานส์มิสชัน</b>transmission dynamometer · วัดแรงบิดขณะส่งกำลังผ่านเพลาไปใช้งาน โดยไม่ดูดกลืนกำลังทิ้ง</li>
+    </ol>
+    <p class="small muted">คำอธิบายสั้น ๆ ของแต่ละแบบเรียบเรียงเพิ่มจากตำราเครื่องกลทั่วไป หนังสือเรียนบอกเฉพาะชื่อทั้ง 5 แบบ</p>
+
+    <div class="grid g2" style="margin-top:12px">
+      <figure class="photo contain card" style="padding:0;overflow:hidden">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-prony-drawing.jpg" alt="แบบร่างไดนาโมมิเตอร์โพรนีเบรก มีผ้าเบรกไม้รัดล้อ แขนคานยาว และเครื่องชั่งสปริงที่ปลายแขน" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">แบบร่างโพรนีเบรกจริง: ก้อนไม้หลายก้อนรัดล้อเหล็ก มีน็อตปรับแรงรัด และเครื่องชั่งสปริงที่ปลายแขน
+          <span class="credit">ภาพ: Fredrosse · <a href="https://commons.wikimedia.org/wiki/File:PronyBrake1980.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+      <figure class="photo card" style="padding:0;overflow:hidden">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-prony-1910.jpg" alt="ภาพถ่ายเก่าการแข่งขันรถแทรกเตอร์ ปี 1910 ใช้โพรนีเบรกวัดกำลัง" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">ใช้โพรนีเบรกวัดกำลังรถแทรกเตอร์ในการแข่งขันที่วินนิเพก ปี ค.ศ. 1910
+          <span class="credit">ภาพ: ไม่ทราบผู้ถ่าย · <a href="https://commons.wikimedia.org/wiki/File:Winnipeg_Tractor_Contests_1910._Prony_Brake_Dynamometers.jpg" target="_blank" rel="noopener">สาธารณสมบัติ</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+
+    <h3>ชุดทดลองวัดแรงบิดและกำลังม้า (รูป 3-8) — กดชื่อเพื่อดูตำแหน่ง</h3>
+    <p>ผู้เรียบเรียงหนังสือพัฒนาไดนาโมมิเตอร์แบบ Prony Brake ขึ้นเองเพื่อใช้เป็นชุดทดลองในวิชานี้ ส่วนประกอบสำคัญมีดังนี้</p>
+    <div class="parts-pick" id="partsPick">
+      <button data-p="engine">เครื่องยนต์</button>
+      <button data-p="throttle">คันเร่ง</button>
+      <button data-p="brake">คันปรับแรงเบรก</button>
+      <button data-p="scale">เครื่องชั่งสปริง</button>
+      <button data-p="tacho">เครื่องวัดความเร็วรอบ</button>
+      <button data-p="drum">ดรัมเบรก + แขนรับแรงบิด</button>
+    </div>
+    <figure class="fig"><svg id="partsSvg" class="rig-svg" viewBox="0 0 640 360" role="img" aria-label="ชุดทดลองวัดแรงบิดและกำลังม้าของเครื่องยนต์"></svg>
+      <figcaption>รูป 3-8 ไดนาโมมิเตอร์แบบ Prony Brake สำหรับชุดทดลอง (วาดใหม่เป็นภาพสี)</figcaption></figure>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: ไดนาโมมิเตอร์ทำงานอย่างไร</h3>
+      <div class="video-grid v4">
+        <div class="video-card">
+          <button class="yt" data-yt="kV_UahDTkTc" aria-label="เล่นวิดีโอ: Dyno ทำงานยังไง"><img src="https://i.ytimg.com/vi/kV_UahDTkTc/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">8:04</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>Dyno (ไดโน่) ทำงานยังไง? หลักการและการนำรถขึ้นวัดแรงม้า</b><span class="small muted">รถซิ่งวิทยา EP26 · Sandwish Media</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="so4B764HrXc" aria-label="เล่นวิดีโอ: แรงม้าและแรงบิด"><img src="https://i.ytimg.com/vi/so4B764HrXc/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">14:34</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>แรงม้ากับแรงบิด ต่างกันอย่างไร</b><span class="small muted">EP.49 แรงม้าและแรงบิด · Local Mechanic</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="AaQtIzgxCWI" aria-label="เล่นวิดีโอ: Prony Brake Dynamometer Working Animation"><img src="https://i.ytimg.com/vi/AaQtIzgxCWI/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">1:46</span></button>
+          <div class="video-meta"><span class="lang lang-en">อังกฤษ</span><b>แอนิเมชันการทำงานของโพรนีเบรก (ดูภาพก็เข้าใจ)</b><span class="small muted">Prony Brake Dynamometer (Working Animation) · Shubham Kola</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="0ESOYhOh28c" aria-label="เล่นวิดีโอ: Simplest DYNO for RC Engines"><img src="https://i.ytimg.com/vi/0ESOYhOh28c/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">5:20</span></button>
+          <div class="video-meta"><span class="lang lang-en">อังกฤษ</span><b>สร้างโพรนีเบรกวัดกำลังเครื่องยนต์เล็กของจริง</b><span class="small muted">Simplest DYNO for RC Engines! · JohnnyQ90</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lab31" data-rig="3.1"></div>
+  </div>
+</section>
+
+<!-- ===== 3.5 กราฟสมรรถนะ ===== -->
+<section class="block" id="curves">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.5</span><h2>กราฟสมรรถนะของเครื่องยนต์</h2></div>
+    <p class="sec-intro">สมรรถนะของเครื่องยนต์<b>ขึ้นอยู่กับความเร็วรอบเสมอ</b> การบอกว่า "ให้แรงบิด 95 N·m ที่ 3,800 rpm"
+      จึงไม่พอจะรู้ว่ารอบอื่นเป็นอย่างไร กราฟสมรรถนะแสดงค่าสมรรถนะด้านต่าง ๆ เทียบกับความเร็วรอบ (Revolution)</p>
+
+    <div class="grid g2">
+      <div class="card"><h4 style="margin-top:0;color:var(--torque)">3.5.1 ด้านแรงบิด (รูป 3-9, 3-10)</h4>
+        <p class="small" style="margin:0">แรงบิด<b>สูงสุดที่รอบค่าหนึ่ง</b> รอบสูงหรือต่ำกว่านั้นแรงบิดลดลง
+          เครื่องยนต์ปัจจุบันให้แรงบิดสูงสุดต่อเนื่องเป็นช่วงรอบ เช่น 250 N·m ที่ 1,400–2,700 rpm กราฟช่วงนั้นเกือบเป็นเส้นตรงแนวนอน เรียกว่า <b>"Flat Torque"</b></p></div>
+      <div class="card"><h4 style="margin-top:0;color:var(--power)">3.5.2 ด้านกำลังม้า (รูป 3-11)</h4>
+        <p class="small" style="margin:0">กำลังม้าเบรก<b>สูงสุดที่รอบค่าหนึ่ง</b> และ<b>รอบที่ให้กำลังม้าสูงสุดสูงกว่ารอบที่ให้แรงบิดสูงสุดเสมอ</b>
+          เพราะ P = 2πT·n กำลังเพิ่มตามรอบ แม้แรงบิดเริ่มลด จนถึงจุดที่แรงบิดลดเร็วกว่ารอบที่เพิ่ม กำลังจึงลดตาม</p></div>
+      <div class="card"><h4 style="margin-top:0;color:var(--sfc)">3.5.3 ด้านอัตราการสิ้นเปลืองเชื้อเพลิงจำเพาะ (รูป 3-12)</h4>
+        <p class="small" style="margin:0">s.f.c. คือน้ำมันที่ใช้ต่อ 1 หน่วยกำลัง<b>มีค่าน้อยที่สุดที่รอบค่าหนึ่ง</b> (ประหยัดที่สุด) รอบอื่นมีค่าเพิ่มขึ้น
+          กราฟจึงเป็นรูปท้องกระทะ</p></div>
+      <div class="card"><h4 style="margin-top:0;color:var(--eff)">3.5.4 ด้านประสิทธิภาพเชิงความร้อน (รูป 3-13)</h4>
+        <p class="small" style="margin:0">Thermal Efficiency เทียบกับรอบ เพิ่มขึ้นแล้วลดลง จุดสูงสุดตรงกับจุดที่ s.f.c. ต่ำสุด
+          (เพราะ η = 3.6 / (s.f.c. × C<sub>v</sub>) เมื่อ s.f.c. เป็น kg/kW·hr และ C<sub>v</sub> เป็น MJ/kg ยิ่งกินน้ำมันน้อยต่อกำลัง ยิ่งมีประสิทธิภาพสูง)</p></div>
+    </div>
+
+    <h3>กราฟสมรรถนะรวม (แบบรูป 3-14) — เลื่อนรอบเพื่ออ่านค่า</h3>
+    <p>วารสารยานยนต์และเอกสารข้อมูลเครื่องยนต์มักรวมทุกเส้นไว้ในกราฟเดียว ประหยัดพื้นที่และเปรียบเทียบง่าย ลองเลือกเครื่องยนต์แล้วเลื่อนแถบรอบ</p>
+    <div class="card" id="perf"></div>
+    <p class="small muted">ข้อมูลในกราฟเป็นค่าจำลองที่สร้างให้มีรูปร่างตามรูป 3-9 ถึง 3-14 ในหนังสือ กำลังม้าคำนวณจากแรงบิดด้วย P = 2πT·n
+      และประสิทธิภาพคำนวณจาก s.f.c. ด้วย η = 3.6/(s.f.c. × C<sub>v</sub>) ทุกเส้นจึงสัมพันธ์กันถูกต้องตามหลักฟิสิกส์</p>
+
+    <h3>ฝึกอ่านกราฟ (แบบฝึกหัด 3.1 ตอนที่ 2)</h3>
+    <p>พิจารณากราฟ แล้วเลือกคำตอบให้ถูกต้อง เลือกแล้วระบบตรวจให้ทันที</p>
+    <div class="lab-row">
+      <figure class="fig"><svg id="readSvg" viewBox="0 0 470 330" role="img" aria-label="กราฟสมรรถนะที่มีจุด A ถึง I"></svg>
+        <figcaption>เส้นแรงบิด (A B C) เส้นกำลังม้า (D E F) และเส้น s.f.c. (G H I)</figcaption></figure>
+      <div class="fill-q" id="readQ"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3.6 อัตราสิ้นเปลืองเชื้อเพลิง ===== -->
+<section class="block" id="fuel">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.6</span><h2>อัตราการสิ้นเปลืองเชื้อเพลิง</h2></div>
+    <p class="sec-intro"><b>อัตราการสิ้นเปลืองเชื้อเพลิง</b> คือปริมาณเชื้อเพลิงที่ถูกใช้ไปในการทำงานของเครื่องยนต์ ภายในหนึ่งหน่วยเวลา</p>
+
+    <div class="grid g2">
+      <div class="formula">
+        <div class="small muted" style="font-style:normal">วัดจากมวล</div>
+        <span class="eq">ṁ<sub>f</sub> = <span class="frac"><span>m</span><span>Δt</span></span></span>
+        <div class="where"><div>ṁ<sub>f</sub> = อัตราการสิ้นเปลืองเชื้อเพลิง (kg/s) · m = มวลเชื้อเพลิงที่ใช้ไป (kg) · Δt = เวลาที่เครื่องยนต์ทำงาน (s)</div></div>
+      </div>
+      <div class="formula accent">
+        <div class="small muted" style="font-style:normal">วัดจากปริมาตร (นิยมกว่า เพราะสะดวก)</div>
+        <span class="eq">ṁ<sub>f</sub> = <span class="frac"><span>V · ρ</span><span>Δt</span></span></span>
+        <div class="where"><div>V = ปริมาตรน้ำมันที่ใช้ไป (m³) · ρ = ความหนาแน่นของน้ำมัน (kg/m³) · Δt = เวลาที่ใช้น้ำมัน (s)</div></div>
+      </div>
+    </div>
+    <div class="grid g2">
+      <div class="formula">
+        <div class="small muted" style="font-style:normal">ความหนาแน่นจากความถ่วงจำเพาะ (วัดด้วยไฮโดรมิเตอร์)</div>
+        <span class="eq">ρ = (s.g.) · ρ<sub>w</sub></span>
+        <div class="where"><div>s.g. = ความถ่วงจำเพาะของน้ำมัน (ไม่มีหน่วย) · ρ<sub>w</sub> = ความหนาแน่นของน้ำ ≈ 1,000 kg/m³</div></div>
+      </div>
+      <div class="formula accent">
+        <div class="small muted" style="font-style:normal">อัตราการสิ้นเปลืองเชื้อเพลิงจำเพาะ (specific fuel consumption)</div>
+        <span class="eq">s.f.c. = <span class="frac"><span>ṁ<sub>f</sub></span><span>BHP</span></span></span>
+        <div class="where"><div>s.f.c. (kg/kW·hr) · ṁ<sub>f</sub> (kg/hr) · BHP = กำลังม้าเบรก (kW)</div></div>
+      </div>
+    </div>
+    <div class="note note-info"><b>💡 หน่วย</b>นิยมบอก ṁ<sub>f</sub> เป็น <b>kg/hr</b> ดังนั้นค่าที่ได้เป็น kg/s ให้<b>คูณ 3,600</b> (1 ชั่วโมง = 3,600 วินาที)
+      · น้ำมัน 5 cc = 5 ml = 5 × 10⁻⁶ m³ · s.f.c. บอกว่าได้กำลัง 1 kW นาน 1 ชั่วโมง ต้องใช้น้ำมันกี่ kg ยิ่งน้อยยิ่งประหยัด</div>
+
+    <h3>เครื่องมือทดสอบอัตราการสิ้นเปลืองเชื้อเพลิง</h3>
+    <div class="lab-row">
+      <figure class="fig">
+        <svg viewBox="0 0 520 330" role="img" aria-label="ระบบวัดอัตราสิ้นเปลืองเชื้อเพลิงด้วยหลอดแก้ววัดปริมาตร">
+          <!-- ถังน้ำมัน -->
+          <rect x="370" y="20" width="120" height="66" rx="14" fill="var(--accent-soft)" stroke="var(--text)" stroke-width="2"/>
+          <rect x="372" y="44" width="116" height="40" rx="10" fill="var(--fuel)" opacity=".75"/>
+          <text x="430" y="38" text-anchor="middle" class="svg-t">ถังน้ำมันเชื้อเพลิง</text>
+          <!-- ท่อ -->
+          <path d="M430 86 V258 H240" fill="none" stroke="var(--muted)" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M430 86 V258 H240" fill="none" stroke="var(--fuel)" stroke-width="3" class="flow" stroke-linejoin="round"/>
+          <circle cx="430" cy="140" r="20" fill="#7a7d80" stroke="var(--text)" stroke-width="2"/>
+          <path d="M418 132 h24 M418 140 h24 M418 148 h24" stroke="#c9ccd0" stroke-width="2"/>
+          <text x="458" y="145" class="svg-t">กรองน้ำมัน</text>
+          <!-- วาล์ว -->
+          <g transform="translate(360 258)"><path d="M-12 -10 L12 10 M-12 10 L12 -10" stroke="var(--bad)" stroke-width="4"/><line x1="0" y1="0" x2="0" y2="-22" stroke="var(--bad)" stroke-width="3"/><line x1="-8" y1="-22" x2="8" y2="-22" stroke="var(--bad)" stroke-width="3"/></g>
+          <text x="352" y="296" text-anchor="middle" class="svg-t" fill="var(--bad)">วาล์วควบคุมน้ำมัน</text>
+          <!-- หลอดแก้ววัดปริมาตร -->
+          <rect x="294" y="30" width="16" height="228" fill="var(--surface)" stroke="var(--text)" stroke-width="2"/>
+          <circle cx="302" cy="190" r="22" fill="var(--surface)" stroke="var(--text)" stroke-width="2"/>
+          <rect x="296" y="150" width="12" height="108" fill="var(--fuel)" opacity=".8"/>
+          <circle cx="302" cy="190" r="20" fill="var(--fuel)" opacity=".8"/>
+          <line x1="288" y1="166" x2="316" y2="166" stroke="var(--bad)" stroke-width="2"/><line x1="288" y1="214" x2="316" y2="214" stroke="var(--bad)" stroke-width="2"/>
+          <text x="282" y="194" text-anchor="end" class="svg-m">5 ml</text>
+          <text x="240" y="56" text-anchor="end" class="svg-t">หลอดแก้ววัดปริมาตร</text><line x1="244" y1="52" x2="292" y2="70" class="stk-m" stroke-width="1"/>
+          <!-- นาฬิกา -->
+          <circle cx="150" cy="96" r="30" fill="var(--surface)" stroke="var(--text)" stroke-width="3"/>
+          <rect x="144" y="56" width="12" height="10" fill="var(--text)"/>
+          <line x1="150" y1="96" x2="150" y2="74" stroke="var(--bad)" stroke-width="3" class="spin slow" style="transform-origin:150px 96px;transform-box:view-box"/>
+          <text x="150" y="146" text-anchor="middle" class="svg-t">นาฬิกาจับเวลา</text>
+          <!-- เครื่องยนต์ + คาร์บู -->
+          <rect x="190" y="240" width="50" height="34" rx="4" fill="#9aa5b3" stroke="var(--text)" stroke-width="2"/>
+          <text x="215" y="236" text-anchor="middle" class="svg-m">คาร์บูเรเตอร์</text>
+          <rect x="40" y="250" width="180" height="70" rx="10" fill="var(--torque)" opacity=".9" stroke="var(--text)" stroke-width="2"/>
+          <text x="130" y="292" text-anchor="middle" fill="#fff" font-weight="700">เครื่องยนต์</text>
+        </svg>
+        <figcaption>รูป 3-15 เครื่องมือทดสอบอัตราการสิ้นเปลืองเชื้อเพลิงอย่างง่าย (วาดใหม่) — ปิดวาล์ว แล้วจับเวลาที่น้ำมันในหลอดแก้วลดลงจากขีดบนถึงขีดล่าง</figcaption>
+      </figure>
+      <div>
+        <p><b>หลักการ:</b> ขณะวาล์วเปิด น้ำมันจากถังไหลไปคาร์บูเรเตอร์และเติมหลอดแก้วให้เต็ม
+          เมื่อ<b>ปิดวาล์ว</b> เครื่องยนต์จะดูดน้ำมันจาก<b>หลอดแก้ววัดปริมาตร</b>แทน ระดับน้ำมันในหลอดจะลดลง
+          จับเวลาที่น้ำมันลดลงครบปริมาตรที่กำหนด (เช่น 5 ml) แล้วนำ V และ Δt ไปแทนในสูตร</p>
+        <p>นอกจากนี้ยังมี<b>เครื่องมือวัดแบบอิเล็กทรอนิกส์</b> (รูป 3-16) ต่อเข้ากับท่อน้ำมัน มีเซนเซอร์วัดการไหล
+          และแสดงผลเป็นอัตราการสิ้นเปลืองเชื้อเพลิงได้โดยตรงบนหน้าจอ</p>
+        <div class="note note-warn"><b>⚠️ ความปลอดภัย</b>น้ำมันเบนซินระเหยและติดไฟง่าย ทำการทดลองในที่อากาศถ่ายเทสะดวก ห้ามมีประกายไฟ
+          เช็ดน้ำมันที่หกทันที และอย่าเติมน้ำมันขณะเครื่องยนต์ร้อน</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 3.3</h4>
+      <p>จับเวลาการไหลของน้ำมันในหลอดแก้ววัดปริมาตร พบว่าใช้น้ำมัน 5 cc ในเวลา 6.48 วินาที ขณะนั้นเครื่องยนต์ผลิตกำลังม้าเบรกได้ 5.04 kW
+        น้ำมันมีความถ่วงจำเพาะ 0.74 จงหา ก. อัตราการสิ้นเปลืองเชื้อเพลิง (kg/s และ kg/hr) ข. อัตราการสิ้นเปลืองเชื้อเพลิงจำเพาะ</p>
+      <details><summary>ดูวิธีทำ</summary>
+        <div class="ex-steps">
+          <div><b>ก.</b> ρ = (s.g.)ρ<sub>w</sub> = (0.74)(1,000) = 740 kg/m³</div>
+          <div>&nbsp;&nbsp;&nbsp;ṁ<sub>f</sub> = V·ρ/Δt = (5 × 10⁻⁶)(740) / 6.48 = <span class="ans">5.71 × 10⁻⁴ kg/s</span></div>
+          <div>&nbsp;&nbsp;&nbsp;ṁ<sub>f</sub> = (5.71 × 10⁻⁴)(3,600) = <span class="ans">2.06 kg/hr</span></div>
+          <div><b>ข.</b> s.f.c. = ṁ<sub>f</sub>/BHP = 2.06 / 5.04 = <span class="ans">0.41 kg/kW·hr</span></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="ecalc" data-ecalc="fuel">
+      <h4>🧮 เครื่องคิดเลขอัตราสิ้นเปลืองเชื้อเพลิง</h4>
+      <div class="ecalc-in">
+        <label><span>ปริมาตรน้ำมันที่ใช้ V (cc)</span><input type="number" data-k="V" value="5" step="any"></label>
+        <label><span>เวลาที่ใช้ Δt (s)</span><input type="number" data-k="t" value="6.48" step="any"></label>
+        <label><span>ความถ่วงจำเพาะ s.g.</span><input type="number" data-k="sg" value="0.74" step="any"></label>
+        <label><span>กำลังม้าเบรก BHP (kW)</span><input type="number" data-k="P" value="5.04" step="any"></label>
+      </div>
+      <div class="lf-list" data-out></div>
+    </div>
+
+    <div data-rig="3.2"></div>
+  </div>
+</section>
+
+<!-- ===== 3.7 ประสิทธิภาพ ===== -->
+<section class="block" id="eff">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">3.7</span><h2>ประสิทธิภาพของเครื่องยนต์</h2></div>
+    <p class="sec-intro">ประสิทธิภาพ คืออัตราส่วนระหว่าง<b>ผลที่ได้รับ (Output)</b> กับ<b>ความพยายามที่ใส่ไป (Input)</b>
+      สำหรับเครื่องยนต์ หมายถึงพลังงานที่เครื่องยนต์ผลิตได้ เทียบกับพลังงานที่จ่ายให้เครื่องยนต์</p>
+    <div class="formula"><span class="eq">ประสิทธิภาพของเครื่องยนต์ = <span class="frac"><span>พลังงานที่เครื่องยนต์ผลิตได้</span><span>พลังงานที่จ่ายให้กับเครื่องยนต์</span></span></span></div>
+    <p>จำแนกได้ 2 ชนิด คือ <b>① ประสิทธิภาพเชิงความร้อน</b> (แบ่งย่อยเป็นอินดิเคตและเบรก) และ <b>② ประสิทธิภาพเชิงกล</b></p>
+
+    <h3>3.7.1 ประสิทธิภาพเชิงความร้อน: พลังงานจากน้ำมันหายไปไหน (รูป 3-17)</h3>
+    <figure class="fig">
+      <svg viewBox="0 0 640 300" role="img" aria-label="แผนภาพการสูญเสียพลังงานความร้อน ไอเสีย 35% ระบายความร้อนและหล่อลื่น 35% ความเสียดทาน 10% กำลังของเครื่องยนต์ 20%">
+        <path d="M60,40 H500 L522,52 L500,64 H60 Z" fill="var(--power)"/>
+        <path d="M60,64 H320 A22 22 0 0 1 342,86 V246 H330 V86 A10 10 0 0 0 320,76 H60 Z" fill="var(--bad)"/>
+        <path d="M60,76 H230 A52 52 0 0 1 282,128 V246 H240 V128 A10 10 0 0 0 230,118 H60 Z" fill="#2f9fd0"/>
+        <path d="M60,118 H140 A52 52 0 0 1 192,170 V246 H150 V170 A10 10 0 0 0 140,160 H60 Z" fill="#7a7d80"/>
+        <g fill="none" stroke="#fff" stroke-width="2.5" opacity=".75" class="flow">
+          <path d="M60,52 H496"/><path d="M60,70 H320 A16 16 0 0 1 336,86 V246"/>
+          <path d="M60,97 H230 A31 31 0 0 1 261,128 V246"/><path d="M60,139 H140 A31 31 0 0 1 171,170 V246"/>
+        </g>
+        <rect x="8" y="34" width="52" height="132" rx="10" fill="var(--fuel)" stroke="var(--text)" stroke-width="2"/>
+        <text x="34" y="96" text-anchor="middle" font-size="22">⛽</text>
+        <text x="34" y="124" text-anchor="middle" class="svg-b" fill="#3a2a00">100%</text>
+        <text x="66" y="26" class="svg-t">พลังงานความร้อนของเชื้อเพลิง 100%</text>
+        <text x="530" y="48" class="svg-b" fill="var(--power)">กำลังของ</text>
+        <text x="530" y="66" class="svg-b" fill="var(--power)">เครื่องยนต์ 20%</text>
+        <text x="171" y="266" text-anchor="middle" class="svg-b">ไอเสีย</text><text x="171" y="284" text-anchor="middle" class="svg-t">35%</text>
+        <text x="261" y="266" text-anchor="middle" class="svg-b">ระบายความร้อน</text><text x="261" y="284" text-anchor="middle" class="svg-t">และหล่อลื่น 35%</text>
+        <text x="372" y="266" text-anchor="middle" class="svg-b" fill="var(--bad)">ความเสียดทาน</text><text x="372" y="284" text-anchor="middle" class="svg-t">10%</text>
+      </svg>
+      <figcaption>รูป 3-17 การสูญเสียพลังงานความร้อน (วาดใหม่ ความกว้างของแถบเป็นสัดส่วนจริง) — เปลี่ยนเป็นกำลังได้เพียงราว 20% ที่เหลือ 80% สูญเสีย</figcaption>
+    </figure>
+    <p>พลังงานความร้อนจากการเผาไหม้ไม่สามารถเปลี่ยนเป็นพลังงานกลได้ทั้งหมด เพราะเครื่องยนต์ต้องมีการระบายความร้อน การหล่อลื่น และการระบายไอเสีย</p>
+    <div class="formula"><span class="eq">ประสิทธิภาพเชิงความร้อน = <span class="frac"><span>พลังงานกลที่เครื่องยนต์ผลิตได้</span><span>พลังงานความร้อนที่จ่ายให้กับเครื่องยนต์</span></span></span></div>
+    <p>พลังงานกลอยู่ในรูป<b>กำลัง</b> (ต่อหนึ่งหน่วยเวลา) พลังงานความร้อนที่จ่ายจึงต้องคิดต่อหนึ่งหน่วยเวลาด้วย = ṁ<sub>f</sub> × C<sub>v</sub></p>
+    <div class="grid g2">
+      <div class="formula">
+        <div class="small muted" style="font-style:normal">3.7.1.1 ประสิทธิภาพเชิงความร้อนอินดิเคต (คิดกำลังในกระบอกสูบ)</div>
+        <span class="eq">η<sub>ti</sub> = <span class="frac"><span>IHP</span><span>ṁ<sub>f</sub> · C<sub>v</sub></span></span></span>
+      </div>
+      <div class="formula accent">
+        <div class="small muted" style="font-style:normal">3.7.1.2 ประสิทธิภาพเชิงความร้อนเบรก (คิดกำลังที่เพลาข้อเหวี่ยง)</div>
+        <span class="eq">η<sub>tb</sub> = <span class="frac"><span>BHP</span><span>ṁ<sub>f</sub> · C<sub>v</sub></span></span></span>
+      </div>
+    </div>
+    <div class="table-wrap"><table class="vars">
+      <thead><tr><th>ตัวแปร</th><th class="left">ความหมาย</th><th>หน่วย</th></tr></thead>
+      <tbody>
+        <tr><td>η<sub>ti</sub>, η<sub>tb</sub></td><td class="left">ประสิทธิภาพเชิงความร้อนอินดิเคต / เบรก (คูณ 100 เป็น %)</td><td>ไม่มีหน่วย</td></tr>
+        <tr><td>IHP, BHP</td><td class="left">กำลังม้าอินดิเคต / กำลังม้าเบรก</td><td>W</td></tr>
+        <tr><td>ṁ<sub>f</sub></td><td class="left">อัตราการสิ้นเปลืองเชื้อเพลิง</td><td><b>kg/s</b> (ไม่ใช่ kg/hr)</td></tr>
+        <tr><td>C<sub>v</sub></td><td class="left">ค่าความร้อนของน้ำมันเชื้อเพลิง (heating value)</td><td>J/kg</td></tr>
+      </tbody></table></div>
+    <div class="note note-warn"><b>⚠️ หน่วยต้องเข้าชุดกัน</b>ใช้ W, kg/s และ J/kg ทั้งหมด (W = J/s) ถ้าโจทย์ให้ ṁ<sub>f</sub> เป็น kg/hr ต้องหาร 3,600
+      ถ้าให้ C<sub>v</sub> เป็น MJ/kg ต้องคูณ 10⁶ และถ้าให้กำลังเป็น kW ต้องคูณ 1,000</div>
+
+    <h3>3.7.2 ประสิทธิภาพเชิงกล</h3>
+    <p>กำลังจากการระเบิดในกระบอกสูบ (IHP) ต้องเสียส่วนหนึ่งเพื่อเอาชนะแรงเสียดทาน ก่อนออกมาเป็นกำลังที่เพลา (BHP)
+      อัตราส่วนของกำลังทั้งสองเรียกว่า<b>ประสิทธิภาพเชิงกล</b></p>
+    <div class="formula"><span class="eq">η<sub>m</sub> = <span class="frac"><span>BHP</span><span>IHP</span></span></span>
+      <div class="where"><div>η<sub>m</sub> = ประสิทธิภาพเชิงกล (ไม่มีหน่วย) · BHP, IHP (W) — ความสัมพันธ์ที่ควรรู้: η<sub>tb</sub> = η<sub>m</sub> × η<sub>ti</sub></div></div></div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 3.4</h4>
+      <p>เครื่องยนต์เล็กแก๊สโซลีนให้กำลังม้าอินดิเคต 5.37 kW ที่ 3,900 rpm มีกำลังม้าเสียดทาน 0.64 kW อัตราการสิ้นเปลืองเชื้อเพลิง 2.35 kg/hr
+        เชื้อเพลิงมีค่าความร้อน 41.7 MJ/kg จงหา ก. η<sub>ti</sub> ข. η<sub>tb</sub> ค. η<sub>m</sub></p>
+      <details><summary>ดูวิธีทำ</summary>
+        <div class="ex-steps">
+          <div><b>ก.</b> η<sub>ti</sub> = IHP/(ṁ<sub>f</sub>·C<sub>v</sub>) = (5.37 × 10³) / [(2.35/3,600)(41.7 × 10⁶)] = 0.1973 = <span class="ans">19.73%</span></div>
+          <div><b>ข.</b> BHP = IHP − FHP = 5.37 − 0.64 = 4.73 kW</div>
+          <div>&nbsp;&nbsp;&nbsp;η<sub>tb</sub> = (4.73 × 10³) / [(2.35/3,600)(41.7 × 10⁶)] = 0.1738 = <span class="ans">17.38%</span></div>
+          <div><b>ค.</b> η<sub>m</sub> = BHP/IHP = 4.73/5.37 = 0.8808 = <span class="ans">88.08%</span></div>
+        </div>
+        <div class="fix">📝 ในหนังสือข้อ ข. พิมพ์ตัวเศษเป็น 4.37 × 10³ ซึ่งพิมพ์สลับตัวเลข ค่าที่ถูกคือ 4.73 × 10³ (คำตอบ 17.38% ในหนังสือถูกต้อง)</div>
+      </details>
+    </div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 3.5 (ใช้ทุกสูตรในบทนี้)</h4>
+      <p>ทดสอบด้วยไดนาโมมิเตอร์ที่มีรัศมีแขน 0.10 m ได้ข้อมูล: แรงที่เครื่องชั่งสปริง 8.3 kg · ความเร็วรอบ 3,700 rpm · ใช้เชื้อเพลิง 5 cc
+        ในเวลา 10.52 s · ความถ่วงจำเพาะ 0.72 จงหา ก. s.f.c. ข. η<sub>tb</sub> ถ้าเชื้อเพลิงมีค่าความร้อน 42 MJ/kg</p>
+      <details><summary>ดูวิธีทำ</summary>
+        <div class="ex-steps">
+          <div>ρ = (0.72)(1,000) = 720 kg/m³</div>
+          <div>ṁ<sub>f</sub> = (5 × 10⁻⁶)(720)/10.52 = 3.42 × 10⁻⁴ kg/s = (3.42 × 10⁻⁴)(3,600) = 1.23 kg/hr</div>
+          <div>T<sub>e</sub> = F·r = (8.3 × 9.81)(0.10) = 8.14 N·m</div>
+          <div>BHP = 2π(8.14)(3,700/60) = 3,153.95 W = 3.15 kW</div>
+          <div><b>ก.</b> s.f.c. = 1.23/3.15 = <span class="ans">0.39 kg/kW·hr</span></div>
+          <div><b>ข.</b> η<sub>tb</sub> = BHP/(ṁ<sub>f</sub>·C<sub>v</sub>) = 3,153.95 / [(3.42 × 10⁻⁴)(42 × 10⁶)] = 0.2196 = <span class="ans">21.96%</span></div>
+        </div>
+        <div class="fix">📝 ในหนังสือข้อ ข. เขียนสมการเป็น η<sub>tb</sub> = BHP/IHP ซึ่งพิมพ์ผิด สมการที่ถูกคือ BHP/(ṁ<sub>f</sub>·C<sub>v</sub>) (การแทนค่าและคำตอบในหนังสือถูกต้อง)
+          และในข้อ ค. พิมพ์ 3,159.95 ที่ถูกคือ 3,153.95 W</div>
+      </details>
+    </div>
+
+    <div class="ecalc" data-ecalc="eff">
+      <h4>🧮 เครื่องคิดเลขประสิทธิภาพ (แบบตัวอย่าง 3.4)</h4>
+      <div class="ecalc-in">
+        <label><span>กำลังม้าอินดิเคต IHP (kW)</span><input type="number" data-k="I" value="5.37" step="any"></label>
+        <label><span>กำลังม้าเสียดทาน FHP (kW)</span><input type="number" data-k="F" value="0.64" step="any"></label>
+        <label><span>อัตราสิ้นเปลือง ṁ<sub>f</sub> (kg/hr)</span><input type="number" data-k="m" value="2.35" step="any"></label>
+        <label><span>ค่าความร้อน C<sub>v</sub> (MJ/kg)</span><input type="number" data-k="cv" value="41.7" step="any"></label>
+      </div>
+      <div class="lf-list" data-out></div>
+    </div>
+
+    <div class="ecalc" data-ecalc="full">
+      <h4>🧮 คำนวณครบชุดจากผลการทดลอง (แบบตัวอย่าง 3.5 และใบงาน 3.3)</h4>
+      <div class="ecalc-in">
+        <label><span>แรงที่เครื่องชั่ง (kg)</span><input type="number" data-k="kg" value="8.3" step="any"></label>
+        <label><span>รัศมีแขน r (m)</span><input type="number" data-k="r" value="0.10" step="any"></label>
+        <label><span>ความเร็วรอบ (rpm)</span><input type="number" data-k="rpm" value="3700" step="any"></label>
+        <label><span>ปริมาตรเชื้อเพลิง (cc)</span><input type="number" data-k="V" value="5" step="any"></label>
+        <label><span>เวลา (s)</span><input type="number" data-k="t" value="10.52" step="any"></label>
+        <label><span>ความถ่วงจำเพาะ</span><input type="number" data-k="sg" value="0.72" step="any"></label>
+        <label><span>ค่าความร้อน C<sub>v</sub> (MJ/kg)</span><input type="number" data-k="cv" value="42" step="any"></label>
+      </div>
+      <div class="lf-list" data-out></div>
+    </div>
+
+    <div data-rig="3.3"></div>
+  </div>
+</section>
+
+<!-- ===== แบบทดสอบ ===== -->
+<section class="block" id="quiz">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">QUIZ</span><h2>แบบทดสอบตรวจคำตอบทันที</h2></div>
+    <p class="sec-intro">ดัดแปลงจากแบบฝึกหัด 3.1–3.3 ในหนังสือ เลือกชุดข้อสอบ แล้วกดตัวเลือก ระบบบอกถูกผิดพร้อมเหตุผล</p>
+    <div class="quiz-head">
+      <div class="tabs" id="quizTabs" style="margin:0"></div>
+      <div style="display:flex;gap:8px;align-items:center"><span class="score" id="quizScore">0 / 0</span><button class="btn btn-line btn-sm" id="quizReset">↺ เริ่มใหม่</button></div>
+    </div>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ===== แบบฝึกหัดแสดงวิธีทำ ===== -->
+<section class="block" id="practice">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">✍️</span><h2>แบบฝึกหัดแสดงวิธีทำ (จากหนังสือ พร้อมเฉลย)</h2></div>
+    <p class="sec-intro">ลองทำในกระดาษก่อน แล้วค่อยกดดูเฉลย ตัวเลขทุกข้อตรวจสอบด้วยการคำนวณซ้ำแล้ว</p>
+
+    <div class="example">
+      <h4>แบบฝึกหัด 3.1 ข้อ 1</h4>
+      <p>เครื่องยนต์แก๊สโซลีน 4 สูบ 4 จังหวะ ทำงานที่ 6,250 rpm มีแรงบิด 130 N·m และกำลังม้าเสียดทาน 11.06 kW จงหา ก. กำลังม้าเบรก ข. กำลังม้าอินดิเคต</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div><b>ก.</b> BHP = 2π·T<sub>e</sub>·n = 2π(130)(6,250/60) = 85,084.80 W = <span class="ans">85.08 kW</span></div>
+        <div><b>ข.</b> IHP = FHP + BHP = 11.06 + 85.08 = <span class="ans">96.14 kW</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 3.1 ข้อ 2</h4>
+      <p>ไดนาโมมิเตอร์มีความยาวแขน 0.10 m ที่ 3,000 rpm อ่านแรงที่เครื่องชั่งได้ 7.8 kg จงหา ก. แรงบิด ข. กำลังม้าเบรก</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div><b>ก.</b> T<sub>e</sub> = F·r = (7.8 × 9.81)(0.10) = <span class="ans">7.65 N·m</span></div>
+        <div><b>ข.</b> BHP = 2π(7.65)(3,000/60) = 2,403.32 W = <span class="ans">2.40 kW</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 3.2</h4>
+      <p>จับเวลาการไหลของน้ำมันในหลอดแก้ววัดปริมาตร ภายใน 4.29 s ใช้น้ำมันไป 5 cc น้ำมันมีความถ่วงจำเพาะ 0.82
+        จงหา ก. ṁ<sub>f</sub> ในหน่วย kg/s และ kg/hr ข. s.f.c. ถ้าขณะนั้นเครื่องยนต์ให้กำลังม้า 9.5 kW</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>ρ = (0.82)(1,000) = 820 kg/m³</div>
+        <div><b>ก.</b> ṁ<sub>f</sub> = (5 × 10⁻⁶)(820)/4.29 = <span class="ans">9.56 × 10⁻⁴ kg/s</span> = (9.56 × 10⁻⁴)(3,600) = <span class="ans">3.44 kg/hr</span></div>
+        <div><b>ข.</b> s.f.c. = 3.44/9.5 = <span class="ans">0.36 kg/kW·hr</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 3.3 ข้อ 1</h4>
+      <p>เครื่องยนต์ 4 สูบ 4 จังหวะ ที่ 3,900 rpm มีกำลังม้าเบรก 55.12 kW อัตราสิ้นเปลืองเชื้อเพลิง 23 kg/hr กำลังม้าเสียดทาน 5.45 kW
+        เชื้อเพลิงมีค่าความร้อน 42 MJ/kg จงหา ก. η<sub>tb</sub> ข. η<sub>ti</sub> ค. η<sub>m</sub></p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>ṁ<sub>f</sub>·C<sub>v</sub> = (23/3,600)(42 × 10⁶) = 268,333 W</div>
+        <div><b>ก.</b> η<sub>tb</sub> = 55,120/268,333 = 0.2054 = <span class="ans">20.54%</span></div>
+        <div><b>ข.</b> IHP = BHP + FHP = 55.12 + 5.45 = 60.57 kW → η<sub>ti</sub> = 60,570/268,333 = 0.2257 = <span class="ans">22.57%</span></div>
+        <div><b>ค.</b> η<sub>m</sub> = 55.12/60.57 = 0.91 = <span class="ans">91%</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 3.3 ข้อ 2</h4>
+      <p>ไดนาโมมิเตอร์รัศมีแขน 0.10 m ข้อมูล: แรงที่เครื่องชั่ง 7.4 kg · 3,200 rpm · เชื้อเพลิง 5 cc ใน 11.33 s · ความถ่วงจำเพาะ 0.70
+        · ค่าความร้อน 43.7 MJ/kg จงหา ก. s.f.c. ข. η<sub>tb</sub></p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>ρ = 700 kg/m³ · ṁ<sub>f</sub> = (5 × 10⁻⁶)(700)/11.33 = 3.09 × 10⁻⁴ kg/s = 1.11 kg/hr</div>
+        <div>T<sub>e</sub> = (7.4 × 9.81)(0.10) = 7.26 N·m · BHP = 2π(7.26)(3,200/60) = 2,432.85 W = 2.43 kW</div>
+        <div><b>ก.</b> s.f.c. = 1.11/2.43 = <span class="ans">0.46 kg/kW·hr</span></div>
+        <div><b>ข.</b> η<sub>tb</sub> = 2,432.85 / [(3.09 × 10⁻⁴)(43.7 × 10⁶)] = 0.1802 = <span class="ans">18.02%</span></div>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== สรุปสูตร ===== -->
+<section class="block" id="formulas">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">Σ</span><h2>สรุปสูตรทั้งหมด พร้อมที่มา</h2></div>
+    <p class="sec-intro">ทุกสูตรมีที่มา ตารางตัวแปร (คืออะไร / หน่วย / ได้ค่ามาจากไหน) และตัวอย่างสั้น ๆ</p>
+    <div class="jump">
+      <a href="#fx1">แรงบิด</a><a href="#fx2">หน่วยกำลัง</a><a href="#fx3">IHP</a><a href="#fx4">BHP</a><a href="#fx5">FHP</a>
+      <a href="#fx6">ไดนาโมมิเตอร์</a><a href="#fx7">ṁf</a><a href="#fx8">s.f.c.</a><a href="#fx9">η ความร้อน</a><a href="#fx10">η เชิงกล</a><a href="#fxu">แปลงหน่วย</a>
+    </div>
+    <div id="fxList"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b>บทที่ 3 งานทดสอบสมรรถนะของเครื่องยนต์</b> · วิชางานทดลองเครื่องกล (30101-2007) · ปวส. หลักสูตร พ.ศ. 2567</p>
+    <p style="margin:0">เรียบเรียงจากแผนการจัดการเรียนรู้และหนังสือวิชางานทดลองเครื่องกล โดย สมนึก มังกะระ (บทที่ 3 หน้า 119–169)</p>
+    <p style="margin:6px 0 0">รูปประกอบวาดใหม่เป็นภาพสีจากรูปในหนังสือ · ชุดทดลองเสมือนใช้ค่าจำลองของเครื่องยนต์เล็กแก๊สโซลีน ตัวเลขใกล้เคียงตัวอย่างในหนังสือ แต่ไม่ใช่ค่าของเครื่องยนต์รุ่นใดรุ่นหนึ่ง</p>
+    <p style="margin:6px 0 0">รูปถ่ายจาก Wikimedia Commons ตามสัญญาอนุญาตที่ระบุใต้แต่ละรูป · วิดีโอเป็นของเจ้าของช่อง YouTube แต่ละช่อง</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+<script src="js/engine.js?v=1"></script>
+</body>
+</html>

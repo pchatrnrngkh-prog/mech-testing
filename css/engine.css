@@ -1,0 +1,122 @@
+/* ===== บทที่ 3 งานทดสอบสมรรถนะของเครื่องยนต์ ===== */
+:root { --torque: #d9622b; --power: #2f6db5; --sfc: #1d8a5a; --eff: #9b4fd0; --fuel: #e0a106; --heat: #d63b2f; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --torque: #ff9a66; --power: #7fb0ff; --sfc: #5fd08f; --eff: #c99bf0; --fuel: #ffd05a; --heat: #ff7a6e; }
+}
+:root[data-theme="dark"] { --torque: #ff9a66; --power: #7fb0ff; --sfc: #5fd08f; --eff: #c99bf0; --fuel: #ffd05a; --heat: #ff7a6e; }
+
+.hero.engine-hero { background: linear-gradient(135deg, #3a1d0b 0%, #8c3b12 45%, #1f4e8c 100%); }
+
+/* ภาพประกอบ SVG */
+.fig { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+.fig svg { width: 100%; height: auto; display: block; }
+.fig svg text { font-family: var(--font); }
+.fig figcaption { margin-top: 6px; }
+.svg-t { fill: var(--text); font-size: 13px; }
+.svg-m { fill: var(--muted); font-size: 12px; }
+.svg-b { fill: var(--text); font-size: 14px; font-weight: 700; }
+.stk { stroke: var(--text); }
+.stk-m { stroke: var(--muted); }
+
+/* แถบเลื่อนในตัวสาธิต */
+.demo-ctrl { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 10px; }
+.demo-ctrl label { display: flex; flex-direction: column; gap: 2px; font-size: .88rem; color: var(--muted); }
+.demo-ctrl label b { color: var(--text); font-size: 1rem; }
+.demo-ctrl input[type=range] { width: 100%; accent-color: var(--accent); }
+
+/* หมุน */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { transform-box: fill-box; transform-origin: center; animation: spin 1.2s linear infinite; }
+.spin.slow { animation-duration: 3s; }
+@keyframes flow { to { stroke-dashoffset: -40; } }
+.flow { stroke-dasharray: 10 10; animation: flow 1s linear infinite; }
+@keyframes horse { 0% { transform: translateX(0); } 100% { transform: translateX(-120px); } }
+@keyframes lift { 0% { transform: translateY(0); } 100% { transform: translateY(-120px); } }
+.horse-move { animation: horse 4s linear infinite; }
+.weight-move { animation: lift 4s linear infinite; }
+@keyframes drip { 0% { transform: translateY(0); opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(38px); opacity: 0; } }
+.drip { animation: drip 1.4s ease-in infinite; transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) { .spin, .flow, .horse-move, .weight-move, .drip { animation: none; } }
+
+/* กล่องเครื่องคิดเลขแบบสูตรสด */
+.ecalc { background: linear-gradient(180deg, var(--accent-soft), var(--surface) 60%); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin: 18px 0; }
+.ecalc h4 { margin: 0 0 4px; }
+.ecalc .muted.small { margin: 0 0 10px; }
+.ecalc-in { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.ecalc-in label { display: flex; flex-direction: column; gap: 3px; font-size: .86rem; color: var(--muted); }
+.ecalc-in input, .ecalc-in select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; width: 100%; }
+.ecalc-in input:focus, .ecalc-in select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.ecalc .ex-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ecalc .ex-btns button { font: inherit; font-size: .85rem; border: 1px solid var(--line); background: var(--surface); color: var(--brand); border-radius: 999px; padding: 2px 12px; cursor: pointer; }
+.ecalc .ex-btns button:hover { border-color: var(--brand); }
+
+/* แถบสัดส่วนกำลัง */
+.pbar { display: flex; height: 34px; border-radius: 8px; overflow: hidden; margin: 10px 0 4px; font-size: .85rem; font-weight: 700; color: #fff; }
+.pbar > div { display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; transition: width .3s; min-width: 0; }
+.pbar .p-b { background: var(--power); }
+.pbar .p-f { background: var(--bad); }
+
+/* การ์ดชนิดไดนาโมมิเตอร์ */
+.type-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.type-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; border-top: 4px solid var(--accent); font-size: .93rem; line-height: 1.55; }
+.type-list li b { display: block; color: var(--brand); font-size: 1rem; }
+
+/* ส่วนประกอบชุดทดลอง (กดชื่อแล้วชี้ในรูป) */
+.parts-pick { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.parts-pick button { font: inherit; font-size: .88rem; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+.parts-pick button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.part-hl { opacity: 0; transition: opacity .2s; }
+.part-hl.on { opacity: 1; }
+
+/* ===== กราฟสมรรถนะแบบโต้ตอบ ===== */
+.perf-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.perf-legend button { font: inherit; font-size: .88rem; border: 2px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 2px 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.perf-legend button i { width: 14px; height: 4px; border-radius: 2px; display: inline-block; }
+.perf-legend button.off { opacity: .45; }
+.perf-read { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-top: 10px; }
+.perf-read .ro b { font-size: 1.25rem; }
+.perf-note { margin-top: 10px; }
+
+/* อ่านกราฟ (แบบฝึกหัด 3.1 ตอนที่ 2) */
+.fill-q { display: grid; gap: 8px; margin-top: 10px; }
+.fill-q div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: .95rem; }
+.fill-q select { font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; margin: 0 4px; }
+.fill-q select.right { border-color: var(--ok); background: var(--ok-soft); }
+.fill-q select.wrong { border-color: var(--bad); background: var(--bad-soft); }
+
+/* ===== ห้องทดลองเครื่องยนต์ ===== */
+.rig-svg text { font-family: var(--font); }
+.rig-ctrl { display: grid; gap: 12px; }
+.rig-ctrl .ctl { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.rig-ctrl .ctl-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: .9rem; color: var(--muted); }
+.rig-ctrl .ctl-h b { color: var(--text); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.rig-ctrl .ctl-r { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.rig-ctrl .ctl-r input[type=range] { flex: 1; accent-color: var(--accent); }
+.rig-ctrl .ctl-r button { font: inherit; width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); cursor: pointer; font-weight: 700; flex-shrink: 0; }
+.rig-ctrl .ctl-r button:hover { border-color: var(--accent); }
+.rpm-pick { display: flex; flex-wrap: wrap; gap: 6px; }
+.rpm-pick button { font: inherit; font-size: .9rem; border: 2px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 2px 12px; cursor: pointer; }
+.rpm-pick button.on { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+.rpm-pick button.done::after { content: " ✓"; color: var(--ok); font-weight: 700; }
+.rig-table td.sel, .rig-table tr.sel td { background: var(--accent-soft); }
+.rig-table tbody tr { cursor: pointer; }
+.rig-table td.miss { color: var(--muted); }
+.hydro-box { display: grid; gap: 12px; grid-template-columns: minmax(0, 170px) minmax(0, 1fr); align-items: center; }
+@media (max-width: 560px) { .hydro-box { grid-template-columns: minmax(0, 1fr); } .hydro-box svg { max-width: 170px; margin: 0 auto; } }
+.check-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: .9rem; }
+.check-list li::before { content: "○"; margin-right: 6px; color: var(--muted); }
+.check-list li.ok::before { content: "✔"; color: var(--ok); }
+.check-list li.ok { color: var(--ok); }
+
+/* ตารางประกอบ */
+.ex-steps { margin-top: 10px; display: grid; gap: 4px; }
+.ex-steps div { font-size: .95rem; overflow-x: auto; white-space: nowrap; }
+.fix { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 8px; padding: 6px 12px; font-size: .9rem; margin-top: 8px; }
+
+.outcome-list { columns: 2 260px; column-gap: 24px; margin: 8px 0 0; padding-left: 1.4em; font-size: .93rem; }
+.outcome-list li { break-inside: avoid; margin-bottom: 2px; }
+
+.ecalc-in label > span { display: block; }
+.lab-row > figure.fig { align-self: start; }
+.lab-body { grid-template-columns: minmax(0, 1fr); }
+.rig-ctrl, .lab-panel { min-width: 0; }

@@ -43,7 +43,7 @@
 
 /* ===== พื้นฐาน ===== */
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+html { scroll-behavior: smooth; scroll-padding-top: 112px; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: var(--font);
@@ -67,6 +67,17 @@ p { margin: 0 0 1em; }
   backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
 }
 .topbar .wrap { display: flex; align-items: center; gap: 12px; height: 56px; }
+/* แถบเลือกบท (อยู่บนสุดของหัวเว็บ กดไปบทไหนก็ได้ทันที) */
+.topbar .wrap.chap-row { height: auto; padding-top: 6px; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.chap-row::-webkit-scrollbar { display: none; }
+.chap-row .chap-lbl { font-size: .82rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.chap-row a {
+  white-space: nowrap; text-decoration: none; font-size: .88rem; font-weight: 600; color: var(--text);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; background: var(--surface); flex-shrink: 0;
+}
+.chap-row a:hover { border-color: var(--accent); }
+.chap-row a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chap-row a .cn { opacity: .75; font-weight: 400; margin-right: 4px; }
 .brand { font-weight: 700; white-space: nowrap; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .brand-badge { background: var(--accent); color: #fff; border-radius: 8px; padding: 2px 8px; font-size: .85rem; }
 .nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; }
