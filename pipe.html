@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>การสูญเสียพลังงานในท่อ</title>
+<meta name="description" content="บทเรียนออนไลน์ บทที่ 5 งานทดลองการสูญเสียพลังงานของการไหลในท่อ วิชางานทดลองเครื่องกล (30101-2007) ระดับ ปวส. เรย์โนลด์นัมเบอร์ แฟกเตอร์ความเสียดทาน Moody Chart การสูญเสียหลัก การสูญเสียรอง">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2311688f'/><rect x='4' y='12' width='24' height='8' rx='2' fill='white'/><path d='M8 16 h16' stroke='%2311688f' stroke-width='2' stroke-dasharray='3 2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/lab.css?v=4">
+<link rel="stylesheet" href="css/engine.css?v=1">
+<link rel="stylesheet" href="css/fluid.css?v=1">
+</head>
+<body>
+
+<!-- ===== เมนูบน ===== -->
+<header class="topbar">
+  <div class="wrap chap-row" aria-label="เลือกบทเรียน">
+    <span class="chap-lbl">📚 เลือกบท:</span>
+    <a href="index.html"><span class="cn">บทที่ 2</span>ทดสอบคุณสมบัติเชิงกลของวัสดุ</a>
+    <a href="engine.html"><span class="cn">บทที่ 3</span>ทดสอบสมรรถนะเครื่องยนต์</a>
+    <a href="fluid.html"><span class="cn">บทที่ 4</span>ทดสอบคุณสมบัติของของไหล</a>
+    <a href="pipe.html" class="on" aria-current="page"><span class="cn">บทที่ 5</span>การสูญเสียพลังงานของการไหลในท่อ</a>
+  </div>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-badge">บทที่ 5</span><span class="brand-text">การสูญเสียพลังงานในท่อ</span></a>
+    <nav class="nav" id="nav">
+      <a href="#intro">บทนำ</a>
+      <a href="#reynolds">เรย์โนลด์นัมเบอร์</a>
+      <a href="#friction">แฟกเตอร์ความเสียดทาน</a>
+      <a href="#major">การสูญเสียหลัก</a>
+      <a href="#rig">ชุดทดลอง</a>
+      <a href="#minor">การสูญเสียรอง</a>
+      <a href="#rig53">ทดลองการสูญเสียรอง</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#practice">แบบฝึกหัด</a>
+      <a href="#formulas">สรุปสูตร</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="สลับโหมดสว่าง/มืด" aria-label="สลับโหมดสว่าง/มืด">◐</button>
+  </div>
+</header>
+
+<!-- ===== ส่วนหัว ===== -->
+<div class="hero pipe-hero" id="top">
+  <div class="wrap">
+    <span class="kicker">วิชางานทดลองเครื่องกล · รหัสวิชา 30101-2007 · ปวส. · บทที่ 5</span>
+    <h1>งานทดลองการสูญเสียพลังงานของการไหลในท่อ</h1>
+    <p class="lead">ทำไมน้ำที่ปลายสายยางยาว ๆ ถึงไหลแรงน้อยกว่าต้นสาย ทำไมช่างประปาไม่ชอบใส่ข้องอเยอะ ๆ
+      บทนี้เรียนว่าน้ำเสียพลังงานไปเท่าไรเมื่อไหลผ่านท่อตรง (การสูญเสียหลัก) และผ่านข้อต่อ วาล์ว ท่อเปลี่ยนขนาด (การสูญเสียรอง) พร้อมวิธีวัดด้วยชุดทดลองจริง</p>
+    <div class="hero-meta">
+      <span>📅 สัปดาห์ที่ 10–12</span>
+      <span>🔧 ชุดทดลองท่อเสมือน ใบงาน 5.1–5.3</span>
+      <span>🌊 ภาพเคลื่อนไหวการไหลแบบราบเรียบ/ปั่นป่วน</span>
+      <span>📈 Moody Chart แบบโต้ตอบ</span>
+      <span>✅ แบบทดสอบตรวจคำตอบทันที</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-accent" href="#intro">เริ่มเรียน →</a>
+      <a class="btn btn-ghost" href="#rig">ไปที่ชุดทดลองเสมือน</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== 5.1 บทนำ ===== -->
+<section class="block" id="intro" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.1</span><h2>บทนำ: น้ำเสียพลังงานไปไหนเมื่อไหลในท่อ</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">🧭 สาระสำคัญ</h3>
+        <p>ของไหลที่ไหลในท่อจะเจอ<b>ความต้านทานต่อการไหลเสมอ</b> เพราะ<b>แรงเฉือนระหว่างโมเลกุลของของไหลกับผนังท่อ</b>
+          และ<b>ระหว่างโมเลกุลของของไหลด้วยกันเอง</b> (ผลของความหนืด) ของไหลต้องใช้พลังงานส่วนหนึ่งเอาชนะความต้านทานนี้ พลังงานส่วนนั้นจึง "สูญเสีย" ไป</p>
+        <p style="margin:0">การสูญเสียพลังงานแบ่งเป็น 2 ประเภท</p>
+        <ol style="margin:4px 0 0;padding-left:1.4em">
+          <li><b>การสูญเสียหลัก (Major Loss)</b> เกิดในท่อตรงที่ขนาดคงที่ เพราะความเสียดทาน (หัวข้อ 5.2)</li>
+          <li><b>การสูญเสียรอง (Minor Loss)</b> เกิดที่ข้อต่อ วาล์ว ท่อโค้ง ท่อเปลี่ยนขนาด ทางเข้าและทางออกของท่อ (หัวข้อ 5.3)</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">🎯 เรียนจบแล้วต้องทำได้</h3>
+        <ul class="goal-list">
+          <li><span class="tag tag-k">ความรู้</span><span>อธิบายความหมายของการสูญเสียหลักได้</span></li>
+          <li><span class="tag tag-k">ความรู้</span><span>จำแนกชนิดการไหล โดยใช้ค่าเรย์โนลด์นัมเบอร์ได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>คำนวณเกี่ยวกับการสูญเสียหลักและการสูญเสียรองได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>ทดลองการสูญเสียหลัก ความขรุขระของท่อ และการสูญเสียรองได้</span></li>
+          <li><span class="tag tag-a">เจตคติ</span><span>นำความรู้ไปปรับใช้ในชีวิตประจำวันได้</span></li>
+        </ul>
+        <details style="margin-top:10px">
+          <summary style="cursor:pointer;color:var(--accent);font-weight:600">ดูผลการเรียนรู้ที่คาดหวังทั้ง 14 ข้อ (จากหนังสือ)</summary>
+          <ol class="outcome-list">
+            <li>อธิบายความหมายของการสูญเสียหลักได้</li><li>จำแนกชนิดการไหล โดยใช้ค่าเรย์โนลด์นัมเบอร์ได้</li>
+            <li>อธิบายปัจจัยที่ส่งผลต่อการสูญเสียหลักได้</li><li>คำนวณเกี่ยวกับการสูญเสียหลักได้</li>
+            <li>ทดลองการสูญเสียหลักได้</li><li>คำนวณหาค่าต่าง ๆ จากผลการทดลองการสูญเสียหลักได้</li>
+            <li>ทดลองความขรุขระของท่อได้</li><li>หาค่าความขรุขระของท่อจากผลการทดลองได้</li>
+            <li>อธิบายความหมายของการสูญเสียรองได้</li><li>บอกปัจจัยที่ส่งผลต่อการสูญเสียรองได้</li>
+            <li>บอกปัจจัยที่ส่งผลต่อค่าสัมประสิทธิ์การสูญเสียรองลักษณะต่าง ๆ ได้</li><li>คำนวณเกี่ยวกับการสูญเสียรองได้</li>
+            <li>ทดลองการสูญเสียรองได้</li><li>คำนวณหาค่าต่าง ๆ จากผลการทดลองการสูญเสียรองได้</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+
+    <h3>มองเห็น "การสูญเสียพลังงาน" ด้วยหลอดแก้ววัดความดัน</h3>
+    <p>ต่อหลอดแก้วเปิดปลาย (พิโซมิเตอร์) ไว้ตามแนวท่อ ความสูงของน้ำในหลอดบอก<b>ความดันในท่อ ณ จุดนั้น</b> เป็นเมตรของน้ำ ลองค่อย ๆ เปิดวาล์วที่ปลายท่อ</p>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0"><svg id="hglSvg" viewBox="0 0 600 300" role="img" aria-label="ถังน้ำต่อกับท่อแนวนอน มีหลอดแก้ววัดความดันตามแนวท่อ"></svg></figure>
+      <div>
+        <div class="demo-ctrl"><label><span>เปิดวาล์วที่ปลายท่อ <b><span id="hglTxt">0</span>%</b></span><input type="range" id="hglR" min="0" max="100" step="1" value="0"></label></div>
+        <div class="lf-list" id="hglOut"></div>
+        <div class="note note-info"><b>💡 สังเกต</b>ปิดวาล์ว (น้ำไม่ไหล) น้ำในทุกหลอดสูงเท่าระดับน้ำในถัง = <b>ไม่มีการสูญเสีย</b>
+          พอเปิดวาล์ว น้ำในหลอด<b>ลดลงเรื่อย ๆ ตามระยะทาง</b> (การสูญเสียหลัก) และ<b>ลดลงทันทีตรงทางเข้าท่อ</b> (การสูญเสียรอง) ยิ่งไหลเร็ว ยิ่งเสียมาก
+          เราวัดการสูญเสียเป็น <b>"ความสูงของน้ำที่หายไป" หน่วยเมตร (m)</b></div>
+      </div>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: การไหลในท่อและการสูญเสียพลังงาน</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="9J9laHx8O3Y" aria-label="เล่นวิดีโอ: วิชาชลศาสตร์ เรื่อง การไหลในท่อ"><img src="https://i.ytimg.com/vi/9J9laHx8O3Y/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">15:33</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ชลศาสตร์ เรื่อง การไหลในท่อ</b><span class="small muted">โยธา15นาที</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="6V3Ctem6hdM" aria-label="เล่นวิดีโอ: What is Head Loss"><img src="https://i.ytimg.com/vi/6V3Ctem6hdM/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">5:16</span></button>
+          <div class="video-meta"><span class="lang lang-en">อังกฤษ</span><b>Head Loss คืออะไร (แอนิเมชัน 3 มิติ ดูภาพก็เข้าใจ)</b><span class="small muted">What is Head Loss? Pressure Drop? · NiLTime</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5.2.1 เรย์โนลด์นัมเบอร์ ===== -->
+<section class="block" id="reynolds">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.2</span><h2>การสูญเสียหลัก (1): ชนิดของการไหลและเรย์โนลด์นัมเบอร์</h2></div>
+    <p class="sec-intro"><b>การสูญเสียหลัก</b> คือการสูญเสียพลังงานเมื่อไหลผ่าน<b>ท่อตรงที่ขนาดคงที่</b> เกิดจากความเสียดทาน จึงเรียกอีกชื่อว่า
+      <b>"การสูญเสียพลังงานอันเนื่องมาจากความเสียดทาน"</b> ก่อนคำนวณต้องรู้ก่อนว่าการไหลเป็นแบบ<b>ราบเรียบ</b>หรือ<b>ปั่นป่วน</b> เพราะคำนวณต่างกัน</p>
+
+    <h3>5.2.1 เรย์โนลด์นัมเบอร์ (Reynolds Number)</h3>
+    <p>เรย์โนลด์นัมเบอร์ คือ<b>อัตราส่วนของแรงเฉื่อยต่อแรงหนืด</b>ที่กระทำต่อก้อนของไหล พูดง่าย ๆ คือ "แรงที่อยากพุ่งไปข้างหน้า" เทียบกับ "ความหนืดที่คอยรั้งให้ไหลเป็นระเบียบ"
+      ถ้าแรงเฉื่อยชนะมาก การไหลจะปั่นป่วน</p>
+    <div class="grid g2">
+      <div class="formula">
+        <span class="eq">N<sub>R</sub> = <span class="frac"><span>D v ρ</span><span>μ</span></span> หรือ N<sub>R</sub> = <span class="frac"><span>D v</span><span>υ</span></span></span>
+        <div class="where">
+          <div>N<sub>R</sub> = เรย์โนลด์นัมเบอร์ (<b>ไม่มีหน่วย</b>) · D = เส้นผ่านศูนย์กลางท่อ (m) · v = ความเร็วการไหล (m/s)</div>
+          <div>ρ = ความหนาแน่น (kg/m³) · μ (มิว) = ความหนืดสัมบูรณ์ (N·s/m²) · υ (นิว) = ความหนืดจลน์ = μ/ρ (m²/s)</div>
+        </div>
+      </div>
+      <div class="card" style="padding:12px 16px">
+        <b>เกณฑ์แบ่งชนิดการไหล</b>
+        <div class="table-wrap" style="margin-top:6px"><table class="vars">
+          <tbody>
+            <tr><td>N<sub>R</sub> ≤ 2,000</td><td class="left"><span class="badge lam">ราบเรียบ (Laminar Flow)</span></td></tr>
+            <tr><td>N<sub>R</sub> 2,000–4,000</td><td class="left"><span class="badge trans">ช่วงเปลี่ยนแปลง</span> จากราบเรียบเป็นปั่นป่วน</td></tr>
+            <tr><td>N<sub>R</sub> &gt; 4,000</td><td class="left"><span class="badge turb">ปั่นป่วน (Turbulent Flow)</span></td></tr>
+          </tbody></table></div>
+      </div>
+    </div>
+
+    <h3>ทดลองแบบออสบอร์น เรย์โนลด์ (Osborne Reynolds) — ฉีดหมึกสีเข้าไปในน้ำที่ไหลในท่อแก้ว</h3>
+    <p>เลื่อนความเร็ว ขนาดท่อ และอุณหภูมิของน้ำ แล้วสังเกต<b>เส้นหมึกสีชมพู</b> ไหลเป็นเส้นตรง (ราบเรียบ) หรือแตกกระจาย (ปั่นป่วน)</p>
+    <div class="sim"><canvas id="reyCanvas" width="900" height="260" aria-label="ภาพเคลื่อนไหวหมึกสีในท่อแก้ว"></canvas></div>
+    <div class="sim-row" style="margin-top:12px">
+      <div>
+        <div class="chips" id="reyFluid"><button data-f="water" class="on">💧 น้ำ</button><button data-f="oil">🛢️ น้ำมัน SAE 10 (ตัวอย่าง 5.2)</button></div>
+        <div class="demo-ctrl">
+          <label><span>ความเร็วการไหล v <b><span id="reyVt">0.10</span> m/s</b></span><input type="range" id="reyV" min="-2.3" max="0.7" step="0.01" value="-1"></label>
+          <label><span>เส้นผ่านศูนย์กลางท่อ D <b><span id="reyDt">15</span> mm</b></span><input type="range" id="reyD" min="5" max="150" step="1" value="15"></label>
+          <label id="reyTwrap"><span>อุณหภูมิของน้ำ <b><span id="reyTt">20</span> °C</b> (ร้อนขึ้น ความหนืดลดลง)</span><input type="range" id="reyT" min="0" max="100" step="5" value="20"></label>
+        </div>
+        <div class="lf-list" id="reyOut"></div>
+      </div>
+      <div>
+        <figure class="fig" style="margin:0"><svg id="reyProf" viewBox="0 0 300 190" role="img" aria-label="รูปร่างความเร็วในท่อ"></svg>
+          <figcaption>รูปร่างความเร็วในท่อ: ราบเรียบ = โค้งพาราโบลา (กลางท่อเร็วสุด) · ปั่นป่วน = แบนกว่า ทุกชั้นปนกัน</figcaption></figure>
+        <div class="table-wrap" style="margin-top:10px"><table class="ktab" id="nuTable"></table></div>
+        <p class="small muted" style="margin:4px 0 0">ตารางคุณสมบัติทางกายภาพของน้ำ (จากใบงาน 5.2) เช่น 20 °C → 10.2 × 10⁻⁷ = 1.02 × 10⁻⁶ m²/s ช่องที่ระบายสีคืออุณหภูมิที่เลือกอยู่</p>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px;align-items:start">
+      <div class="example" style="margin:0">
+        <h4>ตัวอย่าง 5.1</h4>
+        <p>น้ำที่อุณหภูมิ 10 °C ซึ่งมีความหนืดจลน์ 1.30 × 10⁻⁶ m²/s ไหลในท่อขนาด 150 mm ด้วยความเร็ว 5.5 m/s จงหาว่าการไหลเป็นแบบใด</p>
+        <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+          <div>N<sub>R</sub> = Dv/υ = (0.15)(5.5) / (1.30 × 10⁻⁶) = <span class="ans">634,615</span></div>
+          <div>N<sub>R</sub> มากกว่า 4,000 จึงเป็น<span class="ans">การไหลแบบปั่นป่วน (Turbulent Flow)</span></div>
+          <div class="fix">หนังสือพิมพ์ความหนืดจลน์เป็น "1.30 × 106" ที่ถูกคือ 1.30 × 10<sup>−6</sup> m²/s</div>
+        </div></details>
+      </div>
+      <figure class="photo contain card" style="padding:0;overflow:hidden;margin:0">
+        <div class="img-box" style="border:0;border-radius:0;background:#fff"><img src="images/photo-reynolds-1883.jpg" alt="ภาพวาดชุดทดลองของออสบอร์น เรย์โนลด์ ปี 1883 มีถังน้ำยาว ท่อแก้วอยู่ในถัง และขวดหมึกด้านบน" loading="lazy" style="object-fit:contain"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">ชุดทดลองต้นฉบับของออสบอร์น เรย์โนลด์ (ค.ศ. 1883) ท่อแก้วแช่ในถังน้ำ ขวดด้านบนปล่อยหมึกเข้าปากท่อทรงกรวย
+          <span class="credit">ภาพ: Osborne Reynolds · <a href="https://commons.wikimedia.org/wiki/File:Reynolds_fluid_turbulence_experiment_1883.jpg" target="_blank" rel="noopener">สาธารณสมบัติ</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: การไหลแบบราบเรียบและแบบปั่นป่วน</h3>
+      <div class="video-grid v4">
+        <div class="video-card">
+          <button class="yt" data-yt="CUaQQ0OsxNY" aria-label="เล่นวิดีโอ: เลขเรย์โนลด์ กับการไหลแบบปั่นป่วน"><img src="https://i.ytimg.com/vi/CUaQQ0OsxNY/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">4:52</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>เลขเรย์โนลด์ กับการไหลแบบปั่นป่วน</b><span class="small muted">จรัส บุณยธรรมา</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="8BksEDPXyOw" aria-label="เล่นวิดีโอ: การทดลองการไหลแบบราบเรียบและการไหลแบบปั่นป่วน"><img src="https://i.ytimg.com/vi/8BksEDPXyOw/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">7:46</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การทดลองการไหลแบบราบเรียบและแบบปั่นป่วน</b><span class="small muted">ตอนที่ 2 · Beam Snt</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="mYYB79hOEKE" aria-label="เล่นวิดีโอ: การหาเลขเรย์โนลด์"><img src="https://i.ytimg.com/vi/mYYB79hOEKE/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">7:49</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การหาเลขเรย์โนลด์ (Reynolds Number)</b><span class="small muted">CVE-442 วิศวกรรมชลศาสตร์ · วิศวกร บ้านนอก</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="y0WRJtXvpSo" aria-label="เล่นวิดีโอ: Laminar flow, Turbulent flow by Reynolds Experiment"><img src="https://i.ytimg.com/vi/y0WRJtXvpSo/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">0:32</span></button>
+          <div class="video-meta"><span class="lang lang-en">ไม่มีเสียงพูด</span><b>ของจริง: เส้นหมึกเปลี่ยนจากราบเรียบเป็นปั่นป่วน (30 วินาที)</b><span class="small muted">Civil Engineering Theory And Practice</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5.2.2 แฟกเตอร์ความเสียดทาน ===== -->
+<section class="block" id="friction">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.2.2</span><h2>แฟกเตอร์ของความเสียดทาน (Friction Factor, f)</h2></div>
+    <p class="sec-intro">แฟกเตอร์ของความเสียดทาน f เป็นตัวเลข (ไม่มีหน่วย) บอกว่าท่อ "ฝืด" แค่ไหน เป็นตัวแปรสำคัญของการสูญเสียหลัก วิธีหาขึ้นกับชนิดการไหล</p>
+    <div class="grid g2">
+      <div class="formula" style="border-left-color:var(--lam)">
+        <div class="small muted" style="font-style:normal">5.2.2.1 การไหลแบบราบเรียบ (N<sub>R</sub> ≤ 2,000) ใช้สูตร</div>
+        <span class="eq">f = <span class="frac"><span>64</span><span>N<sub>R</sub></span></span></span>
+        <div class="where"><div>f = แฟกเตอร์ของความเสียดทาน · N<sub>R</sub> = เรย์โนลด์นัมเบอร์ · <b>ไม่ขึ้นกับความขรุขระของท่อ</b></div></div>
+      </div>
+      <div class="formula" style="border-left-color:var(--turb)">
+        <div class="small muted" style="font-style:normal">5.2.2.2 การไหลแบบปั่นป่วน (N<sub>R</sub> &gt; 4,000) ไม่มีสูตรตายตัว</div>
+        <span class="eq">อ่าน f จาก "แผนภาพของ Moody"</span>
+        <div class="where"><div>ต้องรู้ 2 ค่า: ① N<sub>R</sub> ② <b>ความขรุขระสัมพัทธ์ ε/D</b> (ความขรุขระของผิวท่อ ε ÷ เส้นผ่านศูนย์กลาง D ใช้หน่วยเดียวกัน)</div></div>
+      </div>
+    </div>
+
+    <h3>ความขรุขระของท่อ ε (ตาราง 5-1 สำหรับท่อใหม่)</h3>
+    <div class="sim-row">
+      <div>
+        <div class="chips" id="roughPick"></div>
+        <div class="demo-ctrl"><label><span>เส้นผ่านศูนย์กลางท่อ D <b><span id="roughDt">150</span> mm</b></span><input type="range" id="roughD" min="10" max="300" step="1" value="150"></label></div>
+        <div class="lf-list" id="roughOut"></div>
+      </div>
+      <figure class="fig" style="margin:0"><svg id="roughSvg" viewBox="0 0 320 190" role="img" aria-label="ภาพขยายผิวในของท่อ แสดงความขรุขระ"></svg>
+        <figcaption>ภาพขยายผิวท่อ (ขยายความสูงของปุ่มให้เห็นชัด) ε คือความสูงเฉลี่ยของปุ่มขรุขระ</figcaption></figure>
+    </div>
+
+    <h3>แผนภาพของ Moody (Moody Chart) แบบโต้ตอบ — รูป 5-1 ในหนังสือ</h3>
+    <p>เลื่อนหาค่า N<sub>R</sub> บนแกนนอน เลือกเส้นโค้ง ε/D ทางขวา แล้ว<b>ลากไปทางซ้ายอ่านค่า f</b> ที่แกนตั้ง (แกนทั้งสองเป็นสเกลลอการิทึม ช่องห่างไม่เท่ากัน)</p>
+    <div class="card" style="padding:10px">
+      <svg id="moodySvg" viewBox="0 0 760 470" role="img" aria-label="แผนภาพของ Moody" style="width:100%;height:auto;display:block"></svg>
+      <div class="demo-ctrl">
+        <label><span>เรย์โนลด์นัมเบอร์ N<sub>R</sub> <b id="mReT">6.18 × 10⁵</b></span><input type="range" id="mRe" min="2.8" max="8" step="0.01" value="5.79"></label>
+        <label><span>ความขรุขระสัมพัทธ์ ε/D <b id="mRrT">0.00173</b></span><input type="range" id="mRr" min="-6.3" max="-1.3" step="0.01" value="-2.76"></label>
+      </div>
+      <div class="ex-btns chips"><button data-re="618000" data-rr="0.00173">ตัวอย่าง 5.3</button><button data-re="371000" data-rr="0.0003">ตัวอย่าง 5.5</button><button data-re="1601" data-rr="0.0017">ตัวอย่าง 5.2 (ราบเรียบ)</button><button data-re="624000" data-rr="0.001">แบบฝึกหัด 5.1 ข้อ 2</button><button data-re="100000" data-rr="0">ท่อผิวเรียบ</button></div>
+      <div class="lf-list" id="moodyOut"></div>
+      <p class="small muted" style="margin:6px 0 0">เส้นโค้งในกราฟคำนวณจากสมการโคลบรูก (Colebrook) ซึ่งเป็นสมการที่ใช้สร้าง Moody Chart ค่า f ที่อ่านจากกราฟกระดาษอาจต่างจากค่าในเว็บที่ตำแหน่งทศนิยมที่ 3 ซึ่งถือว่าปกติ</p>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="example" style="margin:0">
+        <h4>ตัวอย่าง 5.2 (ไหลแบบราบเรียบ)</h4>
+        <p>น้ำมัน SAE 10 ความหนืดสัมบูรณ์ 0.0814 N·s/m² ความหนาแน่น 869 kg/m³ ไหลผ่านท่อเหล็กหล่อด้วยความเร็ว 1.0 m/s ท่อยาว 45.0 m ขนาด 150 mm จงหาแฟกเตอร์ของความเสียดทาน</p>
+        <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+          <div>N<sub>R</sub> = Dvρ/μ = (0.15)(1.0)(869)/0.0814 = 1,601 → <b>ราบเรียบ</b></div>
+          <div>f = 64/N<sub>R</sub> = 64/1,601 = <span class="ans">0.04</span></div>
+          <div class="small muted">ไหลแบบราบเรียบ จึงไม่ต้องใช้ความขรุขระของท่อเหล็กหล่อเลย</div>
+        </div></details>
+      </div>
+      <div class="example" style="margin:0">
+        <h4>ตัวอย่าง 5.3 (ไหลแบบปั่นป่วน)</h4>
+        <p>น้ำ 20 °C (υ = 1.02 × 10⁻⁶ m²/s) ไหลผ่านท่อเหล็กหล่อใหม่ ความเร็ว 4.2 m/s ท่อยาว 400 m ขนาด 150 mm จงหาแฟกเตอร์ของความเสียดทาน</p>
+        <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+          <div>N<sub>R</sub> = Dv/υ = (0.15)(4.2)/(1.02 × 10⁻⁶) = 6.18 × 10⁵ → <b>ปั่นป่วน</b></div>
+          <div>ตาราง 5-1: ท่อเหล็กหล่อ ε = 0.26 mm → ε/D = 0.26/150 = 0.00173</div>
+          <div>Moody Chart ที่ N<sub>R</sub> = 6.18 × 10⁵ และ ε/D = 0.00173 → <span class="ans">f ≈ 0.0226</span></div>
+          <div class="fix">หนังสือแทนค่าเป็น 0.25/150 แต่ผลลัพธ์ 0.00173 มาจาก 0.26/150 (ค่าจากตาราง) ซึ่งถูกต้อง</div>
+        </div></details>
+      </div>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: วิธีอ่าน Moody Chart</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="Hncc6wbAmow" aria-label="เล่นวิดีโอ: การใช้ Moody Chart หา Friction Factor"><img src="https://i.ytimg.com/vi/Hncc6wbAmow/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">5:17</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การใช้ Moody Chart หา Friction Factor</b><span class="small muted">วิชา Thermofluids · StepUp Academy</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="roqIefIvRcc" aria-label="เล่นวิดีโอ: การสูญเสียในท่อ ทฤษฎีและการคำนวณ"><img src="https://i.ytimg.com/vi/roqIefIvRcc/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">13:11</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การสูญเสียในท่อ (Losses in Pipes): ทฤษฎีและการคำนวณ</b><span class="small muted">เนตรนภิส ตันเต็มทรัพย์</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5.2.3 สมการการสูญเสียหลัก ===== -->
+<section class="block" id="major">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.2.3</span><h2>สมการของการสูญเสียหลัก</h2></div>
+    <p class="sec-intro">การสูญเสียหลักขึ้นกับ 5 ตัวแปร: แฟกเตอร์ของความเสียดทาน ความยาวท่อ ขนาดท่อ ความเร็วการไหล และความเร่งเนื่องจากแรงโน้มถ่วงของโลก (สมการดาร์ซี–ไวสบาค)</p>
+    <div class="formula">
+      <span class="eq">h<sub>f</sub> = f · <span class="frac"><span>L</span><span>D</span></span> · <span class="frac"><span>v²</span><span>2g</span></span></span>
+      <div class="where">
+        <div>h<sub>f</sub> = การสูญเสียหลัก (m) · f = แฟกเตอร์ของความเสียดทาน (ไม่มีหน่วย) · L = ความยาวท่อ (m) · D = เส้นผ่านศูนย์กลางท่อ (m)</div>
+        <div>v = ความเร็วการไหล (m/s) · g = 9.81 m/s² · ถ้าโจทย์ให้อัตราการไหล Q ต้องหา v ก่อนจาก Q = A·v → v = Q/A และ A = πD²/4</div>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini" style="border-top-color:var(--hf)"><b>ท่อยาวขึ้น 2 เท่า</b>h<sub>f</sub> เพิ่ม <b>2 เท่า</b> (แปรผันตรงกับ L)</div>
+      <div class="mini" style="border-top-color:var(--hf)"><b>ไหลเร็วขึ้น 2 เท่า</b>h<sub>f</sub> เพิ่มประมาณ <b>4 เท่า</b> (แปรผันกับ v²)</div>
+      <div class="mini" style="border-top-color:var(--hf)"><b>อัตราการไหลเท่าเดิม แต่ท่อเล็กลงครึ่งหนึ่ง</b>v เพิ่ม 4 เท่า h<sub>f</sub> เพิ่มราว <b>32 เท่า!</b></div>
+    </div>
+
+    <h3>ลองปรับท่อ แล้วดูน้ำในหลอดแก้วที่หัวและท้ายท่อ</h3>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0"><svg id="majorSvg" viewBox="0 0 560 260" role="img" aria-label="ท่อตรงมีหลอดแก้ววัดความดันสองจุด"></svg></figure>
+      <div>
+        <div class="chips" id="mjFluid"><button data-f="water" class="on">💧 น้ำ 20 °C</button><button data-f="oil">🛢️ ของไหล ตัวอย่าง 5.4</button></div>
+        <div class="demo-ctrl">
+          <label><span>ความยาวท่อ L <b><span id="mjLt">10</span> m</b></span><input type="range" id="mjL" min="1" max="100" step="1" value="10"></label>
+          <label><span>เส้นผ่านศูนย์กลาง D <b><span id="mjDt">25</span> mm</b></span><input type="range" id="mjD" min="10" max="200" step="1" value="25"></label>
+          <label><span>อัตราการไหล Q <b><span id="mjQt">0.50</span> L/s</b></span><input type="range" id="mjQ" min="0.02" max="5" step="0.01" value="0.5"></label>
+          <label><span>ชนิดท่อ</span><select id="mjMat" style="font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 8px"></select></label>
+        </div>
+      </div>
+    </div>
+    <div class="lf-list" id="mjOut"></div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="example" style="margin:0">
+        <h4>ตัวอย่าง 5.4 (ราบเรียบ)</h4>
+        <p>จงหาการสูญเสียหลักต่อความยาวท่อ 1 m เมื่อของไหลมีความหนืดสัมบูรณ์ 0.20 N·s/m² ความหนาแน่น 840 kg/m³ ไหลในท่อ 200 mm ด้วยอัตราการไหล 1 Litre/s</p>
+        <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+          <div>v = Q/A = (1 × 10⁻³)/[(π/4)(0.2)²] = 0.03183 m/s</div>
+          <div>N<sub>R</sub> = Dvρ/μ = (0.2)(0.03183)(840)/0.20 = 26.74 → ราบเรียบ</div>
+          <div>f = 64/26.74 = 2.393</div>
+          <div>h<sub>f</sub> = (2.393)(1.0/0.2)(0.03183²/(2 × 9.81)) = 0.000618 m = <span class="ans">0.618 mm</span></div>
+        </div></details>
+      </div>
+      <div class="example" style="margin:0">
+        <h4>ตัวอย่าง 5.5 (ปั่นป่วน)</h4>
+        <p>จงหาการสูญเสียหลักของน้ำ 20 °C (υ = 1.02 × 10⁻⁶ m²/s) ไหลผ่านท่อเหล็กเหนียวใหม่ 150 mm <b>ยาว 100 m</b> ด้วยอัตราการไหล 44.5 Litre/s</p>
+        <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+          <div>v = (44.5 × 10⁻³)/[(π/4)(0.15)²] = 2.52 m/s</div>
+          <div>N<sub>R</sub> = (0.15)(2.52)/(1.02 × 10⁻⁶) = 3.71 × 10⁵ → ปั่นป่วน</div>
+          <div>ท่อเหล็กเหนียว ε = 0.045 mm → ε/D = 0.045/150 = 0.0003 → Moody: f = 0.0164</div>
+          <div>h<sub>f</sub> = (0.0164)(100/0.15)(2.52²/(2 × 9.81)) = <span class="ans">3.54 m</span></div>
+          <div class="fix">โจทย์ในหนังสือไม่ได้บอกความยาวท่อ แต่วิธีทำใช้ L = 100 m · หนังสือแทนค่า v = 2.53 จึงได้ 3.57 m (ค่า v ที่คำนวณได้คือ 2.52) · หนังสือเขียนหน่วยความหนืดจลน์เป็น N·s/m² ที่ถูกคือ m²/s</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5.2.4 ชุดทดลอง ===== -->
+<section class="block" id="rig">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.2.4</span><h2>ชุดทดลองการสูญเสียพลังงานของการไหลในท่อ (Piping Loss Test Set)</h2></div>
+    <p class="sec-intro">ปล่อยน้ำให้ไหลในท่อที่ต้องการ แล้วบันทึก<b>ปริมาณการไหล</b> <b>เวลาที่ใช้ในการไหล</b> และ<b>ความแตกต่างของระดับน้ำในมาโนมิเตอร์</b>
+      นำไปคำนวณการสูญเสีย ความขรุขระ และสัมประสิทธิ์การสูญเสียรอง</p>
+    <div class="grid g2" style="align-items:start">
+      <figure class="photo contain card" style="padding:0;overflow:hidden;margin:0">
+        <div class="img-box" style="border:0;border-radius:0;aspect-ratio:auto;background:#fff"><img src="images/book-pipe-rig.jpg" alt="ภาพถ่ายชุดทดลองการสูญเสียพลังงานในท่อ แผงท่อหลายแนวติดผนัง ด้านล่างเป็นถังน้ำและปั๊มบนรถเข็น" loading="lazy" style="object-fit:contain;height:auto"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">รูป 5-1 ชุดทดลองการสูญเสียพลังงานของการไหลในท่อ (ภาพจากหนังสือ)</figcaption>
+      </figure>
+      <div class="card">
+        <h4 style="margin-top:0">ส่วนประกอบสำคัญ (กดชื่อเพื่อดูตำแหน่งในแผนผังด้านล่าง)</h4>
+        <div class="chips" id="rigParts">
+          <button data-p="mano">มาโนมิเตอร์ (จุด 1–4)</button>
+          <button data-p="pump">ปั๊มน้ำ + ถังน้ำ</button>
+          <button data-p="v5">วาล์ว 5 (ปรับอัตราการไหล)</button>
+          <button data-p="meter">มาตรวัดน้ำ (Water Meter)</button>
+          <button data-p="L1">ท่อ 1 นิ้ว (25 mm)</button>
+          <button data-p="L2">ท่อ 3/4 นิ้ว (21 mm)</button>
+          <button data-p="L3">ท่อ PVC 1/2 นิ้ว (18 mm)</button>
+          <button data-p="L4">ท่อเหล็กอาบสังกะสี 1/2 นิ้ว</button>
+          <button data-p="L5">แนววาล์ว 4 ชนิด</button>
+          <button data-p="fit">ข้องอ ข้อโค้ง ท่อเปลี่ยนขนาด</button>
+        </div>
+        <div class="small" id="rigPartTxt" style="min-height:4.5em">กดชื่อส่วนประกอบด้านบน</div>
+        <div class="note note-info" style="margin-bottom:0"><b>📏 มาโนมิเตอร์แบบหลอดแก้ว 2 หลอด</b>ต่อสายยางจากจุด 3 และ 4 ไปยังจุดวัดความดัน 2 จุด
+          จุดต้นทางความดันสูงกว่า น้ำในหลอดจึงสูงกว่า <b>ผลต่างของระดับน้ำ (เมตร) = การสูญเสียระหว่าง 2 จุดนั้น</b>
+          ด้านบนของหลอดมีอากาศ ซึ่งสูบเพิ่มได้ที่จุด 1 เพื่อกดระดับน้ำให้อยู่ในช่วงที่อ่านได้</div>
+      </div>
+    </div>
+    <figure class="fig" style="margin-top:14px"><svg id="rigFig" viewBox="0 0 760 420" role="img" aria-label="แผนผังชุดทดลองการสูญเสียพลังงานในท่อ"></svg>
+      <figcaption>แผนผังชุดทดลอง (วาดใหม่เป็นภาพสีจากรูปในใบงาน) ตัวเลขคือหมายเลขวาล์วและจุดวัดความดัน</figcaption></figure>
+
+    <div class="example">
+      <h4>ตัวอย่าง 5.5 (จากการทดลอง): หาความขรุขระของท่อ</h4>
+      <p>ทดลองกับท่อ D = 21 mm, L = 1.25 m, υ = 8.03 × 10⁻⁷ m²/s (น้ำ 30 °C) ครั้งที่ 1: น้ำ 10 Litre ใช้เวลา 12.74 s ระดับน้ำในมาโนมิเตอร์ 25.5 cm และ 92.0 cm จงหาความขรุขระของท่อ</p>
+      <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+        <div><b>1.</b> การสูญเสียหลัก h<sub>f</sub> = 92.0 − 25.5 = 66.5 cm = 0.665 m</div>
+        <div><b>2.</b> Q = V/t = (10 × 10⁻³)/12.74 = 7.85 × 10⁻⁴ m³/s → v = Q/A = (7.85 × 10⁻⁴)/[(π/4)(0.021)²] = 2.27 m/s</div>
+        <div><b>3.</b> จัดรูป h<sub>f</sub> = f(L/D)(v²/2g) → f = h<sub>f</sub>·D·2g/(L·v²) = (0.665)(0.021)(2)(9.81)/[(1.25)(2.27)²] = 0.043</div>
+        <div><b>4.</b> N<sub>R</sub> = Dv/υ = (0.021)(2.27)/(8.03 × 10⁻⁷) = 5.94 × 10⁴</div>
+        <div><b>5.</b> Moody Chart ที่ f = 0.043 และ N<sub>R</sub> = 5.94 × 10⁴ → ε/D = 0.013 → ε = (0.013)(21) = <span class="ans">0.273 mm</span></div>
+        <div class="small muted">ขั้นที่ 5 เป็นการอ่านกราฟย้อนทาง: รู้ f กับ N<sub>R</sub> แล้วดูว่าจุดตกบนเส้น ε/D เส้นไหน (กดปุ่มด้านล่างเพื่อดูบนกราฟ)</div>
+      </div></details>
+      <div class="chips" style="margin-top:8px"><button id="ex55moody">📍 ดูจุดนี้บน Moody Chart</button></div>
+    </div>
+
+    <div id="rig51" data-plab="5.1"></div>
+    <div id="rig52" data-plab="5.2" style="margin-top:22px"></div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: การทดลองการสูญเสียในท่อของจริง</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="8kCRngdA_j0" aria-label="เล่นวิดีโอ: วิธีการทดลอง การสูญเสียในท่อ"><img src="https://i.ytimg.com/vi/8kCRngdA_j0/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">8:14</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>วิธีการทดลอง: การสูญเสียในท่อ (Losses in Pipe)</b><span class="small muted">เนตรนภิส ตันเต็มทรัพย์</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="KBsCPDssSug" aria-label="เล่นวิดีโอ: บทปฏิบัติการ การสูญเสียแรงดันในท่อปิด"><img src="https://i.ytimg.com/vi/KBsCPDssSug/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">10:22</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ปฏิบัติการ: การสูญเสียแรงดันในท่อปิด (Head Losses in Pipe)</b><span class="small muted">AJ. Tor วิศวกรรมแหล่งน้ำ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5.3 การสูญเสียรอง ===== -->
+<section class="block" id="minor">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.3</span><h2>การสูญเสียรอง (Minor Loss)</h2></div>
+    <p class="sec-intro"><b>การสูญเสียรอง</b> คือการสูญเสียเมื่อของไหลไหลผ่าน<b>ข้อต่อท่อ วาล์ว ท่อโค้ง ท่อเปลี่ยนขนาด และทางเข้า–ทางออกของท่อ</b>
+      ตรงจุดเหล่านี้การไหลต้องเปลี่ยนทิศหรือเปลี่ยนความเร็วกะทันหัน เกิด<b>วังวน (eddy)</b> ที่หมุนวนกินพลังงานไป</p>
+    <div class="formula">
+      <span class="eq">h<sub>m</sub> = k · <span class="frac"><span>v²</span><span>2g</span></span></span>
+      <div class="where">
+        <div>h<sub>m</sub> = การสูญเสียรอง (m) · k = สัมประสิทธิ์การสูญเสียรอง (ไม่มีหน่วย ขึ้นกับรูปร่างอุปกรณ์) · v = ความเร็วการไหล (m/s) · g = 9.81 m/s²</div>
+        <div>ต้องเลือกค่า k ให้ตรงกับลักษณะที่เกิดการสูญเสีย ค่า k ยิ่งมาก ยิ่งเสียพลังงานมาก</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="align-items:center">
+      <figure class="photo card" style="padding:0;overflow:hidden;margin:0">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-pipe-fittings.jpg" alt="ข้อต่อท่อทองแดงหลายแบบ ได้แก่ ข้องอ 45 องศา ข้อต่อสามทาง ข้อโค้ง 90 องศา ข้อลด และข้อต่อตรง" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">ข้อต่อท่อของจริง: ข้องอ 45° (ซ้ายบน, ขวาล่าง) ข้อต่อสามทาง (กลางบน) ข้อโค้ง 90° (ล่างซ้าย) ข้อลด (ล่างกลาง) ข้อต่อตรงและฝาครอบ
+          <span class="credit">ภาพ: Torsten Bätge · <a href="https://commons.wikimedia.org/wiki/File:Kupferfittings_4062.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+      <div class="note note-info" style="margin:0"><b>🔧 ใช้กับงานจริงอย่างไร</b>เวลาเดินท่อประปาหรือท่อน้ำมัน ทุกข้อต่อ ทุกวาล์ว คือการสูญเสียพลังงาน
+        ช่างจึงเลือกใช้ <b>ข้อโค้งรัศมียาวแทนข้องอหักมุม</b> ใช้ <b>Gate/Ball Valve สำหรับเปิด-ปิด</b> (k ต่ำ) และใช้ Globe Valve เฉพาะจุดที่ต้องหรี่ปรับอัตราการไหล
+        และ<b>เดินท่อให้สั้นและมีข้อต่อน้อยที่สุด</b> ปั๊มจะได้ไม่ต้องใช้กำลังมาก</div>
+    </div>
+
+    <h3>เลือกอุปกรณ์ เพื่อดูการไหลและค่า k (หัวข้อ 5.3.1–5.3.5)</h3>
+    <div class="tabs" id="fitTabs"></div>
+    <div class="fit-grid" id="fitGrid"></div>
+    <div class="lab-row" style="margin-top:14px">
+      <figure class="fig" style="margin:0"><svg id="fitBig" viewBox="0 0 240 130" role="img" aria-label="ภาพขยายอุปกรณ์ที่เลือก"></svg>
+        <figcaption id="fitCap"></figcaption></figure>
+      <div class="ecalc" style="margin:0" id="fitCalc">
+        <h4 id="fitTitle">คำนวณการสูญเสียรอง</h4>
+        <div class="ecalc-in">
+          <label><span id="fitVlab">ความเร็วในท่อ v (m/s)</span><input type="number" id="fitV" value="2.0" step="0.1" min="0.1"></label>
+          <label id="fitV2w" style="display:none"><span>ความเร็วในท่อใหญ่ v<sub>2</sub> (m/s)</span><input type="number" id="fitV2" value="0.5" step="0.1" min="0"></label>
+        </div>
+        <div class="lf-list" id="fitOut"></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px;align-items:start">
+      <div>
+        <h4>ตาราง 5-2 ท่อค่อย ๆ เพิ่มขนาด (เลือกแถวและคอลัมน์)</h4>
+        <div class="demo-ctrl" style="grid-template-columns:1fr 1fr">
+          <label><span>d<sub>2</sub>/d<sub>1</sub></span><select id="t52r" style="font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 8px"></select></label>
+          <label><span>มุมกรวย θ</span><select id="t52c" style="font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 8px"></select></label>
+        </div>
+        <div class="table-wrap"><table class="ktab" id="t52"></table></div>
+        <p class="small muted" id="t52note"></p>
+      </div>
+      <div>
+        <h4>ตาราง 5-3 ท่อลดขนาดทันที (เลื่อน d<sub>2</sub>/d<sub>1</sub>)</h4>
+        <div class="demo-ctrl"><label><span>d<sub>2</sub>/d<sub>1</sub> (ท่อเล็ก ÷ ท่อใหญ่) <b id="t53t">0.50</b></span><input type="range" id="t53r" min="0" max="1" step="0.01" value="0.5"></label></div>
+        <div class="table-wrap"><table class="ktab" id="t53"></table></div>
+        <div class="lf-list" id="t53out"></div>
+      </div>
+    </div>
+
+    <h3>ระบบท่อของฉัน: รวมการสูญเสียรองทั้งระบบ (แบบตัวอย่าง 5.8)</h3>
+    <p>ถ้าท่อขนาดเดียวกันตลอด ความเร็วเท่ากันทุกจุด จึง<b>รวมค่า k ทุกตัวก่อน</b> แล้วคูณ v²/2g ครั้งเดียว: h<sub>m</sub> = (Σk) v²/2g</p>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0"><svg id="sysSvg" viewBox="0 0 520 250" role="img" aria-label="ระบบส่งน้ำจากถัง A ไปถัง B"></svg>
+        <figcaption>ตัวอย่าง 5.8: ส่งน้ำจากถัง A ไปถัง B ผ่านท่อ 50 mm ด้วยอัตราการไหล 0.02 m³/s</figcaption></figure>
+      <div class="ecalc" style="margin:0">
+        <div class="ecalc-in">
+          <label><span>อัตราการไหล Q (m³/s)</span><input type="number" id="sysQ" value="0.02" step="0.001" min="0.0001"></label>
+          <label><span>ขนาดท่อ D (mm)</span><input type="number" id="sysD" value="50" step="1" min="5"></label>
+        </div>
+        <div id="sysList" style="margin-top:8px"></div>
+        <div class="ex-btns"><button id="sys58">ตัวอย่าง 5.8</button><button id="sysClr">ล้างอุปกรณ์</button></div>
+        <div class="lf-list" id="sysOut"></div>
+      </div>
+    </div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 5.9 (จากการทดลอง): หาค่า k ของ Gate Valve</h4>
+      <p>ทดลองการไหลผ่าน Gate Valve ท่อขนาด 21 mm ครั้งที่ 1: น้ำ 10 Litre ใช้เวลา 12.59 s ระดับน้ำในมาโนมิเตอร์ 20.0 cm และ 45.0 cm จงหาสัมประสิทธิ์ของ Gate Valve</p>
+      <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+        <div>h<sub>m</sub> = 45.0 − 20.0 = 25.0 cm = 0.25 m</div>
+        <div>Q = V/t = (10 × 10⁻³)/12.59 = 7.94 × 10⁻⁴ m³/s → v = Q/A = (7.94 × 10⁻⁴)/[(π/4)(0.021)²] = 2.29 m/s</div>
+        <div>จัดรูป h<sub>m</sub> = k·v²/2g → k = h<sub>m</sub>·2g/v² = (0.25)(2)(9.81)/(2.29)² = <span class="ans">0.94</span></div>
+        <div class="small muted">ทำครบ 5 ครั้งได้ k = 0.93, 0.93, 0.93, 0.92, 0.94 ใกล้กันมาก แต่ต่างจากตาราง 5-4 (0.19) เพราะวาล์วขนาดเล็กแบบเกลียวในชุดทดลองมีรูปร่างต่างจากวาล์วที่ใช้ทำตาราง <b>ค่า k จากการทดลองจริงจึงสำคัญ</b></div>
+      </div></details>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: วาล์วชนิดต่าง ๆ และการสูญเสียรอง</h3>
+      <div class="video-grid v4">
+        <div class="video-card">
+          <button class="yt" data-yt="CsGCQAJv0ZE" aria-label="เล่นวิดีโอ: สรุปชนิดของวาล์ว"><img src="https://i.ytimg.com/vi/CsGCQAJv0ZE/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">1:50</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>สรุปชนิดของวาล์วที่ใช้ในอุตสาหกรรม</b><span class="small muted">เด็กช่างวัด</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="GnwSbfGBSJE" aria-label="เล่นวิดีโอ: ส่วนประกอบ Globe valve และหลักการทำงาน"><img src="https://i.ytimg.com/vi/GnwSbfGBSJE/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">0:59</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ส่วนประกอบ Globe Valve และหลักการทำงาน</b><span class="small muted">KC Mahanakorn</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="wROqM2fscPs" aria-label="เล่นวิดีโอ: บอลวาล์วคืออะไร"><img src="https://i.ytimg.com/vi/wROqM2fscPs/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">2:37</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>บอลวาล์วคืออะไร มีกี่ประเภท</b><span class="small muted">EP.1 Ball Valve · PAKO Channel</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="acV0vuIjTho" aria-label="เล่นวิดีโอ: Demonstration on Experiment of Minor Losses in Pipe"><img src="https://i.ytimg.com/vi/acV0vuIjTho/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">3:06</span></button>
+          <div class="video-meta"><span class="lang lang-en">อังกฤษ</span><b>สาธิตการทดลองการสูญเสียรองในท่อ (ดูภาพก็เข้าใจ)</b><span class="small muted">Demonstration on Experiment of Minor Losses in Pipe</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ใบงาน 5.3 ===== -->
+<section class="block" id="rig53">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">5.3.6</span><h2>การทดลองการสูญเสียรอง (ใบงาน 5.3)</h2></div>
+    <p class="sec-intro">ปล่อยน้ำไหลผ่านอุปกรณ์ที่ต้องการศึกษา บันทึกปริมาณการไหล เวลา และผลต่างระดับน้ำในมาโนมิเตอร์ แล้วคำนวณ k = h<sub>m</sub>·2g/v² ทำ 5 ครั้งต่ออุปกรณ์แล้วหาค่าเฉลี่ย</p>
+    <div id="rig53lab" data-plab="5.3"></div>
+  </div>
+</section>
+
+<!-- ===== แบบทดสอบ ===== -->
+<section class="block" id="quiz">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">QUIZ</span><h2>แบบทดสอบตรวจคำตอบทันที</h2></div>
+    <p class="sec-intro">ดัดแปลงจากแบบฝึกหัด 5.1 และ 5.2 ในหนังสือ เลือกชุดข้อสอบ แล้วกดตัวเลือก ระบบบอกถูกผิดพร้อมเหตุผล</p>
+    <div class="quiz-head">
+      <div class="tabs" id="quizTabs" style="margin:0"></div>
+      <div style="display:flex;gap:8px;align-items:center"><span class="score" id="quizScore">0 / 0</span><button class="btn btn-line btn-sm" id="quizReset">↺ เริ่มใหม่</button></div>
+    </div>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ===== แบบฝึกหัดแสดงวิธีทำ ===== -->
+<section class="block" id="practice">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">✍️</span><h2>แบบฝึกหัดแสดงวิธีทำ (จากหนังสือ พร้อมเฉลย)</h2></div>
+    <p class="sec-intro">ลองทำในกระดาษก่อน แล้วค่อยกดดูเฉลย ตัวเลขทุกข้อตรวจสอบด้วยการคำนวณซ้ำแล้ว ข้อที่หนังสือหรือเฉลยเดิมคลาดเคลื่อนมีหมายเหตุกำกับ</p>
+    <div class="example">
+      <h4>แบบฝึกหัด 5.1 ข้อ 1</h4>
+      <p>ของไหลชนิดหนึ่งมีความหนาแน่น 840 kg/m³ ความหนืดสัมบูรณ์ 0.20 N·s/m² ไหลในท่อเหล็กหล่อ ขนาด 200 mm ยาว 500 m ด้วยอัตราการไหล 1.4 Litre/s จงคำนวณหาการสูญเสียหลัก</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>v = Q/A = (1.4 × 10⁻³)/[(π/4)(0.2)²] = 0.0446 m/s</div>
+        <div>N<sub>R</sub> = Dvρ/μ = (0.2)(0.0446)(840)/0.20 = 37.4 → ราบเรียบ (ไม่ต้องใช้ความขรุขระของท่อเหล็กหล่อ)</div>
+        <div>f = 64/37.4 = 1.71</div>
+        <div>h<sub>f</sub> = (1.71)(500/0.2)(0.0446²/(2 × 9.81)) = <span class="ans">0.43 m</span></div>
+        <div class="fix">เฉลยเดิมของครูใช้ D = 150 mm (v = 0.0792 m/s, N<sub>R</sub> = 49.9, f = 1.28) ได้ h<sub>f</sub> = 1.36 m ซึ่งไม่ตรงกับโจทย์ในหนังสือที่ให้ D = 200 mm</div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 5.1 ข้อ 2</h4>
+      <p>น้ำ 20 °C ความหนืดจลน์ 1.02 × 10⁻⁶ m²/s ไหลผ่านท่อเหล็กอาบสังกะสี ขนาด 150 mm ยาว 720 m ด้วยอัตราการไหล 75 Litre/s จงคำนวณหาการสูญเสียหลัก</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>v = (75 × 10⁻³)/[(π/4)(0.15)²] = 4.24 m/s</div>
+        <div>N<sub>R</sub> = (0.15)(4.24)/(1.02 × 10⁻⁶) = 6.24 × 10⁵ → ปั่นป่วน</div>
+        <div>ท่อเหล็กอาบสังกะสี ε = 0.15 mm → ε/D = 0.15/150 = 0.001 → Moody: f = 0.02</div>
+        <div>h<sub>f</sub> = (0.02)(720/0.15)(4.24²/(2 × 9.81)) = <span class="ans">87.96 m</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 5.1 ข้อ 3 (ข้อมูลการทดลอง)</h4>
+      <p>ทดลองการสูญเสียหลักและความขรุขระของท่อ D = 21 mm, L = 1.25 m, υ = 8.03 × 10⁻⁷ m²/s ได้ผลดังตาราง จงหาความขรุขระของท่อจาก<b>การทดลองครั้งที่ 5</b></p>
+      <div class="table-wrap"><table class="vars" style="max-width:520px">
+        <thead><tr><th>ครั้งที่</th><th>V (Litre)</th><th>t (s)</th><th>ซ้าย (cm)</th><th>ขวา (cm)</th></tr></thead>
+        <tbody><tr><td>1</td><td>10</td><td>56.28</td><td>45.0</td><td>73.0</td></tr><tr><td>2</td><td>10</td><td>34.30</td><td>38.5</td><td>75.0</td></tr>
+          <tr><td>3</td><td>10</td><td>20.82</td><td>30.5</td><td>82.5</td></tr><tr><td>4</td><td>10</td><td>18.45</td><td>24.0</td><td>85.5</td></tr><tr><td>5</td><td>10</td><td>15.30</td><td>18.0</td><td>90.5</td></tr></tbody></table></div>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>h<sub>f</sub> = 90.5 − 18.0 = 72.5 cm = 0.725 m</div>
+        <div>Q = (10 × 10⁻³)/15.30 = 6.54 × 10⁻⁴ m³/s → v = (6.54 × 10⁻⁴)/[(π/4)(0.021)²] = 1.89 m/s</div>
+        <div>f = h<sub>f</sub>·D·2g/(L·v²) = (0.725)(0.021)(2)(9.81)/[(1.25)(1.89)²] = 0.067</div>
+        <div>N<sub>R</sub> = (0.021)(1.89)/(8.03 × 10⁻⁷) = 4.94 × 10⁴</div>
+        <div>Moody ที่ f = 0.067, N<sub>R</sub> = 4.94 × 10⁴ → ε/D ≈ 0.043 → ε = (0.043)(21) = <span class="ans">0.90 mm</span> (ท่อเก่าขรุขระมาก)</div>
+        <div class="fix">หนังสือถาม "ครั้งที่ 1" แต่ข้อมูลครั้งที่ 1 ได้ f = 0.35 ซึ่งเกินขอบบนของ Moody Chart (ประมาณ 0.1) อ่านค่าไม่ได้ เว็บนี้จึงใช้ครั้งที่ 5 · เฉลยเดิมของครูใช้ตัวเลขต่างจากหนังสือ (t = 15.23 s, ซ้าย 27.0 cm) ได้ ε = 0.63 mm</div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 5.2 ข้อ 1</h4>
+      <p>น้ำไหลจากถังเก็บไปยังปลายท่อ ด้วยอัตราการไหล 20 Litre/s ท่อช่วง A–D ขนาด 120 mm ช่วง D–F ขนาด 80 mm
+        จุด A รอยต่อแบบท่อยื่นเข้าไปในถัง · B ข้อโค้ง 90° รัศมียาว · C ข้องอ 90° · D ท่อลดขนาดฉับพลัน · E Globe Valve เปิดเต็มที่ จงคำนวณการสูญเสียรอง</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>ช่วง A–D: v<sub>1</sub> = (20 × 10⁻³)/[(π/4)(0.12)²] = 1.77 m/s · ช่วง D–F: v<sub>2</sub> = (20 × 10⁻³)/[(π/4)(0.08)²] = 3.98 m/s</div>
+        <div>k: A = 0.8, B = 0.6, C = 0.9 · D: d<sub>2</sub>/d<sub>1</sub> = 80/120 = 0.67 ≈ 0.7 → k = 0.22 (ตาราง 5-3) · E = 10.0</div>
+        <div>จุด A, B, C (ใช้ v<sub>1</sub>): h<sub>m</sub> = (0.8 + 0.6 + 0.9)(1.77²/(2 × 9.81)) = 0.37 m</div>
+        <div>จุด D, E (ใช้ v<sub>2</sub> ในท่อเล็ก): h<sub>m</sub> = (0.22 + 10.0)(3.98²/(2 × 9.81)) = 8.25 m</div>
+        <div>รวม h<sub>m</sub> = 0.37 + 8.25 = <span class="ans">8.62 m</span></div>
+        <div class="fix">เฉลยเดิมใช้ v<sub>2</sub> = 3.61 m/s ได้ 7.16 m แต่ท่อ 80 mm ที่ 20 L/s ให้ v<sub>2</sub> = 3.98 m/s คำตอบจึงเป็น 8.62 m (ถ้าเทียบตารางแบบเฉลี่ยระหว่าง 0.6 กับ 0.7 จะได้ k = 0.24 และ h<sub>m</sub> ≈ 8.63 m แทบไม่ต่างกัน)</div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>แบบฝึกหัด 5.2 ข้อ 2 (ข้อมูลการทดลอง)</h4>
+      <p>ทดลองการไหลของน้ำผ่านข้องอ 90° ท่อขนาด 18 mm ครั้งที่ 5: น้ำ 20 Litre ใช้เวลา 20.15 s ระดับน้ำ 15.0 cm และ 92.0 cm จงคำนวณสัมประสิทธิ์ของข้องอ 90°</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>h<sub>m</sub> = 92.0 − 15.0 = 77.0 cm = 0.77 m</div>
+        <div>Q = (20 × 10⁻³)/20.15 = 9.93 × 10⁻⁴ m³/s → v = (9.93 × 10⁻⁴)/[(π/4)(0.018)²] = 3.90 m/s</div>
+        <div>k = h<sub>m</sub>·2g/v² = (0.77)(2)(9.81)/(3.90)² = <span class="ans">0.99</span> (ใกล้ค่าในตาราง 5-4 คือ 0.9)</div>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== สรุปสูตร ===== -->
+<section class="block" id="formulas">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">Σ</span><h2>สรุปสูตรทั้งหมด พร้อมที่มา</h2></div>
+    <p class="sec-intro">ทุกสูตรมีที่มา ตารางตัวแปร (คืออะไร / หน่วย / ได้ค่ามาจากไหน) และตัวอย่างสั้น ๆ</p>
+    <div class="jump">
+      <a href="#fx1">อัตราการไหล</a><a href="#fx2">ความเร็ว</a><a href="#fx3">เรย์โนลด์</a><a href="#fx4">f ราบเรียบ</a><a href="#fx5">f ปั่นป่วน</a><a href="#fx6">การสูญเสียหลัก</a>
+      <a href="#fx7">f จากการทดลอง</a><a href="#fx8">การสูญเสียรอง</a><a href="#fx9">ท่อเพิ่มขนาดฉับพลัน</a><a href="#fx10">k จากการทดลอง</a><a href="#fxu">แปลงหน่วย</a>
+    </div>
+    <div id="fxList"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b>บทที่ 5 งานทดลองการสูญเสียพลังงานของการไหลในท่อ</b> · วิชางานทดลองเครื่องกล (30101-2007) · ปวส. หลักสูตร พ.ศ. 2567</p>
+    <p style="margin:0">เรียบเรียงจากแผนการจัดการเรียนรู้และหนังสือวิชางานทดลองเครื่องกล โดย สมนึก มังกะระ (บทที่ 5 หน้า 189–252) · หนังสือใช้ชื่อบทว่า "การไหลในบ่อ" เว็บนี้ใช้ "การไหลในท่อ" ตามเนื้อหา</p>
+    <p style="margin:6px 0 0">รูปประกอบวาดใหม่เป็นภาพสี · ชุดทดลองเสมือนใช้ค่าจำลอง (ความขรุขระของท่อ ค่า k ของวาล์วและข้อต่อ กำลังปั๊ม) ให้ตัวเลขใกล้เคียงตัวอย่างในหนังสือ แต่ไม่ใช่ค่าของชุดทดลองจริงเครื่องใดเครื่องหนึ่ง</p>
+    <p style="margin:6px 0 0">รูปถ่ายจาก Wikimedia Commons ตามสัญญาอนุญาตที่ระบุใต้แต่ละรูป · วิดีโอเป็นของเจ้าของช่อง YouTube แต่ละช่อง</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+<script src="js/common.js?v=1"></script>
+<script src="js/pipe.js?v=1"></script>
+<script src="js/pipe-lab.js?v=1"></script>
+</body>
+</html>

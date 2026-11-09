@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ทดสอบคุณสมบัติของไหล</title>
+<meta name="description" content="บทเรียนออนไลน์ บทที่ 4 งานทดสอบคุณสมบัติของของไหล วิชางานทดลองเครื่องกล (30101-2007) ระดับ ปวส. ความหนาแน่น น้ำหนักจำเพาะ ปริมาตรจำเพาะ ความถ่วงจำเพาะ ความถ่วง API ไฮโดรมิเตอร์">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b6e8a'/><path d='M16 6 C16 6 8 16 8 20 a8 8 0 0 0 16 0 C24 16 16 6 16 6z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/lab.css?v=4">
+<link rel="stylesheet" href="css/engine.css?v=1">
+<link rel="stylesheet" href="css/fluid.css?v=1">
+</head>
+<body>
+
+<!-- ===== เมนูบน ===== -->
+<header class="topbar">
+  <div class="wrap chap-row" aria-label="เลือกบทเรียน">
+    <span class="chap-lbl">📚 เลือกบท:</span>
+    <a href="index.html"><span class="cn">บทที่ 2</span>ทดสอบคุณสมบัติเชิงกลของวัสดุ</a>
+    <a href="engine.html"><span class="cn">บทที่ 3</span>ทดสอบสมรรถนะเครื่องยนต์</a>
+    <a href="fluid.html" class="on" aria-current="page"><span class="cn">บทที่ 4</span>ทดสอบคุณสมบัติของของไหล</a>
+    <a href="pipe.html"><span class="cn">บทที่ 5</span>การสูญเสียพลังงานของการไหลในท่อ</a>
+  </div>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-badge">บทที่ 4</span><span class="brand-text">คุณสมบัติของของไหล</span></a>
+    <nav class="nav" id="nav">
+      <a href="#intro">ของไหล</a>
+      <a href="#density">ความหนาแน่น</a>
+      <a href="#weight">น้ำหนักจำเพาะ</a>
+      <a href="#volume">ปริมาตรจำเพาะ</a>
+      <a href="#sg">ความถ่วงจำเพาะ</a>
+      <a href="#lab1">ทดลองชั่ง-ตวง</a>
+      <a href="#lab2">ไฮโดรมิเตอร์</a>
+      <a href="#quiz">แบบทดสอบ</a>
+      <a href="#practice">แบบฝึกหัด</a>
+      <a href="#formulas">สรุปสูตร</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="สลับโหมดสว่าง/มืด" aria-label="สลับโหมดสว่าง/มืด">◐</button>
+  </div>
+</header>
+
+<!-- ===== ส่วนหัว ===== -->
+<div class="hero fluid-hero" id="top">
+  <div class="wrap">
+    <span class="kicker">วิชางานทดลองเครื่องกล · รหัสวิชา 30101-2007 · ปวส. · บทที่ 4</span>
+    <h1>งานทดสอบคุณสมบัติของของไหล</h1>
+    <p class="lead">น้ำมันเครื่อง 1 ถังหนักกี่กิโลกรัม น้ำมันชนิดไหนเบากว่าน้ำ และร้านขายน้ำมันบอกว่าน้ำมัน "เบา" หรือ "หนัก" ได้อย่างไร
+      บทนี้เรียนคุณสมบัติพื้นฐาน 4 อย่างของของไหล พร้อมวิธีวัดด้วยเครื่องชั่ง กระบอกตวง และไฮโดรมิเตอร์</p>
+    <div class="hero-meta">
+      <span>📅 สัปดาห์ที่ 9</span>
+      <span>🧪 ห้องทดลองเสมือน ใบงาน 4 (2 ตอน)</span>
+      <span>🎞️ ภาพเคลื่อนไหวทุกหัวข้อ</span>
+      <span>🧮 เครื่องคิดเลขแสดงการแทนค่า</span>
+      <span>✅ แบบทดสอบตรวจคำตอบทันที</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-accent" href="#intro">เริ่มเรียน →</a>
+      <a class="btn btn-ghost" href="#lab1">ไปที่ห้องทดลองเสมือน</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ===== 4.1 บทนำ ===== -->
+<section class="block" id="intro" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">4.1</span><h2>บทนำ: ของไหลคืออะไร</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">🧭 สาระสำคัญ</h3>
+        <p><b>ของไหล (Fluid)</b> คือสสารที่เมื่อมี<b>ความเค้นเฉือน</b>มากระทำ จะ<b>เสียรูปร่างอย่างต่อเนื่องไม่หยุด</b>
+          การเสียรูปร่างอย่างต่อเนื่องนี้เรียกว่า <b>"การไหล"</b></p>
+        <p>สสารมี 3 สถานะ คือ ของแข็ง ของเหลว และแก๊ส มีเพียง<b>ของเหลวและแก๊สเท่านั้นที่ไหลได้</b> ของเหลวและแก๊สจึงเป็นของไหล ส่วนของแข็งไม่ใช่</p>
+        <p class="muted small" style="margin:0">คุณสมบัติที่เรียนในบทนี้: ① ความหนาแน่น ② น้ำหนักจำเพาะ ③ ปริมาตรจำเพาะ ④ ความถ่วงจำเพาะ (และความถ่วง API)</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">🎯 เรียนจบแล้วต้องทำได้</h3>
+        <ul class="goal-list">
+          <li><span class="tag tag-k">ความรู้</span><span>บอกความหมายของคุณสมบัติต่าง ๆ ของของไหลได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>คำนวณเกี่ยวกับคุณสมบัติต่าง ๆ ของของไหลได้</span></li>
+          <li><span class="tag tag-s">ทักษะ</span><span>ใช้เครื่องมือทดสอบคุณสมบัติของของไหลได้ และคำนวณผลการทดสอบได้</span></li>
+          <li><span class="tag tag-a">เจตคติ</span><span>นำความรู้เรื่องคุณสมบัติของของไหลไปปรับใช้ในชีวิตประจำวันได้</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>ของแข็ง กับ ของไหล ต่างกันอย่างไรเมื่อโดน "แรงเฉือน"</h3>
+    <p>แรงเฉือนคือแรงที่ดันขนานไปกับผิว เหมือนเอามือถูไปบนผิวโต๊ะ ลองกดปุ่มด้านล่าง แล้วดู<b>เส้นสีชมพู</b>ที่ขีดไว้ในเนื้อสาร</p>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="shearSvg" viewBox="0 0 560 230" role="img" aria-label="เปรียบเทียบการเสียรูปของของแข็งและของไหลเมื่อมีแรงเฉือน"></svg>
+        <figcaption>แผ่นล่างถูกยึดไว้ แผ่นบนถูกแรง F ดันไปทางขวา</figcaption>
+      </figure>
+      <div>
+        <div class="btn-row"><button class="btn btn-accent" id="shearGo">➡ ออกแรงเฉือน F</button><button class="btn btn-line" id="shearStop">✋ ปล่อยแรง</button><button class="btn btn-line" id="shearReset">↺ เริ่มใหม่</button></div>
+        <div class="lf-list" id="shearOut"></div>
+        <div class="note note-info"><b>💡 จำง่าย ๆ</b>ของแข็งโดนแรงเฉือนแล้ว<b>เอียงไปนิดหนึ่งแล้วหยุด</b> (ปล่อยแรงก็เด้งกลับ)
+          แต่ของไหล<b>เสียรูปไปเรื่อย ๆ ไม่หยุด ตราบที่ยังมีแรงอยู่</b> นั่นคือ "การไหล" เช่น น้ำมันเครื่องในเครื่องยนต์ที่ถูกลูกสูบเฉือนตลอดเวลา</div>
+      </div>
+    </div>
+
+    <h3>ของเหลว กับ แก๊ส ต่างกันอย่างไรเมื่อโดน "อัด"</h3>
+    <p>ของเหลวและแก๊สอยู่ภายใต้ความดันเดียวกัน แต่ยุบตัวไม่เท่ากัน ลองเลื่อนแรงกดกระบอกฉีดยาทั้งสองอันที่อุดปลายไว้</p>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="syrSvg" viewBox="0 0 560 220" role="img" aria-label="กระบอกฉีดยาบรรจุน้ำและอากาศ เมื่อกดลูกสูบ"></svg>
+      </figure>
+      <div>
+        <div class="demo-ctrl"><label><span>ความดันที่กด <b><span id="syrP">1.0</span> เท่าของความดันบรรยากาศ</b></span><input type="range" id="syrR" min="1" max="5" step="0.1" value="1"></label></div>
+        <div class="lf-list" id="syrOut"></div>
+      </div>
+    </div>
+    <div class="table-wrap" style="margin-top:14px"><table class="vars state-tbl">
+      <thead><tr><th>สถานะของสสาร</th><th>ไหลได้หรือไม่</th><th>เป็นของไหลหรือไม่</th><th>ยุบตัวตามความดันหรือไม่</th></tr></thead>
+      <tbody>
+        <tr><td>🧊 ของแข็ง</td><td class="no">ไม่ไหล</td><td class="no">ไม่ใช่</td><td>–</td></tr>
+        <tr><td>💧 ของเหลว</td><td class="yes">ไหลได้</td><td class="yes">ใช่</td><td>ยุบน้อยมาก จนถือว่า<b>ไม่ยุบตัว</b> (ของไหลที่ไม่ยุบตัวตามความดัน)</td></tr>
+        <tr><td>💨 แก๊ส</td><td class="yes">ไหลได้</td><td class="yes">ใช่</td><td><b>ยุบตัวได้มาก</b> (ของไหลที่ยุบตัวตามความดัน)</td></tr>
+      </tbody></table></div>
+    <div class="note note-info"><b>🗺️ แผนที่บทเรียน</b>ความหนาแน่น (4.2) → น้ำหนักจำเพาะ (4.3) → ปริมาตรจำเพาะ (4.4) → ความถ่วงจำเพาะและความถ่วง API (4.5)
+      → ห้องทดลองเสมือนใบงาน 4 ตอนที่ 1 (ชั่ง-ตวง) และตอนที่ 2 (ไฮโดรมิเตอร์)</div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: ของไหลคืออะไร</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="Z6_JrfYW7GU" aria-label="เล่นวิดีโอ: กลศาสตร์ของไหลคืออะไร"><img src="https://i.ytimg.com/vi/Z6_JrfYW7GU/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">16:52</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>กลศาสตร์ของไหลคืออะไร?</b><span class="small muted">The Projectile</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="fjqbQU-Nnjs" aria-label="เล่นวิดีโอ: หน่วยที่ 1 คุณสมบัติของของไหล"><img src="https://i.ytimg.com/vi/fjqbQU-Nnjs/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">14:44</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>คุณสมบัติของของไหล (บรรยาย)</b><span class="small muted">หน่วยที่ 1 คุณสมบัติของของไหล · จุตติ ประนมศรี</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.2 ความหนาแน่น ===== -->
+<section class="block" id="density">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">4.2</span><h2>ความหนาแน่น (Density)</h2></div>
+    <p class="sec-intro"><b>ความหนาแน่น</b> คือ <b>มวลสารต่อหนึ่งหน่วยปริมาตร</b>ของสารนั้น ๆ บอกว่าสารนั้น "อัดแน่น" แค่ไหน
+      ปริมาตรเท่ากัน สารที่หนาแน่นกว่าจะมีมวลมากกว่า</p>
+    <div class="formula">
+      <span class="eq">ρ = <span class="frac"><span>m</span><span>V</span></span></span>
+      <div class="where">
+        <div>ρ (โร) = ความหนาแน่นของสาร (kg/m³) · m = มวลของสาร (kg) · V = ปริมาตรของสาร (m³)</div>
+      </div>
+    </div>
+
+    <h3>หอคอยของเหลว: ของเหลวที่หนาแน่นน้อยกว่าลอยอยู่ข้างบน</h3>
+    <p>กดเทของเหลวลงในแก้วทีละชนิด เรียงลำดับแบบไหนก็ได้ แล้วดูว่าสุดท้ายแต่ละชนิดไปอยู่ชั้นไหน จากนั้นลองหย่อนวัตถุลงไป</p>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="towerSvg" viewBox="0 0 300 330" role="img" aria-label="แก้วทรงสูงที่มีของเหลวหลายชั้น"></svg>
+      </figure>
+      <div>
+        <div class="small muted">เทของเหลว (ตัวเลขคือความหนาแน่นโดยประมาณ kg/m³)</div>
+        <div class="chips" id="towerLiq"></div>
+        <div class="small muted">หย่อนวัตถุ</div>
+        <div class="chips" id="towerObj"></div>
+        <div class="btn-row" style="margin-top:6px"><button class="btn btn-line btn-sm" id="towerReset">↺ เทออกทั้งหมด</button><button class="btn btn-line btn-sm" id="towerAll">เทครบทุกชนิด</button></div>
+        <div class="status" id="towerMsg">แก้วยังว่างอยู่ ลองเทของเหลวชนิดใดก็ได้</div>
+      </div>
+    </div>
+    <p class="small muted">ในการทำจริงต้องเทช้า ๆ ไหลตามขอบแก้ว ของเหลวบางคู่ (เช่น น้ำกับน้ำยาล้างจาน) ค่อย ๆ ผสมกันได้ ภาพนี้แสดงกรณีที่ไม่ผสมกัน</p>
+
+    <h3>แปลงหน่วยปริมาตรให้เป็น m³ ก่อนคำนวณทุกครั้ง</h3>
+    <p>ในชีวิตประจำวันเราใช้หน่วยปริมาตรหลายหน่วย เช่น cc, ml, ลิตร (Litre), cm³ แต่การคำนวณด้านของไหลใช้ <b>m³</b>
+      ถ้าโจทย์ให้หน่วยอื่นต้องแปลงเป็น m³ ก่อน โดยใช้ความสัมพันธ์</p>
+    <div class="mini-grid">
+      <div class="mini"><b>1 m³ = 1,000 Litre</b>ลิตร → m³ ให้ <span class="eqs">หาร 1,000</span> (× 10⁻³)</div>
+      <div class="mini"><b>1 Litre = 1,000 cc</b>cc → ลิตร ให้หาร 1,000</div>
+      <div class="mini"><b>1 cc = 1 ml = 1 cm³</b>cc, ml, cm³ → m³ ให้ <span class="eqs">× 10⁻⁶</span></div>
+    </div>
+
+    <div class="ecalc" data-calc="density">
+      <h4>🧮 เครื่องคิดเลขความหนาแน่น (แปลงหน่วยให้อัตโนมัติ)</h4>
+      <p class="muted small">ใส่มวลและปริมาตรในหน่วยที่โจทย์ให้มา ระบบจะแสดงขั้นแปลงหน่วยและแทนค่าให้ดู</p>
+      <div class="ecalc-in">
+        <label><span>มวล m</span><input type="number" data-k="m" value="460" step="any"></label>
+        <label><span>หน่วยมวล</span><select data-k="mu"><option value="kg">kg</option><option value="g">g (กรัม)</option></select></label>
+        <label><span>ปริมาตร V</span><input type="number" data-k="V" value="500" step="any"></label>
+        <label><span>หน่วยปริมาตร</span><select data-k="Vu"><option value="L">Litre (ลิตร)</option><option value="ml">ml</option><option value="cc">cc</option><option value="cm3">cm³</option><option value="m3">m³</option></select></label>
+      </div>
+      <div class="ex-btns"><button data-set='{"m":460,"mu":"kg","V":500,"Vu":"L"}'>ตัวอย่าง 4.1</button><button data-set='{"m":170,"mu":"kg","V":200,"Vu":"L"}'>แบบฝึกหัด ข้อ 1</button><button data-set='{"m":75,"mu":"g","V":50,"Vu":"ml"}'>แบบฝึกหัด ข้อ 2</button></div>
+      <div class="lf-list" data-out></div>
+    </div>
+
+    <div class="grid g2" style="align-items:start">
+      <div class="table-wrap"><table class="vars">
+        <thead><tr><th class="left">ของไหล (ประมาณที่ 20–30 °C)</th><th>ρ (kg/m³)</th></tr></thead>
+        <tbody>
+          <tr><td class="left">อากาศ</td><td>1.2</td></tr>
+          <tr><td class="left">น้ำมันแก๊สโซฮอล์ 95</td><td>≈ 745</td></tr>
+          <tr><td class="left">น้ำมันดีเซล</td><td>≈ 835</td></tr>
+          <tr><td class="left">น้ำมันเครื่อง SAE 40</td><td>≈ 880</td></tr>
+          <tr><td class="left">น้ำ (หนังสือใช้ค่า)</td><td><b>1,000</b></td></tr>
+          <tr><td class="left">น้ำทะเล</td><td>≈ 1,025</td></tr>
+          <tr><td class="left">ปรอท</td><td>≈ 13,600</td></tr>
+        </tbody></table></div>
+      <figure class="photo card" style="padding:0;overflow:hidden;margin:0">
+        <div class="img-box" style="border:0;border-radius:0"><img src="images/photo-density-tower.jpg" alt="หอคอยของเหลวหลายสีซ้อนกันเป็นชั้นในภาชนะใส" loading="lazy"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">หอคอยของเหลวของจริง ของเหลวแต่ละชั้นมีความหนาแน่นต่างกัน จึงไม่ปนกัน
+          <span class="credit">ภาพ: Silviaelzi · <a href="https://commons.wikimedia.org/wiki/File:Density_and_the_liquid_tower.jpg" target="_blank" rel="noopener">CC BY 4.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: ความหนาแน่น</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="5Wq0-Y-VmrQ" aria-label="เล่นวิดีโอ: ของไหล ความหนาแน่น"><img src="https://i.ytimg.com/vi/5Wq0-Y-VmrQ/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">9:48</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ของไหล ตอนที่ 1: ความหนาแน่น</b><span class="small muted">I know PHYSICS ep.14 · I know PHYSICs a little</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="YfzNZ2germ8" aria-label="เล่นวิดีโอ: ความหนาแน่น ความถ่วงจำเพาะ"><img src="https://i.ytimg.com/vi/YfzNZ2germ8/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">8:02</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ความหนาแน่น ความถ่วงจำเพาะ ความหนาแน่นของน้ำ</b><span class="small muted">ของไหล ของเหลว EP.2 · Yuzututor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.3 น้ำหนักจำเพาะ ===== -->
+<section class="block" id="weight">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">4.3</span><h2>น้ำหนักจำเพาะ (Specific Weight)</h2></div>
+    <p class="sec-intro"><b>น้ำหนักจำเพาะ</b> คือ <b>น้ำหนักของสารต่อหนึ่งหน่วยปริมาตร</b>ของสารนั้น ๆ
+      ต่างจากความหนาแน่นตรงที่ใช้ "น้ำหนัก" (แรงที่โลกดึง หน่วยนิวตัน) แทน "มวล" (เนื้อสาร หน่วยกิโลกรัม)</p>
+    <div class="grid g2">
+      <div class="formula">
+        <span class="eq">γ = <span class="frac"><span>w</span><span>V</span></span></span>
+        <div class="where"><div>γ (แกมมา) = น้ำหนักจำเพาะ (N/m³) · w = น้ำหนักของสาร (N) · V = ปริมาตร (m³)</div></div>
+      </div>
+      <div class="formula accent">
+        <span class="eq">γ = ρ · g</span>
+        <div class="where"><div>ที่มา: w = m·g แทนในสูตรซ้าย → γ = <span class="frac"><span>m·g</span><span>V</span></span> = <span class="frac"><span>m</span><span>V</span></span>·g = ρ·g</div>
+          <div>g = ความเร่งเนื่องจากแรงโน้มถ่วงของโลก = 9.81 m/s²</div></div>
+      </div>
+    </div>
+
+    <h3>ชั่งของเหลว 1 ลูกบาศก์เมตร บนโลก และบนดวงจันทร์</h3>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="gammaSvg" viewBox="0 0 520 260" role="img" aria-label="ถังของเหลว 1 ลูกบาศก์เมตรวางบนเครื่องชั่ง"></svg>
+      </figure>
+      <div>
+        <div class="chips" id="gammaLiq"></div>
+        <div class="chips" id="gammaPlace"><button data-g="9.81" class="on">🌏 บนโลก g = 9.81 m/s²</button><button data-g="1.62">🌕 บนดวงจันทร์ g = 1.62 m/s²</button></div>
+        <div class="lf-list" id="gammaOut"></div>
+        <div class="note note-warn"><b>⚠️ สังเกต</b>ย้ายไปดวงจันทร์ <b>ความหนาแน่นเท่าเดิม</b> (เนื้อสารเท่าเดิม) แต่<b>น้ำหนักจำเพาะลดลง</b> เพราะแรงดึงดูดน้อยลง
+          ในบทเรียนนี้ใช้ g = 9.81 m/s² เสมอ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.4 ปริมาตรจำเพาะ ===== -->
+<section class="block" id="volume">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">4.4</span><h2>ปริมาตรจำเพาะ (Specific Volume)</h2></div>
+    <p class="sec-intro"><b>ปริมาตรจำเพาะ</b> คือ <b>ปริมาตรของสารต่อหนึ่งหน่วยมวล</b>ของสารนั้น ๆ
+      ตอบคำถามว่า "สาร 1 กิโลกรัม กินที่เท่าไร" ซึ่งกลับด้านกับความหนาแน่น</p>
+    <div class="grid g2">
+      <div class="formula">
+        <span class="eq">V<sub>S</sub> = <span class="frac"><span>V</span><span>m</span></span></span>
+        <div class="where"><div>V<sub>S</sub> = ปริมาตรจำเพาะ (m³/kg) · V = ปริมาตร (m³) · m = มวล (kg)</div><div class="small">ในใบงานใช้ตัว v (วีตัวเล็ก) แทน V<sub>S</sub></div></div>
+      </div>
+      <div class="formula accent">
+        <span class="eq">V<sub>S</sub> = <span class="frac"><span>1</span><span>ρ</span></span> หรือ ρ = <span class="frac"><span>1</span><span>V<sub>S</sub></span></span></span>
+        <div class="where"><div>ที่มา: ρ = <span class="frac"><span>m</span><span>V</span></span> ดังนั้น <span class="frac"><span>1</span><span>ρ</span></span> = <span class="frac"><span>V</span><span>m</span></span> = V<sub>S</sub></div>
+          <div><b>ปริมาตรจำเพาะกับความหนาแน่นเป็นส่วนกลับซึ่งกันและกัน</b></div></div>
+      </div>
+    </div>
+
+    <h3>สาร 1 กิโลกรัม กินที่เท่าไร (กดเลือกสาร)</h3>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="vsSvg" viewBox="0 0 560 240" role="img" aria-label="กล่องแสดงปริมาตรของสาร 1 กิโลกรัม"></svg>
+      </figure>
+      <div>
+        <div class="chips" id="vsPick"></div>
+        <div class="lf-list" id="vsOut"></div>
+        <p class="small muted">ปริมาตรจำเพาะใช้มากกับ<b>แก๊สและไอน้ำ</b> (เช่น ในวิชาเทอร์โมไดนามิกส์) เพราะปริมาตรของแก๊สเปลี่ยนไปตามความดันและอุณหภูมิมาก</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4.5 ความถ่วงจำเพาะ ===== -->
+<section class="block" id="sg">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">4.5</span><h2>ความถ่วงจำเพาะ (Specific Gravity) และความถ่วง API</h2></div>
+    <p class="sec-intro"><b>ความถ่วงจำเพาะ</b> คือ <b>อัตราส่วนระหว่างความหนาแน่นของสาร กับความหนาแน่นของน้ำ</b>
+      (หรืออัตราส่วนระหว่างน้ำหนักจำเพาะของสาร กับน้ำหนักจำเพาะของน้ำ) บอกว่าสารนั้นหนักเป็นกี่เท่าของน้ำ</p>
+    <div class="formula">
+      <span class="eq">s.g. = <span class="frac"><span>ρ<sub>f</sub></span><span>ρ<sub>w</sub></span></span> หรือ s.g. = <span class="frac"><span>γ<sub>f</sub></span><span>γ<sub>w</sub></span></span></span>
+      <div class="where">
+        <div>s.g. = ความถ่วงจำเพาะ (<b>ไม่มีหน่วย</b> เพราะหน่วยบนกับล่างตัดกันหมด) · คนไทยนิยมเขียนว่า <b>ถ.พ.</b></div>
+        <div>ρ<sub>f</sub>, γ<sub>f</sub> = ความหนาแน่น / น้ำหนักจำเพาะของสาร · ρ<sub>w</sub> = 1,000 kg/m³ และ γ<sub>w</sub> = 9,810 N/m³ (ของน้ำ)</div>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini" style="border-top-color:var(--oil)"><b>s.g. น้อยกว่า 1</b>เบากว่าน้ำ เทลงน้ำจะ<b>ลอย</b> เช่น น้ำมันเกือบทุกชนิด</div>
+      <div class="mini" style="border-top-color:var(--water)"><b>s.g. = 1.000</b>คือน้ำ ใช้เป็นตัวเทียบ</div>
+      <div class="mini" style="border-top-color:var(--bad)"><b>s.g. มากกว่า 1</b>หนักกว่าน้ำ เทลงน้ำจะ<b>จม</b> เช่น น้ำเกลือ กลีเซอรีน ปรอท</div>
+    </div>
+
+    <h3>เทของเหลวลงในน้ำ จะลอยหรือจม</h3>
+    <div class="sim-row">
+      <figure class="fig" style="margin:0">
+        <svg id="sgSvg" viewBox="0 0 520 260" role="img" aria-label="บีกเกอร์น้ำที่เทของเหลวอีกชนิดลงไป"></svg>
+      </figure>
+      <div>
+        <div class="chips" id="sgPick"></div>
+        <div class="lf-list" id="sgOut"></div>
+      </div>
+    </div>
+
+    <h3>ความถ่วง API (API Gravity) ของน้ำมันปิโตรเลียม</h3>
+    <p>สถาบันปิโตรเลียมของอเมริกา (American Petroleum Institute) กำหนดความถ่วงจำเพาะอีกแบบหนึ่งสำหรับน้ำมันปิโตรเลียมโดยเฉพาะ เรียกว่า
+      <b>"ความถ่วงเอพีไอ" (API Gravity)</b> กำหนดให้น้ำ (s.g. = 1.000) มีความถ่วง API = 10</p>
+    <div class="formula accent">
+      <span class="eq">API Gr. = <span class="frac"><span>141.5</span><span>s.g.</span></span> − 131.5</span>
+      <div class="where"><div>s.g. ที่ใช้แทนค่าต้องเป็นความถ่วงจำเพาะที่อุณหภูมิ <b>60 °F</b> (15.6 °C) · ตรวจสอบ: s.g. = 1.000 → 141.5 − 131.5 = 10 ✔</div>
+        <div><b>สังเกต:</b> s.g. อยู่ในส่วน ค่า API จึงกลับด้าน <b>API ยิ่งมาก น้ำมันยิ่งเบา</b></div></div>
+    </div>
+    <div class="ecalc" data-calc="api">
+      <h4>🧮 แปลง s.g. ↔ ความถ่วง API</h4>
+      <div class="ecalc-in">
+        <label><span>ความถ่วงจำเพาะ s.g.</span><input type="number" data-k="sg" value="0.85" step="0.005" min="0.5" max="1.1"></label>
+      </div>
+      <div class="ex-btns"><button data-set='{"sg":0.745}'>แก๊สโซฮอล์ 95</button><button data-set='{"sg":0.835}'>ดีเซล</button><button data-set='{"sg":0.88}'>น้ำมันเครื่อง</button><button data-set='{"sg":1}'>น้ำ</button></div>
+      <div class="api-bar" id="apiBar"></div>
+      <div class="lf-list" data-out></div>
+      <p class="small muted" style="margin:6px 0 0">ความรู้เพิ่มเติม (ไม่อยู่ในหนังสือ): วงการน้ำมันแบ่งน้ำมันดิบตามความถ่วง API เช่น มากกว่า 31.1 = น้ำมันดิบเบา, 22.3–31.1 = ปานกลาง, น้อยกว่า 22.3 = หนัก
+        น้ำมันดิบเบามีราคาสูงกว่า เพราะกลั่นเป็นน้ำมันเบนซินและดีเซลได้มากกว่า</p>
+    </div>
+
+    <h3>เครื่องคิดเลขแปลงคุณสมบัติทั้ง 5 ค่า</h3>
+    <p>รู้ค่าใดค่าหนึ่ง ก็หาค่าที่เหลือได้หมด เพราะทุกค่าเชื่อมกันด้วย ρ</p>
+    <div class="ecalc" data-calc="props">
+      <h4>🧮 รู้ 1 ค่า หาอีก 4 ค่า</h4>
+      <div class="ecalc-in">
+        <label><span>ค่าที่รู้</span><select data-k="kind"><option value="sg">ความถ่วงจำเพาะ s.g.</option><option value="rho">ความหนาแน่น ρ (kg/m³)</option><option value="gam">น้ำหนักจำเพาะ γ (N/m³)</option><option value="vs">ปริมาตรจำเพาะ V<sub>S</sub> (m³/kg)</option><option value="api">ความถ่วง API</option></select></label>
+        <label><span>ค่า</span><input type="number" data-k="x" value="0.71" step="any"></label>
+      </div>
+      <div class="ex-btns"><button data-set='{"kind":"sg","x":0.71}'>ตัวอย่าง 4.2 (s.g. 0.71)</button><button data-set='{"kind":"sg","x":0.81}'>แบบฝึกหัด ข้อ 3 (s.g. 0.81)</button><button data-set='{"kind":"rho","x":920}'>ρ = 920</button></div>
+      <div class="lf-list" data-out></div>
+    </div>
+
+    <div class="example">
+      <h4>ตัวอย่าง 4.1</h4>
+      <p>ถังใบหนึ่งบรรจุน้ำมันหล่อลื่นมวล 460 kg และมีปริมาตร 500 Litre จงคำนวณหา 1. ความหนาแน่น 2. น้ำหนักจำเพาะ 3. ปริมาตรจำเพาะ 4. ความถ่วงจำเพาะ</p>
+      <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+        <div>แปลงหน่วยก่อน: V = 500 Litre = 500 × 10⁻³ m³ = 0.5 m³</div>
+        <div><b>1.</b> ρ = m/V = 460 / (500 × 10⁻³) = <span class="ans">920 kg/m³</span></div>
+        <div><b>2.</b> γ = w/V = (460 × 9.81) / (500 × 10⁻³) = <span class="ans">9,025.2 N/m³</span></div>
+        <div><b>3.</b> V<sub>S</sub> = V/m = (500 × 10⁻³) / 460 = <span class="ans">1.087 × 10⁻³ m³/kg</span></div>
+        <div><b>4.</b> s.g. = ρ<sub>f</sub>/ρ<sub>w</sub> = 920 / 1,000 = <span class="ans">0.92</span></div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>ตัวอย่าง 4.2</h4>
+      <p>น้ำมันเชื้อเพลิงชนิดหนึ่ง มีความถ่วงจำเพาะ 0.71 จงคำนวณหา 1. ความหนาแน่น 2. น้ำหนักจำเพาะ 3. ปริมาตรจำเพาะ</p>
+      <details><summary>ดูวิธีทำ</summary><div class="ex-steps">
+        <div><b>1.</b> จาก s.g. = ρ<sub>f</sub>/ρ<sub>w</sub> → ρ<sub>f</sub> = (s.g.)ρ<sub>w</sub> = (0.71)(1,000) = <span class="ans">710 kg/m³</span></div>
+        <div><b>2.</b> จาก s.g. = γ<sub>f</sub>/γ<sub>w</sub> → γ<sub>f</sub> = (s.g.)γ<sub>w</sub> = (0.71)(9,810) = <span class="ans">6,965.1 N/m³</span></div>
+        <div><b>3.</b> V<sub>S</sub> = 1/ρ = 1/710 = <span class="ans">1.41 × 10⁻³ m³/kg</span></div>
+      </div></details>
+    </div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: ความถ่วงจำเพาะ และความถ่วง API</h3>
+      <div class="video-grid v4">
+        <div class="video-card">
+          <button class="yt" data-yt="9Ly00qzKzTU" aria-label="เล่นวิดีโอ: ความถ่วงจำเพาะคืออะไร"><img src="https://i.ytimg.com/vi/9Ly00qzKzTU/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">4:31</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ความถ่วงจำเพาะคืออะไร</b><span class="small muted">นายช่างดอย 4.0</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="Lh27MoczGHI" aria-label="เล่นวิดีโอ: งานทดลองและวิเคราะห์ความถ่วง API ของน้ำมันเชื้อเพลิง"><img src="https://i.ytimg.com/vi/Lh27MoczGHI/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">6:43</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>งานทดลองและวิเคราะห์ความถ่วง API ของน้ำมันเชื้อเพลิง</b><span class="small muted">ชุมพล ราชสีห์</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="HaTUU23HvNY" aria-label="เล่นวิดีโอ: การทดลองหาค่าความถ่วง API ของน้ำมันเชื้อเพลิง"><img src="https://i.ytimg.com/vi/HaTUU23HvNY/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">2:53</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การทดลองหาค่าความถ่วง API ของน้ำมันเชื้อเพลิง</b><span class="small muted">ศิวกร ต้องกระโทก</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="o6wkLX8KCKE" aria-label="เล่นวิดีโอ: การทดลองการหาค่าความถ่วง API"><img src="https://i.ytimg.com/vi/o6wkLX8KCKE/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">1:40</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การทดลองหาค่าความถ่วง API (คลิปสั้น)</b><span class="small muted">Dewzar Studioracing.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ใบงาน 4 ตอนที่ 1 ===== -->
+<section class="block" id="lab1">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">ใบงาน 4</span><h2>ตอนที่ 1 ทดสอบคุณสมบัติของไหลด้วยการชั่งและการตวง</h2></div>
+    <p class="sec-intro">ตวงของเหลว 50 ml ด้วยกระบอกตวง ชั่งมวลด้วยเครื่องชั่งดิจิตอล (ละเอียด 0.1 กรัม) แล้วคำนวณ ρ, V<sub>S</sub>, γ, s.g. และความถ่วง API
+      ทำครบ 3 ชนิด ตารางและตัวอย่างการคำนวณจะขึ้นให้อัตโนมัติ</p>
+    <div class="grid g2" style="align-items:start">
+      <div class="card">
+        <h4 style="margin-top:0">อุปกรณ์</h4>
+        <ol style="margin:0;padding-left:1.3em">
+          <li>เครื่องชั่งแบบดิจิตอล ขนาดความละเอียด 0.1 กรัม</li>
+          <li>กระบอกตวง ขนาด 50 ml</li>
+          <li>บีกเกอร์ ขนาด 100 ml</li>
+          <li>ของเหลวสำหรับทดลอง จำนวน 3 ชนิด</li>
+        </ol>
+      </div>
+      <div class="note note-warn" style="margin:0"><b>👀 เคล็ดลับการอ่านกระบอกตวง</b>ผิวของเหลวในกระบอกตวงโค้งลง เรียกว่า <b>เมนิสคัส (meniscus)</b>
+        ให้<b>อ่านที่ท้องโค้ง</b> และให้<b>สายตาอยู่ระดับเดียวกับผิวของเหลว</b> ถ้ามองจากด้านบนหรือด้านล่าง จะอ่านค่าคลาดเคลื่อน (parallax)</div>
+    </div>
+    <div id="labScale" data-flab="scale"></div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: การใช้กระบอกตวง และการทดลองหาความหนาแน่น</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="3jVkByobhOU" aria-label="เล่นวิดีโอ: การใช้กระบอกตวง"><img src="https://i.ytimg.com/vi/3jVkByobhOU/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">10:03</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การใช้กระบอกตวง (Cylinder) และการอ่านค่า</b><span class="small muted">Sakawrat Tabtonglang</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="zckdFaJvFiM" aria-label="เล่นวิดีโอ: การทดลอง ความหนาแน่นและความถ่วงจำเพาะ"><img src="https://i.ytimg.com/vi/zckdFaJvFiM/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">28:12</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การทดลองความหนาแน่นและความถ่วงจำเพาะ</b><span class="small muted">ภาควิชาฟิสิกส์และวัสดุศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยเชียงใหม่</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ใบงาน 4 ตอนที่ 2 ===== -->
+<section class="block" id="lab2">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">ใบงาน 4</span><h2>ตอนที่ 2 ทดสอบคุณสมบัติของไหลด้วยไฮโดรมิเตอร์</h2></div>
+    <p class="sec-intro"><b>ไฮโดรมิเตอร์ (Hydrometer)</b> เป็นหลอดแก้วถ่วงน้ำหนักที่ปลายล่าง ลอยตั้งตรงในของเหลว
+      ของเหลวยิ่งหนาแน่น ไฮโดรมิเตอร์ยิ่ง<b>ลอยสูง</b> (จมน้อย) ตัวเลขที่ผิวของเหลวตัดกับก้านคือค่า s.g. ที่อ่านได้ทันที ไม่ต้องชั่งหรือตวง</p>
+    <div class="grid g2" style="align-items:start">
+      <div class="card">
+        <h4 style="margin-top:0">อุปกรณ์และหลักการ</h4>
+        <ol style="margin:0;padding-left:1.3em">
+          <li>ไฮโดรมิเตอร์<b>ชนิดเบากว่าน้ำ</b> (สเกล s.g. 0.700–1.000 ด้านหนึ่ง และสเกล API อีกด้านหนึ่ง)</li>
+          <li>กระบอกตวง ขนาด 100 ml จำนวน 3 ใบ</li>
+          <li>ของเหลวสำหรับทดลอง จำนวน 3 ชนิด</li>
+        </ol>
+        <p class="small" style="margin:8px 0 0">ตัวเลข s.g. บนก้าน<b>มากอยู่ด้านล่าง น้อยอยู่ด้านบน</b> (กลับกับไม้บรรทัด) และช่องสเกล s.g. <b>ห่างไม่เท่ากัน</b> ส่วนสเกล API ห่างเท่ากัน</p>
+      </div>
+      <figure class="photo contain card" style="padding:0;overflow:hidden;margin:0">
+        <div class="img-box" style="border:0;border-radius:0;aspect-ratio:auto"><img src="images/photo-hydrometer.jpg" alt="ไฮโดรมิเตอร์แก้ว 1 อัน ปลายล่างมีเม็ดโลหะถ่วงน้ำหนัก ก้านด้านบนมีสเกลตัวเลข" loading="lazy" style="object-fit:contain;height:auto"></div>
+        <figcaption style="padding:0 12px 12px;text-align:left">ไฮโดรมิเตอร์จริง: ปลายล่างมีเม็ดโลหะถ่วงไว้ให้ลอยตั้งตรง ก้านด้านบนมีสเกล (อันในภาพเป็นสเกลวัดความหวาน แต่หลักการลอยเหมือนกัน)
+          <span class="credit">ภาพ: Jacek Halicki · <a href="https://commons.wikimedia.org/wiki/File:2023_Areometr_Ballinga.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a> ผ่าน Wikimedia Commons</span></figcaption>
+      </figure>
+    </div>
+    <div id="labHydro" data-flab="hydro"></div>
+
+    <div class="media-block">
+      <h3>🎬 ดูวิดีโอ: การใช้และการอ่านค่าไฮโดรมิเตอร์</h3>
+      <div class="video-grid">
+        <div class="video-card">
+          <button class="yt" data-yt="MWfsQoBoD0U" aria-label="เล่นวิดีโอ: การใช้งานและวิธีอ่านค่า Hydrometer"><img src="https://i.ytimg.com/vi/MWfsQoBoD0U/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">1:58</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>การใช้งานและวิธีอ่านค่าไฮโดรมิเตอร์</b><span class="small muted">EP.12 · Homebrewthai</span></div>
+        </div>
+        <div class="video-card">
+          <button class="yt" data-yt="Lh27MoczGHI" aria-label="เล่นวิดีโอ: งานทดลองความถ่วง API ของน้ำมันเชื้อเพลิง"><img src="https://i.ytimg.com/vi/Lh27MoczGHI/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-len">6:43</span></button>
+          <div class="video-meta"><span class="lang lang-th">ไทย</span><b>ใช้ไฮโดรมิเตอร์วัดความถ่วง API ของน้ำมันเชื้อเพลิง</b><span class="small muted">ชุมพล ราชสีห์</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== แบบทดสอบ ===== -->
+<section class="block" id="quiz">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">QUIZ</span><h2>แบบทดสอบตรวจคำตอบทันที</h2></div>
+    <p class="sec-intro">ดัดแปลงจากแบบฝึกหัดบทที่ 4 ในหนังสือ เลือกชุดข้อสอบ แล้วกดตัวเลือก ระบบบอกถูกผิดพร้อมเหตุผล</p>
+    <div class="quiz-head">
+      <div class="tabs" id="quizTabs" style="margin:0"></div>
+      <div style="display:flex;gap:8px;align-items:center"><span class="score" id="quizScore">0 / 0</span><button class="btn btn-line btn-sm" id="quizReset">↺ เริ่มใหม่</button></div>
+    </div>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ===== แบบฝึกหัดแสดงวิธีทำ ===== -->
+<section class="block" id="practice">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">✍️</span><h2>แบบฝึกหัดแสดงวิธีทำ (จากหนังสือ พร้อมเฉลย)</h2></div>
+    <p class="sec-intro">แบบฝึกหัดบทที่ 4 ตอนที่ 2 ลองทำในกระดาษก่อน แล้วค่อยกดดูเฉลย ตัวเลขทุกข้อตรวจสอบด้วยการคำนวณซ้ำแล้ว</p>
+    <div class="example">
+      <h4>ข้อ 1</h4>
+      <p>น้ำมันชนิดหนึ่งมวล 170 kg มีปริมาตร 200 Litre จงหาความถ่วงจำเพาะของน้ำมันชนิดนี้</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>ต้องหา ρ ก่อน: ρ = m/V = 170 / (200 × 10⁻³) = 850 kg/m³</div>
+        <div>s.g. = ρ<sub>f</sub>/ρ<sub>w</sub> = 850 / 1,000 = <span class="ans">0.85</span></div>
+        <div class="small muted">เพิ่มเติม: ความถ่วง API = 141.5/0.85 − 131.5 = 34.97</div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>ข้อ 2</h4>
+      <p>ทดสอบของเหลวชนิดหนึ่ง โดยนำของเหลวปริมาตร 50 ml ไปชั่ง พบว่ามีมวล 75 g จงคำนวณหา 2.1 ความหนาแน่น 2.2 น้ำหนักจำเพาะ 2.3 ปริมาตรจำเพาะ 2.4 ความถ่วงจำเพาะ</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div>แปลงหน่วย: m = 75 g = 75 × 10⁻³ kg · V = 50 ml = 50 × 10⁻⁶ m³</div>
+        <div><b>2.1</b> ρ = (75 × 10⁻³)/(50 × 10⁻⁶) = <span class="ans">1,500 kg/m³</span></div>
+        <div><b>2.2</b> γ = ρg = (1,500)(9.81) = <span class="ans">14,715 N/m³</span></div>
+        <div><b>2.3</b> V<sub>S</sub> = 1/ρ = 1/1,500 = <span class="ans">6.67 × 10⁻⁴ m³/kg</span></div>
+        <div><b>2.4</b> s.g. = 1,500/1,000 = <span class="ans">1.5</span> (หนักกว่าน้ำ จึงใช้ไฮโดรมิเตอร์ชนิดเบากว่าน้ำวัดไม่ได้)</div>
+      </div></details>
+    </div>
+    <div class="example">
+      <h4>ข้อ 3</h4>
+      <p>วัดความถ่วงจำเพาะของน้ำมันเชื้อเพลิงชนิดหนึ่งด้วยไฮโดรมิเตอร์ ได้ 0.81 จงคำนวณหา 3.1 ความหนาแน่น 3.2 น้ำหนักจำเพาะ 3.3 ปริมาตรจำเพาะ</p>
+      <details><summary>ดูเฉลย</summary><div class="ex-steps">
+        <div><b>3.1</b> ρ<sub>f</sub> = (s.g.)ρ<sub>w</sub> = (0.81)(1,000) = <span class="ans">810 kg/m³</span></div>
+        <div><b>3.2</b> γ<sub>f</sub> = (s.g.)γ<sub>w</sub> = (0.81)(9,810) = <span class="ans">7,946.1 N/m³</span></div>
+        <div><b>3.3</b> V<sub>S</sub> = 1/ρ = 1/810 = <span class="ans">1.23 × 10⁻³ m³/kg</span></div>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== สรุปสูตร ===== -->
+<section class="block" id="formulas">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">Σ</span><h2>สรุปสูตรทั้งหมด พร้อมที่มา</h2></div>
+    <p class="sec-intro">ทุกสูตรมีที่มา ตารางตัวแปร (คืออะไร / หน่วย / ได้ค่ามาจากไหน) และตัวอย่างสั้น ๆ</p>
+    <div class="jump">
+      <a href="#fx1">ความหนาแน่น</a><a href="#fx2">น้ำหนักจำเพาะ</a><a href="#fx3">ปริมาตรจำเพาะ</a><a href="#fx4">ความถ่วงจำเพาะ</a><a href="#fx5">ความถ่วง API</a><a href="#fxu">แปลงหน่วย</a>
+    </div>
+    <div id="fxList"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b>บทที่ 4 งานทดสอบคุณสมบัติของของไหล</b> · วิชางานทดลองเครื่องกล (30101-2007) · ปวส. หลักสูตร พ.ศ. 2567</p>
+    <p style="margin:0">เรียบเรียงจากแผนการจัดการเรียนรู้และหนังสือวิชางานทดลองเครื่องกล โดย สมนึก มังกะระ (บทที่ 4 หน้า 175–185)</p>
+    <p style="margin:6px 0 0">รูปประกอบวาดใหม่เป็นภาพสี · ความหนาแน่นของของเหลวในห้องทดลองเสมือนเป็นค่าโดยประมาณที่อุณหภูมิห้อง ของจริงแต่ละยี่ห้อต่างกันเล็กน้อย</p>
+    <p style="margin:6px 0 0">รูปถ่ายจาก Wikimedia Commons ตามสัญญาอนุญาตที่ระบุใต้แต่ละรูป · วิดีโอเป็นของเจ้าของช่อง YouTube แต่ละช่อง</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="กลับขึ้นด้านบน">↑</button>
+
+<script src="js/common.js?v=1"></script>
+<script src="js/fluid.js?v=1"></script>
+</body>
+</html>

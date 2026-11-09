@@ -1,0 +1,135 @@
+/* ===== บทที่ 4 (fluid.html) และบทที่ 5 (pipe.html): ของไหล และการสูญเสียพลังงานในท่อ =====
+   ใช้ร่วมกับ style.css + lab.css + engine.css (ส่วนประกอบทั่วไป เช่น .fig .ecalc .demo-ctrl .rig-ctrl) */
+:root {
+  --water: #2f86d6; --water-soft: #d7ebfb; --oil: #d99a1e; --dye: #d6336c;
+  --hf: #d9622b; --hm: #8b46c9; --lam: #1d8a5a; --trans: #c98a00; --turb: #d63b2f;
+  --glass: #eaf4fb; --metal: #8a96a6; --pvc: #b9cfe2; --galv: #9aa7b4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --water: #6fb4ff; --water-soft: #12304d; --oil: #ffc04d; --dye: #ff6b9d;
+    --hf: #ff9a66; --hm: #c99bf0; --lam: #5fd08f; --trans: #ffd05a; --turb: #ff7a6e;
+    --glass: #16283a; --metal: #7d8a9b; --pvc: #5d7590; --galv: #6d7a88;
+  }
+}
+:root[data-theme="dark"] {
+  --water: #6fb4ff; --water-soft: #12304d; --oil: #ffc04d; --dye: #ff6b9d;
+  --hf: #ff9a66; --hm: #c99bf0; --lam: #5fd08f; --trans: #ffd05a; --turb: #ff7a6e;
+  --glass: #16283a; --metal: #7d8a9b; --pvc: #5d7590; --galv: #6d7a88;
+}
+
+.hero.fluid-hero { background: linear-gradient(135deg, #04293a 0%, #0b6e8a 50%, #1f4e8c 100%); }
+.hero.pipe-hero { background: linear-gradient(135deg, #0b2440 0%, #11688f 45%, #23795d 100%); }
+
+/* ปุ่มเลือกแบบชิป */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.chips button { font: inherit; font-size: .88rem; border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 999px; padding: 3px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chips button:hover { border-color: var(--accent); }
+.chips button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chips button.done::after { content: " ✓"; color: var(--ok); font-weight: 700; }
+.chips button.on.done::after { color: #fff; }
+.chips i.sw { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,.25); }
+
+/* ป้ายชนิดการไหล */
+.badge { display: inline-block; padding: 1px 10px; border-radius: 999px; font-weight: 700; font-size: .9rem; color: #fff; }
+.badge.lam { background: var(--lam); }
+.badge.trans { background: var(--trans); color: #1b2230; }
+.badge.turb { background: var(--turb); }
+
+/* ผืนผ้าใบภาพเคลื่อนไหว */
+.sim { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+.sim canvas { width: 100%; height: auto; display: block; border-radius: 8px; }
+.sim-row { display: grid; gap: 16px; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .sim-row { grid-template-columns: minmax(0, 1fr); } }
+
+/* ตารางสถานะของสาร */
+.state-tbl td, .state-tbl th { text-align: center; }
+.yes { color: var(--ok); font-weight: 700; }
+.no { color: var(--bad); font-weight: 700; }
+
+/* ตารางค่าที่เลือกได้ (ตาราง 5-2, 5-3) */
+table.ktab { border-collapse: collapse; width: 100%; font-size: .9rem; background: var(--surface); }
+table.ktab th, table.ktab td { border: 1px solid var(--line); padding: 4px 6px; text-align: center; font-variant-numeric: tabular-nums; }
+table.ktab th { background: var(--surface-2); }
+table.ktab td.hit, table.ktab tr.hl td.hit { background: var(--accent); color: #fff; font-weight: 700; }
+table.ktab td.near { background: var(--accent-soft); }
+table.ktab tr.hl td, table.ktab td.hl { background: var(--brand-soft); }
+
+/* แกลเลอรีอุปกรณ์ท่อ */
+.fit-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.fit-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px 10px; cursor: pointer; text-align: left; font: inherit; color: var(--text); transition: border-color .15s, transform .15s; }
+.fit-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.fit-card.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.fit-card svg { width: 100%; height: auto; display: block; }
+.fit-card b { display: block; font-size: .95rem; line-height: 1.35; }
+.fit-card .k { color: var(--hm); font-weight: 700; }
+.fit-card .small { line-height: 1.4; display: block; }
+
+/* แอนิเมชันการไหลและวังวน */
+@keyframes eddy { to { transform: rotate(360deg); } }
+.eddy { transform-box: fill-box; transform-origin: center; animation: eddy 1.6s linear infinite; }
+.eddy.rev { animation-direction: reverse; }
+@keyframes flowx { to { stroke-dashoffset: -28; } }
+.flowline { stroke-dasharray: 8 6; animation: flowx .9s linear infinite; }
+.flowline.slow { animation-duration: 1.8s; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); } }
+@media (prefers-reduced-motion: reduce) { .eddy, .flowline { animation: none; } }
+
+/* กล่องอ่านค่า (ไฮโดรมิเตอร์ / มาโนมิเตอร์) */
+.read-box { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-top: 8px; }
+.read-box label { display: flex; flex-direction: column; gap: 3px; font-size: .86rem; color: var(--muted); }
+.read-box input { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; width: 100%; font-variant-numeric: tabular-nums; }
+.read-box input.right { border-color: var(--ok); background: var(--ok-soft); }
+.read-box input.wrong { border-color: var(--bad); background: var(--bad-soft); }
+
+/* ชุดทดลอง */
+.bench { display: grid; gap: 12px; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 860px) { .bench { grid-template-columns: minmax(0, 1fr); } }
+.bench svg { width: 100%; height: auto; display: block; }
+.bench svg text { font-family: var(--font); }
+.zoom-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px; }
+.zoom-box .small { display: block; text-align: center; }
+.zoom-box svg { max-width: 330px; margin: 0 auto; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn-row .btn { margin: 0; }
+.lcd-big { font-variant-numeric: tabular-nums; }
+.pour-ctl { display: flex; flex-wrap: wrap; gap: 6px; }
+.pour-ctl button { font: inherit; font-size: .9rem; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); cursor: pointer; padding: 6px 12px; touch-action: none; user-select: none; }
+.pour-ctl button:hover { border-color: var(--accent); }
+.pour-ctl button:active { background: var(--accent-soft); }
+.pour-ctl button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* สรุปผลอัตโนมัติ */
+.conclude-box { background: var(--ok-soft); border-radius: 10px; padding: 10px 14px; font-size: .95rem; margin-top: 10px; }
+
+/* แถบสเกล API */
+.api-bar { position: relative; height: 54px; margin: 18px 4px 34px; }
+.api-bar .zone { position: absolute; top: 14px; height: 18px; border-radius: 4px; font-size: .72rem; color: #fff; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; }
+.api-bar .tick { position: absolute; top: 36px; transform: translateX(-50%); font-size: .75rem; color: var(--muted); }
+.api-bar .pin { position: absolute; top: -6px; transform: translateX(-50%); text-align: center; font-size: .78rem; font-weight: 700; white-space: nowrap; transition: left .3s; }
+.api-bar .pin::after { content: ""; display: block; width: 2px; height: 26px; background: currentColor; margin: 0 auto; }
+
+/* การ์ดสรุปสั้น */
+.mini-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.mini { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; border-top: 4px solid var(--water); font-size: .93rem; line-height: 1.55; }
+.mini b { display: block; color: var(--brand); font-size: 1rem; }
+.mini .eqs { font-style: italic; color: var(--brand); font-weight: 600; }
+
+/* แก้ฟอนต์ใน SVG ทุกอัน */
+.fig svg text, .sim svg text, .bench svg text, .fit-card svg text { font-family: var(--font); }
+.ex-steps .note { white-space: normal; }
+.ex-steps div.wrap-ok { white-space: normal; }
+
+/* ตัวอักษรใน SVG ที่มีขอบสีพื้นหลัง อ่านง่ายเมื่อทับเส้น */
+.halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+#nuTable th { white-space: nowrap; font-size: .8rem; }
+#nuTable td { font-size: .82rem; }
+
+/* รายการอุปกรณ์ของระบบท่อ (ตัวอย่าง 5.8) */
+.sys-grid { display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.sys-it { display: flex; align-items: center; justify-content: space-between; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 3px 6px 3px 10px; font-size: .88rem; line-height: 1.35; }
+.sys-it.on { border-color: var(--hm); background: var(--accent-soft); }
+.sys-it .cnt { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.sys-it .cnt b { min-width: 1.2em; text-align: center; }
+.sys-it .cnt button { font: inherit; width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); cursor: pointer; padding: 0; }
+.sys-it .cnt button:hover { border-color: var(--accent); }
