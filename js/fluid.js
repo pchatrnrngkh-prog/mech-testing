@@ -738,7 +738,7 @@ function buildHydroLab(host) {
           <div class="status" data-r="status">เริ่มจากเลือกของเหลว แล้วเทลงกระบอกตวงทั้ง 3 อัน</div>
         </div>
       </div>
-      <div class="lab-panel"><p class="lab-step"><span class="n">✓</span>บันทึกผลการทดลอง <span class="small muted" style="font-weight:400">(กดแถวเพื่อดูตัวอย่างการคำนวณ)</span></p>
+      <div class="lab-panel"><p class="lab-step"><span class="n">✓</span>บันทึกผลการทดลอง <span class="small muted" style="font-weight:400">(ช่องเหมือนตารางในหนังสือ หน้า 184 · ความถ่วงจำเพาะอ่านจากสเกล 比重 ส่วนความถ่วง API คำนวณจาก s.g. · กดแถวเพื่อดูตัวอย่างการคำนวณ)</span></p>
         <div class="table-wrap"><table class="rig-table" data-r="table"></table></div>
         <div class="lf-list" data-r="rowCalc"></div></div>
       <div class="lab-panel"><p class="lab-step"><span class="n">📈</span>ความสัมพันธ์ระหว่างความถ่วงจำเพาะกับองศาโบเม่ และความถ่วง API</p>
@@ -874,11 +874,11 @@ function buildHydroLab(host) {
   }
   function render() {
     const calc = r => ({ gam: r.sg * GAM_W, rho: r.sg * RHO_W, vs: 1 / (r.sg * RHO_W) });
-    R('table').innerHTML = `<thead><tr><th>กระบอกตวง<br>อันที่</th><th>สีของ<br>ของไหล</th><th>ความถ่วงจำเพาะ<br>(比重 อ่านได้)</th><th>องศา °Bé<br>(軽ボーメ度 อ่านได้)</th><th>ความถ่วง API<br>(คำนวณ)</th><th>น้ำหนักจำเพาะ<br>(N/m³)</th><th>ความหนาแน่น<br>(kg/m³)</th><th>ปริมาตรจำเพาะ<br>(m³/kg)</th></tr></thead><tbody>` +
+    R('table').innerHTML = `<thead><tr><th>กระบอกตวง<br>อันที่</th><th>สีของ<br>ของไหล</th><th>ความถ่วง<br>จำเพาะ</th><th>ความถ่วง<br>API</th><th>น้ำหนักจำเพาะ<br>(N/m³)</th><th>ความหนาแน่น<br>(kg/m³)</th><th>ปริมาตรจำเพาะ<br>(m³/kg)</th></tr></thead><tbody>` +
       rows.map((r, i) => {
-        if (!r) return `<tr data-i="${i}"><td>${i + 1}</td>${'<td class="miss">–</td>'.repeat(7)}</tr>`;
+        if (!r) return `<tr data-i="${i}"><td>${i + 1}</td>${'<td class="miss">–</td>'.repeat(6)}</tr>`;
         const o = calc(r), l = LIQ[r.liq];
-        return `<tr data-i="${i}"${i === sel ? ' class="sel"' : ''}><td>${i + 1}</td><td style="white-space:nowrap">${sw(l)} ${l.cname}<div class="small muted">${l.name}</div></td><td>${r.sg.toFixed(3)}</td><td>${r.be.toFixed(1)}</td><td>${N(apiOf(r.sg), 1)}</td><td>${N(o.gam, 1)}</td><td>${N(o.rho, 0)}</td><td>${SCI(o.vs, 3)}</td></tr>`;
+        return `<tr data-i="${i}"${i === sel ? ' class="sel"' : ''}><td>${i + 1}</td><td style="white-space:nowrap">${sw(l)} ${l.cname}<div class="small muted">${l.name}</div></td><td>${r.sg.toFixed(3)}</td><td>${N(apiOf(r.sg), 1)}</td><td>${N(o.gam, 1)}</td><td>${N(o.rho, 0)}</td><td>${SCI(o.vs, 3)}</td></tr>`;
       }).join('') + '</tbody>';
     const out = R('rowCalc');
     if (sel == null || !rows[sel]) out.innerHTML = '<div class="small muted">ยังไม่มีข้อมูล — อ่านค่าและบันทึกอย่างน้อย 1 อัน</div>';
