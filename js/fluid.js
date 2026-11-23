@@ -5,7 +5,7 @@
 const RHO_W = 1000, GAM_W = 9810;
 const apiOf = sg => 141.5 / sg - 131.5;
 const sgOfApi = a => 141.5 / (a + 131.5);
-const beOf = sg => 140 / sg - 130;          // องศาโบเม่ (ของเหลวเบากว่าน้ำ) ตรงกับสเกล 度 70–10 บนไฮโดรมิเตอร์จีนของจริง
+const beOf = sg => 140 / sg - 130;          // องศาโบเม่ (ของเหลวเบากว่าน้ำ) ตรงกับสเกล 軽ボーメ度 70–10 บนไฮโดรมิเตอร์ญี่ปุ่นของจริง
 const sgOfBe = b => 140 / (b + 130);
 
 /* ของเหลวที่ใช้ในห้องทดลองเสมือน (sg = ความถ่วงจำเพาะโดยประมาณ) */
@@ -720,12 +720,12 @@ function buildHydroLab(host) {
         <ol style="margin:0;padding-left:1.3em;font-size:.93rem">
           <li>เลือกของเหลว 3 ชนิด แล้ว<b>เทลงกระบอกตวงอันที่ 1, 2, 3</b> ให้ได้ 100 ml</li>
           <li>เลือกกระบอกตวง แล้วกด <b>"ค่อย ๆ จุ่มไฮโดรมิเตอร์"</b> ปล่อยให้ลอยอย่างอิสระ ไม่แตะผนัง</li>
-          <li><b>อ่านค่าจากสเกลทั้ง 2 อัน</b> ในภาพขยาย (ผิวของเหลวตัดกับก้านตรงไหน): สเกล <b>比重</b> = ความถ่วงจำเพาะ และสเกล <b>度</b> = องศาโบเม่ (°Bé) กรอกลงช่อง แล้วกด "ตรวจค่าที่อ่าน"</li>
+          <li><b>อ่านค่าจากสเกลทั้ง 2 อัน</b> ในภาพขยาย (ผิวของเหลวตัดกับก้านตรงไหน): สเกล <b>比重</b> = ความถ่วงจำเพาะ และสเกล <b>軽ボーメ度</b> = องศาโบเม่ (°Bé) กรอกลงช่อง แล้วกด "ตรวจค่าที่อ่าน"</li>
           <li>กด "บันทึกค่า" ยกไฮโดรมิเตอร์ออก เช็ดให้สะอาด แล้วทำกับกระบอกตวงอันถัดไป ส่วนความถ่วง API ให้<b>คำนวณจาก s.g.</b> ด้วยสูตร (ไฮโดรมิเตอร์รุ่นนี้ไม่มีสเกล API)</li>
         </ol></div>
       <div class="bench">
         <div><svg data-r="scene" viewBox="0 -46 440 348" aria-label="กระบอกตวง 3 ใบกับไฮโดรมิเตอร์"></svg>
-          <div class="zoom-box" style="margin-top:8px"><svg data-r="zoom" viewBox="0 0 240 230" aria-label="ภาพขยายก้านไฮโดรมิเตอร์ที่ผิวของเหลว"></svg><span class="small muted">🔍 ภาพขยายก้านไฮโดรมิเตอร์ตรงผิวของเหลว · ซ้าย 比重 = ความถ่วงจำเพาะ 0.700–1.000 · ขวา 度 = องศาโบเม่ 70–10</span></div></div>
+          <div class="zoom-box" style="margin-top:8px"><svg data-r="zoom" viewBox="0 0 240 230" aria-label="ภาพขยายก้านไฮโดรมิเตอร์ที่ผิวของเหลว"></svg><span class="small muted">🔍 ภาพขยายก้านไฮโดรมิเตอร์ตรงผิวของเหลว · ซ้าย 比重 = ความถ่วงจำเพาะ 0.700–1.000 · ขวา 軽ボーメ度 = องศาโบเม่ 70–10</span></div></div>
         <div class="rig-ctrl">
           <div class="ctl"><div class="ctl-h">ของเหลวในกระบอกตวงแต่ละอัน</div>
             ${[0, 1, 2].map(i => `<label class="small" style="display:flex;gap:6px;align-items:center;margin-top:4px">อันที่ ${i + 1}<select data-r="liq${i}" style="flex:1;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 8px">${liqOptions(['gasohol', 'diesel', 'engine'][i])}</select></label>`).join('')}
@@ -733,7 +733,7 @@ function buildHydroLab(host) {
           <div class="ctl"><div class="ctl-h">เลือกกระบอกตวง</div>
             <div class="chips" data-r="cylPick">${[0, 1, 2].map(i => `<button data-i="${i}" class="${i ? '' : 'on'}">อันที่ ${i + 1}</button>`).join('')}</div>
             <div class="btn-row"><button class="btn btn-accent btn-sm" data-r="dip">⬇ ค่อย ๆ จุ่มไฮโดรมิเตอร์</button><button class="btn btn-line btn-sm" data-r="lift">⬆ ยกออก</button></div></div>
-          <div class="read-box"><label>ความถ่วงจำเพาะที่อ่านได้<input type="number" step="0.001" data-r="inSg" placeholder="0.000"></label><label>องศา 度 (°Bé) ที่อ่านได้<input type="number" step="0.5" data-r="inApi" placeholder="00.0"></label></div>
+          <div class="read-box"><label>ความถ่วงจำเพาะที่อ่านได้<input type="number" step="0.001" data-r="inSg" placeholder="0.000"></label><label>องศา 軽ボーメ度 (°Bé) ที่อ่านได้<input type="number" step="0.5" data-r="inApi" placeholder="00.0"></label></div>
           <div class="btn-row"><button class="btn btn-line btn-sm" data-r="check">✔ ตรวจค่าที่อ่าน</button><button class="btn btn-line btn-sm" data-r="help">💡 ช่วยอ่านให้</button><button class="btn btn-accent" data-r="rec" disabled>📝 บันทึกค่า</button><button class="btn btn-line btn-sm" data-r="clear">↺ ล้างตาราง</button></div>
           <div class="status" data-r="status">เริ่มจากเลือกของเหลว แล้วเทลงกระบอกตวงทั้ง 3 อัน</div>
         </div>
@@ -743,7 +743,7 @@ function buildHydroLab(host) {
         <div class="lf-list" data-r="rowCalc"></div></div>
       <div class="lab-panel"><p class="lab-step"><span class="n">📈</span>ความสัมพันธ์ระหว่างความถ่วงจำเพาะกับองศาโบเม่ และความถ่วง API</p>
         <div class="chart-box"><svg viewBox="0 0 620 300" data-r="chart"></svg></div>
-        <div class="small muted" style="margin-top:6px">เส้นทึบสีแดงคือสเกล 度 บนก้าน (°Bé = 140/s.g. − 130) จุดคือค่าที่อ่านได้ จุดควรอยู่บนเส้นทึบ เพราะสเกลสร้างจากสูตรนี้ · เส้นประคือความถ่วง API = 141.5/s.g. − 131.5 ไว้เทียบ จะเห็นว่าสองค่าใกล้กันมาก (ต่างกันไม่ถึง 1 องศา) แต่<b>ไม่ใช่ค่าเดียวกัน</b></div></div>
+        <div class="small muted" style="margin-top:6px">เส้นทึบสีแดงคือสเกล 軽ボーメ度 บนก้าน (°Bé = 140/s.g. − 130) จุดคือค่าที่อ่านได้ จุดควรอยู่บนเส้นทึบ เพราะสเกลสร้างจากสูตรนี้ · เส้นประคือความถ่วง API = 141.5/s.g. − 131.5 ไว้เทียบ จะเห็นว่าสองค่าใกล้กันมาก (ต่างกันไม่ถึง 1 องศา) แต่<b>ไม่ใช่ค่าเดียวกัน</b></div></div>
     </div>
   </div>`;
   const R = k => host.querySelector(`[data-r="${k}"]`);
@@ -787,7 +787,7 @@ function buildHydroLab(host) {
     R('inSg').className = isFinite(a) ? (okA ? 'right' : 'wrong') : ''; R('inApi').className = isFinite(b) ? (okB ? 'right' : 'wrong') : '';
     s.checked = okA && okB;
     R('rec').disabled = !s.checked;
-    status(s.checked ? 'อ่านค่าถูกต้อง ✔ กด "บันทึกค่า" ได้เลย' : `ยังไม่ถูก: ${!okA ? 's.g. ' : ''}${!okA && !okB ? 'และ ' : ''}${!okB ? 'องศา 度 ' : ''}ลองดูภาพขยายอีกครั้ง (อ่านที่ระดับผิวของเหลว สเกล 比重 ตัวเลขมากอยู่ข้างล่าง ส่วนสเกล 度 ตัวเลขมากอยู่ข้างบน)`, s.checked ? 'ok' : 'warn');
+    status(s.checked ? 'อ่านค่าถูกต้อง ✔ กด "บันทึกค่า" ได้เลย' : `ยังไม่ถูก: ${!okA ? 's.g. ' : ''}${!okA && !okB ? 'และ ' : ''}${!okB ? 'องศา 軽ボーメ度 ' : ''}ลองดูภาพขยายอีกครั้ง (อ่านที่ระดับผิวของเหลว สเกล 比重 ตัวเลขมากอยู่ข้างล่าง ส่วนสเกล 軽ボーメ度 ตัวเลขมากอยู่ข้างบน)`, s.checked ? 'ok' : 'warn');
   });
   R('help').addEventListener('click', () => {
     if (s.dipped == null) { status('จุ่มไฮโดรมิเตอร์ก่อน', 'warn'); return; }
@@ -857,14 +857,14 @@ function buildHydroLab(host) {
         z += `<line x1="94" x2="${94 + (major ? 22 : half ? 15 : 9)}" y1="${y}" y2="${y}" stroke="#222" stroke-width="${major ? 1.6 : 1}"/>`;
         if (major) z += `<text x="${118}" y="${y + 4}" style="font-size:11px;fill:#222;font-weight:700">${(k / 1000).toFixed(2)}</text>`;
       }
-      for (let a = 10; a <= 70; a += 1) {            // สเกล 度 (องศาโบเม่) 10–70 ตามของจริง ตัวเลขมากอยู่บน
+      for (let a = 10; a <= 70; a += 1) {            // สเกล 軽ボーメ度 (องศาโบเม่) 10–70 ตามของจริง ตัวเลขมากอยู่บน
         const y = Yu(uOf(sgOfBe(a))); if (y < -10 || y > 240) continue;
         const major = a % 5 === 0;
         z += `<line x1="${146 - (major ? 14 : 7)}" x2="146" y1="${y}" y2="${y}" stroke="#c0392b" stroke-width="${major ? 1.6 : 1}"/>`;
         if (major) z += `<text x="${148}" y="${y + 4}" style="font-size:11px;fill:#c0392b;font-weight:700">${a}</text>`;
       }
       z += `<path d="M0,${mid} L88,${mid} Q93,${mid - 5} 94,${mid - 8} M146,${mid - 8} Q147,${mid - 5} 152,${mid} L240,${mid}" stroke="var(--text)" stroke-width="1.5" fill="none"/>`;
-      z += `<text x="6" y="${mid - 6}" style="font-size:10px;fill:var(--muted)">ผิวของเหลว</text><text x="234" y="16" text-anchor="end" style="font-size:13px;fill:#c0392b;font-weight:700">度</text><text x="234" y="28" text-anchor="end" style="font-size:9px;fill:#c0392b">°Bé</text><text x="6" y="16" style="font-size:13px;fill:#222;font-weight:700">比重</text><text x="6" y="28" style="font-size:9px;fill:#222">s.g.</text>`;
+      z += `<text x="6" y="${mid - 6}" style="font-size:10px;fill:var(--muted)">ผิวของเหลว</text><text x="234" y="16" text-anchor="end" style="font-size:12px;fill:#c0392b;font-weight:700">軽ボーメ度</text><text x="234" y="28" text-anchor="end" style="font-size:9px;fill:#c0392b">°Bé</text><text x="6" y="16" style="font-size:13px;fill:#222;font-weight:700">比重</text><text x="6" y="28" style="font-size:9px;fill:#222">s.g.</text>`;
       z += `<text x="226" y="${mid + 4}" style="font-size:14px">👁</text>`;
       if (!inRange) z += `<rect x="10" y="80" width="220" height="40" rx="6" fill="var(--bad-soft)" stroke="var(--bad)"/><text x="120" y="105" text-anchor="middle" style="font-size:12px;fill:var(--bad);font-weight:700">${sg > 1 ? 'ลอยสูงเกินสเกล อ่านไม่ได้' : 'จมเกินสเกล อ่านไม่ได้'}</text>`;
     }
@@ -874,7 +874,7 @@ function buildHydroLab(host) {
   }
   function render() {
     const calc = r => ({ gam: r.sg * GAM_W, rho: r.sg * RHO_W, vs: 1 / (r.sg * RHO_W) });
-    R('table').innerHTML = `<thead><tr><th>กระบอกตวง<br>อันที่</th><th>สีของ<br>ของไหล</th><th>ความถ่วงจำเพาะ<br>(比重 อ่านได้)</th><th>องศา °Bé<br>(度 อ่านได้)</th><th>ความถ่วง API<br>(คำนวณ)</th><th>น้ำหนักจำเพาะ<br>(N/m³)</th><th>ความหนาแน่น<br>(kg/m³)</th><th>ปริมาตรจำเพาะ<br>(m³/kg)</th></tr></thead><tbody>` +
+    R('table').innerHTML = `<thead><tr><th>กระบอกตวง<br>อันที่</th><th>สีของ<br>ของไหล</th><th>ความถ่วงจำเพาะ<br>(比重 อ่านได้)</th><th>องศา °Bé<br>(軽ボーメ度 อ่านได้)</th><th>ความถ่วง API<br>(คำนวณ)</th><th>น้ำหนักจำเพาะ<br>(N/m³)</th><th>ความหนาแน่น<br>(kg/m³)</th><th>ปริมาตรจำเพาะ<br>(m³/kg)</th></tr></thead><tbody>` +
       rows.map((r, i) => {
         if (!r) return `<tr data-i="${i}"><td>${i + 1}</td>${'<td class="miss">–</td>'.repeat(7)}</tr>`;
         const o = calc(r), l = LIQ[r.liq];
@@ -888,7 +888,7 @@ function buildHydroLab(host) {
         LF('1. น้ำหนักจำเพาะ', `s.g. = ${FR('γ<sub>f</sub>', 'γ<sub>w</sub>')} → γ<sub>f</sub> = (s.g.)(γ<sub>w</sub>)`, `= (${r.sg.toFixed(3)})(9,810)`, `= ${N(o.gam, 1)} N/m³`, 'hl') +
         LF('2. ความหนาแน่น', `s.g. = ${FR('ρ<sub>f</sub>', 'ρ<sub>w</sub>')} → ρ<sub>f</sub> = (s.g.)(ρ<sub>w</sub>)`, `= (${r.sg.toFixed(3)})(1,000)`, `= ${N(o.rho, 0)} kg/m³`, 'hl') +
         LF('3. ปริมาตรจำเพาะ', `v = ${FR('1', 'ρ<sub>f</sub>')}`, `= ${FR('1', N(o.rho, 0))}`, `= ${SCI(o.vs, 3)} m³/kg`, 'hl') +
-        LF('4. ความถ่วง API (คำนวณจาก s.g. เพราะสเกล 度 บนก้านไม่ใช่ API)', `API Gr. = ${FR('141.5', 's.g.')} − 131.5`, `= ${FR('141.5', r.sg.toFixed(3))} − 131.5`, `= ${N(apiOf(r.sg), 1)}`, 'hl') +
+        LF('4. ความถ่วง API (คำนวณจาก s.g. เพราะสเกล 軽ボーメ度 บนก้านไม่ใช่ API)', `API Gr. = ${FR('141.5', 's.g.')} − 131.5`, `= ${FR('141.5', r.sg.toFixed(3))} − 131.5`, `= ${N(apiOf(r.sg), 1)}`, 'hl') +
         LF('ตรวจสอบองศาโบเม่ที่อ่านได้ด้วยสูตร', `°Bé = ${FR('140', 's.g.')} − 130`, `= ${FR('140', r.sg.toFixed(3))} − 130`, `= ${N(beOf(r.sg), 1)} (อ่านได้ ${r.be.toFixed(1)})`);
     }
     const curve = [], curveApi = []; for (let x = 0.70; x <= 1.0001; x += 0.01) { curve.push([x, beOf(x)]); curveApi.push([x, apiOf(x)]); }
